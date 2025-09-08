@@ -4,15 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Amedeo Carraro — Portfolio</title>
-  <meta name="description" content="Personal website of Amedeo Carraro: projects, skills, and contact information." />
+  <meta name="description" content="Portfolio of Amedeo Carraro: AI & ML engineer, projects, skills, and contact information." />
   <meta property="og:title" content="Amedeo Carraro — Portfolio" />
-  <meta property="og:description" content="Projects, skills, and contact info." />
+  <meta property="og:description" content="AI & ML projects, skills, and resume." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://amecarraro.github.io/AmedeoCarraro/" />
   <meta name="theme-color" content="#0f172a" />
-  <!-- Optional favicon
-  <link rel="icon" href="/favicon.ico" />
-  -->  <style>
+  <style>
     :root {
       --bg: #0b1020;
       --bg-soft: #111735;
@@ -38,52 +36,35 @@
     html, body { height: 100%; }
     body {
       margin: 0;
-      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial;
       background: radial-gradient(1200px 600px at 80% -10%, rgba(96,165,250,.15), transparent 60%) , var(--bg);
       color: var(--text);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
     a { color: var(--brand); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
     .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
 
-    /* Header */
     header { position: sticky; top: 0; backdrop-filter: saturate(180%) blur(8px); background: color-mix(in oklab, var(--bg) 80%, transparent); border-bottom: 1px solid color-mix(in oklab, var(--text) 10%, transparent); z-index: 20; }
     .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: .3px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; }
     .brand .logo { width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(135deg, var(--brand), #22d3ee); box-shadow: 0 0 0 6px var(--ring); }
     nav a { margin-left: 16px; padding: 8px 12px; border-radius: 10px; }
     nav a:hover { background: color-mix(in oklab, var(--brand) 15%, transparent); text-decoration: none; }
 
-    /* Hero */
     .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: center; padding: 56px 0 28px; }
     .hero h1 { font-size: clamp(28px, 5vw, 44px); line-height: 1.15; margin: 0 0 12px; }
     .hero p { color: var(--muted); margin: 0 0 20px; }
     .hero .cta { display: flex; gap: 12px; flex-wrap: wrap; }
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 12px; background: var(--brand); color: white; font-weight: 600; border: 1px solid color-mix(in oklab, black 10%, var(--brand)); box-shadow: 0 6px 24px -8px var(--ring); }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 12px; background: var(--brand); color: white; font-weight: 600; }
     .btn.secondary { background: transparent; color: var(--text); border: 1px solid color-mix(in oklab, var(--text) 18%, transparent); }
 
-    .hero .card { background: var(--card); border: 1px solid color-mix(in oklab, var(--text) 10%, transparent); padding: 20px; border-radius: 18px; box-shadow: 0 12px 24px -12px rgba(0,0,0,.4); }
-    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
-    .stat { background: var(--bg-soft); border: 1px dashed color-mix(in oklab, var(--text) 14%, transparent); padding: 10px; border-radius: 14px; text-align: center; }
-    .stat .v { font-weight: 800; font-size: 18px; }
-    .stat .k { font-size: 12px; color: var(--muted); }
-
-    /* Sections */
-    section { padding: 36px 0; }
-    h2 { font-size: 22px; margin: 0 0 16px; }
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
     .card { background: var(--card); border: 1px solid color-mix(in oklab, var(--text) 10%, transparent); border-radius: 16px; padding: 16px; }
-    .card h3 { margin: 0 0 8px; font-size: 18px; }
-    .card p { margin: 0 0 12px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
     .pill { display: inline-block; font-size: 12px; padding: 4px 8px; border-radius: 999px; background: color-mix(in oklab, var(--brand) 16%, transparent); border: 1px solid color-mix(in oklab, var(--brand) 40%, transparent); margin-right: 6px; }
 
-    /* Footer */
     footer { border-top: 1px solid color-mix(in oklab, var(--text) 10%, transparent); color: var(--muted); padding: 24px 0 48px; }
 
-    /* Responsive */
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; }
       .grid { grid-template-columns: 1fr 1fr; }
@@ -91,7 +72,6 @@
     @media (max-width: 600px) {
       nav { display: none; }
       .grid { grid-template-columns: 1fr; }
-      .stats { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -102,7 +82,7 @@
         <div class="logo" aria-hidden="true"></div>
         <span>Amedeo Carraro</span>
       </div>
-      <nav aria-label="Primary">
+      <nav>
         <a href="#projects">Projects</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
@@ -114,9 +94,8 @@
     <!-- Hero -->
     <section class="hero" id="home">
       <div>
-        <h1>Hi, I’m <span style="white-space:nowrap">Amedeo Carraro</span> — building on the web.</h1>
-        <p>Front‑end tinkerer and problem solver. I enjoy crafting clean, fast, and accessible web experiences.
-          Below are a few projects and the tech I like to work with.</p>
+        <h1>Amedeo Carraro — AI Engineer</h1>
+        <p>Computer Engineer specialized in Artificial Intelligence and Machine Learning. I design, optimize, and deploy end‑to‑end neural network pipelines and Large Language Models (LLMs), integrating AI into production with a focus on performance, scalability, and fast inference.</p>
         <div class="cta">
           <a class="btn" href="#projects">View projects</a>
           <a class="btn secondary" href="https://github.com/AmeCarraro" target="_blank" rel="noopener">GitHub profile</a>
@@ -127,8 +106,8 @@
         <strong>At a glance</strong>
         <div class="stats" aria-hidden="true">
           <div class="stat"><div class="v" id="years">3+</div><div class="k">Years coding</div></div>
-          <div class="stat"><div class="v" id="projectsCount">…</div><div class="k">Projects</div></div>
-          <div class="stat"><div class="v">HTML • CSS • JS</div><div class="k">Core stack</div></div>
+          <div class="stat"><div class="v" id="projectsCount">…</div><div class="k">Public repos</div></div>
+          <div class="stat"><div class="v">AI · ML · LLMs</div><div class="k">Focus</div></div>
         </div>
       </div>
     </section>
@@ -138,34 +117,47 @@
       <h2>Selected projects</h2>
       <div class="grid">
         <article class="card">
-          <h3>Project One</h3>
-          <p>Short description of what it does and why it’s interesting.
-          </p>
+          <h3>PCB_yolo</h3>
+          <p>YOLO implementation for detecting PCB defects using the DeepPCB dataset. High‑res images (~16k×16k) are aligned, binarized, and cropped to 640×640; annotations include six defect classes.</p>
           <div>
-            <span class="pill">HTML</span>
-            <span class="pill">CSS</span>
-            <span class="pill">JavaScript</span>
+            <span class="pill">YOLO</span>
+            <span class="pill">Computer Vision</span>
+            <span class="pill">Deep Learning</span>
           </div>
-          <p><a href="#" target="_blank" rel="noopener">Live demo</a> · <a href="#" target="_blank" rel="noopener">Source</a></p>
+          <p><a href="https://github.com/AmeCarraro/PCB_yolo" target="_blank" rel="noopener">Source</a></p>
         </article>
+
         <article class="card">
-          <h3>Project Two</h3>
-          <p>Another project — replace with your own. Keep it concise.</p>
+          <h3>thesis-variable-stars-nn</h3>
+          <p>Neural network approaches for classifying variable star light curves (ZTF). LSTM on sequences and CNN on image‑like transforms (incl. DMDT); evaluated with 5‑fold CV on 5‑ and 10‑class setups.</p>
           <div>
-            <span class="pill">Vite</span>
-            <span class="pill">API</span>
-            <span class="pill">SPA</span>
+            <span class="pill">LSTM</span>
+            <span class="pill">CNN</span>
+            <span class="pill">AstroML</span>
           </div>
-          <p><a href="#" target="_blank" rel="noopener">Live demo</a> · <a href="#" target="_blank" rel="noopener">Source</a></p>
+          <p><a href="https://github.com/AmeCarraro/thesis-variable-stars-nn" target="_blank" rel="noopener">Source</a></p>
         </article>
+
         <article class="card">
-          <h3>Project Three</h3>
-          <p>Describe the problem solved or the learning outcome.</p>
+          <h3>Project_Leukemia</h3>
+          <p>Leukemic cell classifier combining OpenCV preprocessing &amp; augmentation with handcrafted features and tuned hyperparameters (GridSearch); achieved F1 score of 84.66%.</p>
           <div>
-            <span class="pill">Accessibility</span>
-            <span class="pill">Performance</span>
+            <span class="pill">OpenCV</span>
+            <span class="pill">Classification</span>
+            <span class="pill">Healthcare</span>
           </div>
-          <p><a href="#" target="_blank" rel="noopener">Live demo</a> · <a href="#" target="_blank" rel="noopener">Source</a></p>
+          <p><a href="https://github.com/AmeCarraro/Project_Leukemia" target="_blank" rel="noopener">Source</a></p>
+        </article>
+
+        <article class="card">
+          <h3>Erasmus_Hardgainers</h3>
+          <p>Parameter‑efficient fine‑tuning (LoRA) of Mistral 7B via Hugging Face to build a lightweight QA system for memory‑constrained environments; BLEU 62%, ROUGE‑1 81%, METEOR 78%.</p>
+          <div>
+            <span class="pill">LoRA</span>
+            <span class="pill">LLMs</span>
+            <span class="pill">Hugging Face</span>
+          </div>
+          <p><a href="https://github.com/AmeCarraro/Erasmus_Hardgainers" target="_blank" rel="noopener">Source</a></p>
         </article>
       </div>
     </section>
@@ -174,10 +166,25 @@
     <section id="about">
       <h2>About</h2>
       <div class="card">
-        <p>I’m a developer based in Italy. I like clean UI, neat CSS, and small interactions that make UIs feel alive.
-           I’m comfortable with semantic HTML, modern CSS, and vanilla JavaScript, and I’m exploring frameworks and tooling.
-        </p>
-        <p><strong>Currently learning:</strong> TypeScript, React, and GitHub Actions.</p>
+        <p>Computer Engineer specialized in Artificial Intelligence and Machine Learning, with experience in designing, optimizing, and deploying end‑to‑end neural network pipelines and Large Language Models (LLMs), as well as automatic classification systems. Skilled in integrating AI solutions into production environments, with a focus on performance, scalability, and inference time reduction. Excellent ability to work in interdisciplinary teams and manage complex technical projects while meeting strict functional and time objectives.</p>
+        <div style="display:grid; gap:10px; margin-top:12px">
+          <div>
+            <strong>Programming Languages</strong>
+            <p class="muted">Python, Java, C, C++, C#, JavaScript, SQL, HTML, PHP, C/BASE, C/AL, MATLAB, ROS, R</p>
+          </div>
+          <div>
+            <strong>IT Knowledge</strong>
+            <p class="muted">TensorFlow, NumPy, pandas, SciPy, Matplotlib, Keras, PyTorch, scikit‑learn, Apache Spark, GitHub &amp; MLOps</p>
+          </div>
+          <div>
+            <strong>Languages</strong>
+            <p class="muted">Italian (mother tongue), English (C1), French (A2)</p>
+          </div>
+          <div>
+            <strong>Certifications</strong>
+            <p class="muted">OCI AI Foundations Associate, OCI Generative AI Professional</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -188,12 +195,10 @@
         <p>Spotted a bug or want to say hi? Reach me here:</p>
         <p>
           <a href="mailto:amedeo.carraro01@gmail.com">amedeo.carraro01@gmail.com</a> ·
-          <a href="https://github.com/AmeCarraro" target="_blank" rel="noopener">GitHub</a> ·
-          <a href="https://www.linkedin.com/in/amedeo-carraro/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/AmeCarraro" target="_blank">GitHub</a> ·
+          <a href="https://www.linkedin.com/in/amedeo-carraro/" target="_blank">LinkedIn</a>
         </p>
-        <p>
-          <strong>Resume:</strong> <a href="Amedeo_Carraro_resume.pdf" target="_blank" rel="noopener">Open PDF</a>
-        </p>
+        <p><strong>Resume:</strong> <a href="Amedeo_Carraro_resume.pdf" target="_blank">Open PDF</a></p>
       </div>
     </section>
   </main>
@@ -205,16 +210,9 @@
   </footer>
 
   <script>
-    // Small niceties: current year and a graceful hash scroll
     document.getElementById('year').textContent = new Date().getFullYear();
-    const enableSmooth = () => {
-      if ('scrollBehavior' in document.documentElement.style) {
-        document.documentElement.style.scrollBehavior = 'smooth';
-      }
-    };
-    enableSmooth();
+    document.documentElement.style.scrollBehavior = 'smooth';
 
-    // Dynamically count total public repositories (non-forks) for your GitHub account
     async function updateProjectCountFromGitHub(username) {
       try {
         let page = 1;
@@ -224,18 +222,16 @@
           if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
           const data = await res.json();
           repos = repos.concat(data);
-          if (data.length < 100) break; // no more pages
+          if (data.length < 100) break;
           page++;
         }
-        const count = repos.filter(r => !r.fork).length; // exclude forks
+        const count = repos.filter(r => !r.fork).length;
         const el = document.getElementById('projectsCount');
         if (el) el.textContent = count;
       } catch (err) {
         console.error(err);
-        // Fallback: keep the placeholder value
       }
     }
-
     updateProjectCountFromGitHub('AmeCarraro');
   </script>
 </body>
