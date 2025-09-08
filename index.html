@@ -127,7 +127,7 @@
         <strong>At a glance</strong>
         <div class="stats" aria-hidden="true">
           <div class="stat"><div class="v" id="years">3+</div><div class="k">Years coding</div></div>
-          <div class="stat"><div class="v" id="projectsCount">12</div><div class="k">Projects</div></div>
+          <div class="stat"><div class="v" id="projectsCount">…</div><div class="k">Projects</div></div>
           <div class="stat"><div class="v">HTML • CSS • JS</div><div class="k">Core stack</div></div>
         </div>
       </div>
@@ -209,6 +209,29 @@
       }
     };
     enableSmooth();
+      // Dynamically count total public repositories (non-forks) for your GitHub account
+    async function updateProjectCountFromGitHub(username) {
+      try {
+        let page = 1;
+        let repos = [];
+        while (true) {
+          const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&page=${page}`);
+          if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+          const data = await res.json();
+          repos = repos.concat(data);
+          if (data.length < 100) break; // no more pages
+          page++;
+        }
+        const count = repos.filter(r => !r.fork).length; // exclude forks
+        const el = document.getElementById('projectsCount');
+        if (el) el.textContent = count;
+      } catch (err) {
+        console.error(err);
+        // Fallback: keep the placeholder value
+      }
+    }
+
+    updateProjectCountFromGitHub('AmeCarraro');
   </script>
 </body>
 </html>
