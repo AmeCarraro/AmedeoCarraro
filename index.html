@@ -83,6 +83,9 @@
     .media-col { display: grid; gap: 16px; }
     .hero-img { margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid color-mix(in oklab, var(--text) 10%, transparent); background: var(--card); box-shadow: 0 12px 24px -12px rgba(0,0,0,.4); }
     .hero-img img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+      /* --- Shrink hero image size --- */
+    .hero-img { width: 100%; max-width: 280px; margin-left: auto; }
+    @media (max-width: 900px) { .hero-img { margin-inline: auto; } }
   </style>
 </head>
 <body>
