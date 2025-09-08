@@ -72,6 +72,12 @@
     footer { border-top: 1px solid color-mix(in oklab, var(--text) 10%, transparent); color: var(--muted); padding: 24px 0 48px; }
 
     @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+      /* --- Timeline styles --- */
+    .timeline { position: relative; padding-left: 22px; margin: 0; }
+    .timeline::before { content: ""; position: absolute; top: 4px; bottom: 4px; left: 8px; width: 2px; background: color-mix(in oklab, var(--text) 14%, transparent); }
+    .tl-item { position: relative; margin: 0 0 18px 0; padding-left: 18px; }
+    .tl-item::before { content: ""; position: absolute; left: 2px; top: 6px; width: 12px; height: 12px; border-radius: 999px; background: var(--brand); box-shadow: 0 0 0 4px color-mix(in oklab, var(--brand) 20%, transparent); }
+    .tl-meta { font-size: 12px; color: var(--muted); margin-top: -2px; }
   </style>
 </head>
 <body>
@@ -82,10 +88,10 @@
         <span>Amedeo Carraro</span>
       </div>
       <nav aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="#education">Education</a>
-        <a href="#experience">Work Experience</a>
-        <a href="#extras">Extras</a>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a class="btn" href="about.html">Full resume</a>
       </nav>
     </div>
   </header>
@@ -95,45 +101,62 @@
       <h1>More about me</h1>
       <p>Additional details on my <strong>education</strong>, <strong>work experience</strong>, and some <strong>extras</strong>. Use the buttons below to go back to the homepage or open my résumé.</p>
       <div class="cta">
-        <a class="btn secondary" href="index.html">← Back to Home</a>
-        <a class="btn" href="Amedeo_Carraro_resume.pdf" target="_blank" rel="noopener">Download Resume (PDF)</a>
-      </div>
+          <a class="btn" href="#projects">View projects</a>
+          <a class="btn secondary" href="about.html">Full profile</a>
+          <a class="btn secondary" href="https://github.com/AmeCarraro" target="_blank" rel="noopener">GitHub profile</a>
+          <a class="btn" href="Amedeo_Carraro_resume.pdf" target="_blank" rel="noopener" title="Open resume PDF">Download Resume (PDF)</a>
+        </div>
     </section>
 
     <!-- Education -->
     <section id="education">
       <h2>Education</h2>
       <div class="card">
-        <h3>M.Sc. in Computer Engineering — University of Padova</h3>
-        <p class="muted">Thesis: <em>Neural Network Approaches for Classifying Variable Star Light Curves</em> — Defense: 24/03/2025 — Supervisor: Prof. Loris Nanni</p>
-        <ul>
-          <li>Deep learning on light curves: LSTM for sequences and CNN on image-like transforms (incl. DMDT).</li>
-          <li>Real data: Zwicky Transient Facility (ZTF), 5‑fold cross‑validation on 5‑ and 10‑class setups.</li>
-        </ul>
+        <div class="timeline">
+          <div class="tl-item">
+            <h3>M.Sc. in Computer Engineering — University of Padova</h3>
+            <p class="tl-meta">Defense: 24/03/2025 · Supervisor: Prof. Loris Nanni</p>
+            <p class="muted">Thesis: <em>Neural Network Approaches for Classifying Variable Star Light Curves</em></p>
+            <ul>
+              <li>Deep learning on light curves: LSTM for sequences and CNN on image‑like transforms (incl. DMDT).</li>
+              <li>Real data: Zwicky Transient Facility (ZTF), 5‑fold cross‑validation on 5‑ and 10‑class setups.</li>
+            </ul>
+          </div>
+          <div class="tl-item">
+            <h3>B.Sc. in Computer Engineering — University (fill in)</h3>
+            <p class="tl-meta">YYYY – YYYY · City (fill in)</p>
+            <ul>
+              <li>Main courses: Algorithms, Data Structures, Databases, Operating Systems, Signals (edit).</li>
+              <li>Final project: (fill in one‑line description).</li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <!-- Add more degrees here if needed -->
     </section>
 
     <!-- Work Experience -->
     <section id="experience">
       <h2>Work Experience</h2>
-      <div class="grid">
-        <article class="card">
-          <h3>AI/ML Engineer — Company/Org</h3>
-          <p class="muted">MM/YYYY – MM/YYYY · City/Remote</p>
-          <ul>
-            <li>Designed and deployed training/inference pipelines for neural networks and LLMs.</li>
-            <li>Performance optimization (latency, throughput) and MLOps with GitHub Actions.</li>
-          </ul>
-        </article>
-        <article class="card">
-          <h3>Research Intern — Lab/University</h3>
-          <p class="muted">MM/YYYY – MM/YYYY · City/Remote</p>
-          <ul>
-            <li>Experiments on automatic classification, cross‑validation, and metrics (F1, AUC).</li>
-            <li>Scalable data pipelines with Python (NumPy, pandas, PyTorch/TensorFlow).</li>
-          </ul>
-        </article>
+      <div class="card">
+        <div class="timeline">
+          <div class="tl-item">
+            <h3>AI/ML Engineer — Company/Org (fill in)</h3>
+            <p class="tl-meta">MM/YYYY – MM/YYYY · City/Remote</p>
+            <ul>
+              <li>Designed and deployed training/inference pipelines for neural networks and LLMs.</li>
+              <li>Optimized latency and throughput; CI/CD and MLOps with GitHub Actions.</li>
+              <li>Stack: Python, PyTorch/TensorFlow, Hugging Face, Docker.</li>
+            </ul>
+          </div>
+          <div class="tl-item">
+            <h3>Research Intern — Lab/University (fill in)</h3>
+            <p class="tl-meta">MM/YYYY – MM/YYYY · City/Remote</p>
+            <ul>
+              <li>Experiments on automatic classification; cross‑validation; metrics (Accuracy, F1, AUC).</li>
+              <li>Data pipeline with NumPy, pandas; experiment tracking (fill in if used).</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -157,10 +180,10 @@
           </ul>
         </div>
         <div class="card">
-          <h3>Interests / Community</h3>
+          <h3>Selected Skills</h3>
           <ul>
-            <li>Open‑source, CV/LLM reading groups, hackathons/CTFs.</li>
-            <li>Mentoring and outreach on ML/AI.</li>
+            <li><strong>Programming:</strong> Python, Java, C, C++, C#, JavaScript, SQL, HTML, PHP, C/BASE, C/AL, MATLAB, ROS, R</li>
+            <li><strong>Tools:</strong> TensorFlow, PyTorch, Keras, scikit‑learn, NumPy, pandas, SciPy, Matplotlib, Apache Spark, GitHub &amp; MLOps</li>
           </ul>
         </div>
       </div>
