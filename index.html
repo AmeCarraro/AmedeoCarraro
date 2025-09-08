@@ -80,11 +80,11 @@
     .stat .k { font-size: 12px; color: var(--muted); line-height: 1.2; }
     .muted { color: var(--muted); }
       /* --- Hero media column & image styles --- */
-    .media-col { display: grid; gap: 16px; }
+    .media-col { display: grid; gap: 16px; justify-items: center; }
     .hero-img { margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid color-mix(in oklab, var(--text) 10%, transparent); background: var(--card); box-shadow: 0 12px 24px -12px rgba(0,0,0,.4); }
     .hero-img img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
       /* --- Shrink hero image size --- */
-    .hero-img { width: 100%; max-width: 120px; margin-left: auto; }
+    .hero-img { width: 100%; max-width: 120px; margin-inline: auto; }
     @media (max-width: 900px) { .hero-img { margin-inline: auto; } }
       /* --- Circle avatar tweaks --- */
     .hero-img { border-radius: 9999px; border: 2px solid color-mix(in oklab, var(--text) 18%, transparent); overflow: hidden; }
@@ -227,12 +227,12 @@
 
   <footer>
     <div class="container">
-      <small>© <span id="year"></span> Amedeo Carraro. Built with pure HTML/CSS/JS and hosted on GitHub Pages.</small>
+      <small>© 2025 Amedeo Carraro. All rights reserved.</small>
     </div>
   </footer>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const yearEl = document.getElementById('year'); if (yearEl) yearEl.textContent = new Date().getFullYear();
     document.documentElement.style.scrollBehavior = 'smooth';
 
     async function updateProjectCountFromGitHub(username) {
