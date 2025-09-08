@@ -84,8 +84,12 @@
     .hero-img { margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid color-mix(in oklab, var(--text) 10%, transparent); background: var(--card); box-shadow: 0 12px 24px -12px rgba(0,0,0,.4); }
     .hero-img img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
       /* --- Shrink hero image size --- */
-    .hero-img { width: 100%; max-width: 140px; margin-left: auto; }
+    .hero-img { width: 100%; max-width: 120px; margin-left: auto; }
     @media (max-width: 900px) { .hero-img { margin-inline: auto; } }
+      /* --- Circle avatar tweaks --- */
+    .hero-img { border-radius: 9999px; border: 2px solid color-mix(in oklab, var(--text) 18%, transparent); overflow: hidden; }
+    .hero-img img { aspect-ratio: 1 / 1; object-fit: cover; }
+    .hero h1 .role { font-weight: 700; }
   </style>
 </head>
 <body>
@@ -107,7 +111,7 @@
     <!-- Hero -->
     <section class="hero" id="home">
       <div>
-        <h1>Amedeo Carraro — AI Engineer</h1>
+        <h1>Amedeo Carraro<br><span class="role">AI Engineer</span></h1>
         <p>Computer Engineer specialized in Artificial Intelligence and Machine Learning. I design, optimize, and deploy end‑to‑end neural network pipelines and Large Language Models (LLMs), integrating AI into production with a focus on performance, scalability, and fast inference.</p>
         <div class="cta">
           <a class="btn" href="#projects">View projects</a>
