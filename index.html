@@ -95,10 +95,15 @@
       .grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 600px) {
-      nav { display: none; }
+      /* nav was previously hidden here; kept visible for easy access */
       .grid { grid-template-columns: 1fr; }
       .stats { grid-template-columns: 1fr 1fr; }
     }
+
+    /* Auto-hide/reveal header on scroll */
+    header { transition: transform .25s ease; will-change: transform; }
+    .header-hidden { transform: translateY(-100%); }
+    @media (prefers-reduced-motion: reduce) { header { transition: none; } }
   </style>
 </head>
 <body>
@@ -124,12 +129,12 @@
         <h1>Amedeo Carraro<br><span class="role">AI Engineer</span></h1>
         <p>
           Computer Engineer specialized in Artificial Intelligence and Machine Learning. I design, optimize, and deploy end-to-end neural network pipelines and Large Language Models (LLMs), integrating AI into production with a focus on performance, scalability, and fast inference.
-          <a href="https://github.com/AmeCarraro" target="_blank" rel="noopener">Visit my GitHub</a> to explore projects in AI, robotics, and more.
+          <a href="https://github.com/AmeCarraro" target="_blank" rel="noopener noreferrer">Visit my GitHub</a> to explore projects in AI, robotics, and more.
         </p>
         <div class="cta">
           <a class="btn" href="#projects">View projects</a>
-          <a class="btn secondary" href="https://github.com/AmeCarraro" target="_blank" rel="noopener">GitHub profile</a>
-          <a class="btn" href="Amedeo_Carraro_resume.pdf" target="_blank" rel="noopener" title="Open resume PDF">Download Resume (PDF)</a>
+          <a class="btn secondary" href="https://github.com/AmeCarraro" target="_blank" rel="noopener noreferrer">GitHub profile</a>
+          <a class="btn" href="Amedeo_Carraro_resume.pdf" target="_blank" rel="noopener noreferrer" title="Open resume PDF">Download Resume (PDF)</a>
         </div>
       </div>
       <div class="media-col">
@@ -151,36 +156,36 @@
       <h2>Selected projects</h2>
       <div class="grid">
         <article class="card">
-          <h3>Variable Star Light-Curve Classifier</h3>
+          <h3>Stellar Variability Classifier</h3>
           <p>Neural network approaches for classifying variable star light curves (ZTF). LSTM on sequences and CNN on image-like transforms (incl. DMDT); evaluated with 5-fold CV on 5- and 10-class setups.</p>
           <div>
             <span class="pill">LSTM</span>
             <span class="pill">CNN</span>
             <span class="pill">AstroML</span>
           </div>
-          <p><a href="https://github.com/AmeCarraro/thesis-variable-stars-nn" target="_blank" rel="noopener">Source</a></p>
+          <p><a href="https://github.com/AmeCarraro/thesis-variable-stars-nn" target="_blank" rel="noopener noreferrer">Source</a></p>
         </article>
 
         <article class="card">
-          <h3>Leukemia Cell Classifier</h3>
+          <h3>Leukemia cells Classifier</h3>
           <p>Leukemic cell classifier combining OpenCV preprocessing &amp; augmentation with handcrafted features and tuned hyperparameters (GridSearch); achieved F1 score of 84.66%.</p>
           <div>
             <span class="pill">OpenCV</span>
             <span class="pill">Classification</span>
             <span class="pill">Healthcare</span>
           </div>
-          <p><a href="https://github.com/AmeCarraro/Project_Leukemia" target="_blank" rel="noopener">Source</a></p>
+          <p><a href="https://github.com/AmeCarraro/Project_Leukemia" target="_blank" rel="noopener noreferrer">Source</a></p>
         </article>
 
         <article class="card">
-          <h3>Mistral-7B — LoRA Fine-Tuning</h3>
+          <h3>Mistral 7b PEFT Fine tune</h3>
           <p>Parameter-efficient fine-tuning (LoRA) of Mistral 7B via Hugging Face to build a lightweight QA system for memory-constrained environments; BLEU 62%, ROUGE-1 81%, METEOR 78%.</p>
           <div>
             <span class="pill">LoRA</span>
             <span class="pill">LLMs</span>
             <span class="pill">Hugging Face</span>
           </div>
-          <p><a href="https://github.com/AmeCarraro/Erasmus_Hardgainers" target="_blank" rel="noopener">Source</a></p>
+          <p><a href="https://github.com/AmeCarraro/Erasmus_Hardgainers" target="_blank" rel="noopener noreferrer">Source</a></p>
         </article>
 
         <article class="card">
@@ -191,7 +196,7 @@
             <span class="pill">Computer Vision</span>
             <span class="pill">Deep Learning</span>
           </div>
-          <p><a href="https://github.com/AmeCarraro/PCB_yolo" target="_blank" rel="noopener">Source</a></p>
+          <p><a href="https://github.com/AmeCarraro/PCB_yolo" target="_blank" rel="noopener noreferrer">Source</a></p>
         </article>
 
         <article class="card">
@@ -202,7 +207,7 @@
             <span class="pill">Regression</span>
             <span class="pill">scikit-learn</span>
           </div>
-          <p><a href="https://github.com/AmeCarraro/Ransac_Swiss-House-Price-Prediction" target="_blank" rel="noopener">Source</a></p>
+          <p><a href="https://github.com/AmeCarraro/Ransac_Swiss-House-Price-Prediction" target="_blank" rel="noopener noreferrer">Source</a></p>
         </article>
       </div>
     </section>
@@ -240,10 +245,10 @@
         <p>Spotted a bug or want to say hi? Reach me here:</p>
         <p>
           <a href="mailto:amedeo.carraro01@gmail.com">amedeo.carraro01@gmail.com</a> ·
-          <a href="https://github.com/AmeCarraro" target="_blank" rel="noopener">GitHub</a> ·
-          <a href="https://www.linkedin.com/in/amedeo-carraro/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/AmeCarraro" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+          <a href="https://www.linkedin.com/in/amedeo-carraro/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </p>
-        <p><strong>Resume:</strong> <a href="Amedeo_Carraro_resume.pdf" target="_blank" rel="noopener">Open PDF</a></p>
+        <p><strong>Resume:</strong> <a href="Amedeo_Carraro_resume.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a></p>
       </div>
     </section>
   </main>
@@ -263,8 +268,7 @@
     // Dynamically count total public repositories (non-forks) for your GitHub account
     async function updateProjectCountFromGitHub(username) {
       try {
-        let page = 1;
-        let repos = [];
+        let page = 1, repos = [];
         while (true) {
           const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&page=${page}`);
           if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
@@ -276,12 +280,28 @@
         const count = repos.filter(r => !r.fork).length; // exclude forks
         const el = document.getElementById('projectsCount');
         if (el) el.textContent = count;
-      } catch (err) {
-        console.error(err);
-        // Fallback: keep the placeholder value
-      }
+      } catch (err) { console.error(err); }
     }
     updateProjectCountFromGitHub('AmeCarraro');
+  </script>
+
+  <!-- Auto-hide/reveal header on scroll -->
+  <script>
+  (() => {
+    const header = document.querySelector('header');
+    if (!header) return;
+    let lastY = window.scrollY || 0;
+    const threshold = 10;
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY || 0;
+      const delta = y - lastY;
+      if (y < 10) { header.classList.remove('header-hidden'); lastY = y; return; }
+      if (Math.abs(delta) < threshold) return;
+      if (delta > 0) header.classList.add('header-hidden');
+      else header.classList.remove('header-hidden');
+      lastY = y;
+    }, { passive: true });
+  })();
   </script>
 </body>
 </html>
