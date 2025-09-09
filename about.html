@@ -72,12 +72,18 @@
     footer { border-top: 1px solid color-mix(in oklab, var(--text) 10%, transparent); color: var(--muted); padding: 24px 0 48px; }
 
     @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
-      /* --- Timeline styles --- */
+
+    /* --- Timeline styles --- */
     .timeline { position: relative; padding-left: 22px; margin: 0; }
     .timeline::before { content: ""; position: absolute; top: 4px; bottom: 4px; left: 8px; width: 2px; background: color-mix(in oklab, var(--text) 14%, transparent); }
     .tl-item { position: relative; margin: 0 0 18px 0; padding-left: 18px; }
     .tl-item::before { content: ""; position: absolute; left: 2px; top: 6px; width: 12px; height: 12px; border-radius: 999px; background: var(--brand); box-shadow: 0 0 0 4px color-mix(in oklab, var(--brand) 20%, transparent); }
     .tl-meta { font-size: 12px; color: var(--muted); margin-top: -2px; }
+
+    /* Auto-hide/reveal header on scroll */
+    header { transition: transform .25s ease; will-change: transform; }
+    .header-hidden { transform: translateY(-100%); }
+    @media (prefers-reduced-motion: reduce) { header { transition: none; } }
   </style>
 </head>
 <body>
@@ -102,7 +108,7 @@
       <p>Additional details on my <strong>education</strong>, <strong>work experience</strong>, and some <strong>extras</strong>. Use the buttons below to go back to the homepage or open my résumé.</p>
       <div class="cta">
         <a class="btn" href="index.html">← Back to Home</a>
-        <a class="btn" href="Amedeo_Carraro_resume.pdf" target="_blank" rel="noopener">Open resume (PDF)</a>
+        <a class="btn" href="Amedeo_Carraro_resume.pdf" target="_blank" rel="noopener noreferrer">Open resume (PDF)</a>
       </div>
     </section>
 
@@ -116,7 +122,7 @@
             <p class="tl-meta">Sep 2022 – Mar 2025 · Grade: 93/110 (≈ 3.4 GPA)</p>
             <ul>
               <li><strong>Relevant Modules:</strong> Machine Learning, Artificial Intelligence, Computer Vision, Intelligent Robotics.</li>
-              <li><strong>Thesis:</strong> <em>Neural Network Approaches for Classifying Variable Star Light Curves</em> (ZTF; LSTM &amp; CNN on DMDT/light‑curve representations).</li>
+              <li><strong>Thesis:</strong> <em>Neural Network Approaches for Classifying Variable Star Light Curves</em> (ZTF; LSTM &amp; CNN on DMDT/light-curve representations).</li>
             </ul>
           </div>
           <div class="tl-item">
@@ -146,15 +152,15 @@
             <h3>Research Intern — Neural Network for Variable Star Classification, University of Padua, Italy</h3>
             <p class="tl-meta">Oct 2024 – Mar 2025</p>
             <ul>
-              <li>Analyzed and implemented two hybrid architectures combining CNNs and LSTMs for variable star classification, based on in‑depth review and integration of techniques from multiple state‑of‑the‑art publications.</li>
-              <li>Achieved F1‑score &gt;95% (peaks &gt;99%) on ZTF, balancing accuracy and computational efficiency.</li>
+              <li>Analyzed and implemented two hybrid architectures combining CNNs and LSTMs for variable star classification, based on in-depth review and integration of techniques from multiple state-of-the-art publications.</li>
+              <li>Achieved F1-score &gt;95% (peaks &gt;99%) on ZTF, balancing accuracy and computational efficiency.</li>
             </ul>
           </div>
           <div class="tl-item">
-            <h3>Full‑Stack Developer Intern — ITReview, Padua, Italy</h3>
+            <h3>Full-Stack Developer Intern — ITReview, Padua, Italy</h3>
             <p class="tl-meta">Nov 2023 – Dec 2023</p>
             <ul>
-              <li>Developed full‑stack web features with React (frontend) and Node.js (backend), integrating RESTful APIs to deliver scalable user interfaces.</li>
+              <li>Developed full-stack web features with React (frontend) and Node.js (backend), integrating RESTful APIs to deliver scalable user interfaces.</li>
               <li>Collaborated in code reviews and optimizations, improving database response times by ~20%.</li>
             </ul>
           </div>
@@ -163,14 +169,14 @@
             <p class="tl-meta">Sep 2021 – Dec 2021</p>
             <ul>
               <li>Managed the ERP migration from Navision to Dynamics 365 with custom development.</li>
-              <li>Built Docker‑based deployment systems, reducing downtime and accelerating delivery by ~50%.</li>
+              <li>Built Docker-based deployment systems, reducing downtime and accelerating delivery by ~50%.</li>
             </ul>
           </div>
           <div class="tl-item">
             <h3>Data Analyst — ULSS 7 Pedemontana, Thiene, Italy</h3>
             <p class="tl-meta">Jun 2015 – Aug 2015</p>
             <ul>
-              <li>Led the deployment of a digital signature system across the regional healthcare network, enabling real‑time data capture and analysis in compliance with data governance.</li>
+              <li>Led the deployment of a digital signature system across the regional healthcare network, enabling real-time data capture and analysis in compliance with data governance.</li>
               <li>Automated workflows, eliminating manual errors and achieving 3–4× faster processing.</li>
             </ul>
           </div>
@@ -201,7 +207,7 @@
           <h3>Selected Skills</h3>
           <ul>
             <li><strong>Programming:</strong> Python, Java, C, C++, JavaScript, C#, SQL, HTML, PHP, MATLAB, ROS, R, C/BASE, C/AL</li>
-            <li><strong>Tools:</strong> TensorFlow, PyTorch, Keras, scikit‑learn, NumPy, pandas, SciPy, Matplotlib, Apache Spark, GitHub &amp; MLOps</li>
+            <li><strong>Tools:</strong> TensorFlow, PyTorch, Keras, scikit-learn, NumPy, pandas, SciPy, Matplotlib, Apache Spark, GitHub &amp; MLOps</li>
           </ul>
         </div>
       </div>
@@ -214,5 +220,24 @@
       <small>© 2025 Amedeo Carraro. All rights reserved.</small>
     </div>
   </footer>
+
+  <!-- Auto-hide/reveal header on scroll -->
+  <script>
+  (() => {
+    const header = document.querySelector('header');
+    if (!header) return;
+    let lastY = window.scrollY || 0;
+    const threshold = 10;
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY || 0;
+      const delta = y - lastY;
+      if (y < 10) { header.classList.remove('header-hidden'); lastY = y; return; }
+      if (Math.abs(delta) < threshold) return;
+      if (delta > 0) header.classList.add('header-hidden');
+      else header.classList.remove('header-hidden');
+      lastY = y;
+    }, { passive: true });
+  })();
+  </script>
 </body>
 </html>
