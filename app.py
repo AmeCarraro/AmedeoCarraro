@@ -93,7 +93,7 @@ rag = None
 def init_rag():
     global rag
     if rag is None:
-        knowledge_file = os.path.join(os.path.dirname(__file__), '..', 'chatbot-data.txt')
+        knowledge_file = os.path.join(os.path.dirname(__file__), 'chatbot-data.txt')
         rag = SimpleRAG(knowledge_file)
         print(f"RAG initialized with {len(rag.chunks)} chunks")
 

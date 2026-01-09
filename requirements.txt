@@ -1,2 +1,3 @@
-# No external dependencies needed!
-# Python standard library only for maximum simplicity and speed
+flask==3.0.0
+flask-cors==4.0.0
+llama-cpp-python==0.2.27
