@@ -220,10 +220,10 @@ class SimpleChatbot {
   }
 
   async getAIResponse(message) {
-    // Use Render backend (will be set after deployment)
+    // Use Render backend
     const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
       ? 'http://localhost:5000/chat'
-      : 'https://amedeo-chatbot.onrender.com/chat'; // Will update after Render deployment
+      : 'https://amedeocarraro.onrender.com/chat';
 
     const response = await fetch(apiUrl, {
       method: 'POST',
