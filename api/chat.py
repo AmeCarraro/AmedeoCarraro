@@ -105,6 +105,11 @@ def call_groq(messages, api_key):
 
     url = "https://api.groq.com/openai/v1/chat/completions"
 
+    # Debug: check API key format
+    api_key = api_key.strip()  # Remove any whitespace
+    print(f"Calling Groq with key starting: {api_key[:10]}...")
+    print(f"Key ends with: ...{api_key[-10:]}")
+
     data = {
         "model": "llama-3.3-70b-versatile",
         "messages": messages,
