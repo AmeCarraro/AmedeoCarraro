@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: amedeo-chatbot
+    env: python
+    region: frankfurt
+    plan: free
+    buildCommand: |
+      cd backend
+      pip install -r requirements.txt
+      mkdir -p models
+      # Download Phi-2 model (small, quantized version)
+      wget -q https://huggingface.co/TheBloke/phi-2-GGUF/resolve/main/phi-2.Q4_K_M.gguf -O models/phi-2.Q4_K_M.gguf || echo "Model download failed, will use RAG-only mode"
+    startCommand: cd backend && python app.py
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: MODEL_PATH
+        value: ./models/phi-2.Q4_K_M.gguf
+    autoDeploy: true
