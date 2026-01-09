@@ -111,7 +111,7 @@ def call_groq(messages, api_key):
     print(f"Key ends with: ...{api_key[-10:]}")
 
     data = {
-        "model": "llama-3.3-70b-versatile",
+        "model": "llama-3.1-8b-instant",
         "messages": messages,
         "temperature": 0.7,
         "max_tokens": 500
