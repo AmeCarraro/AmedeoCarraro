@@ -103,18 +103,18 @@ def call_huggingface(messages, api_key):
     """Call Hugging Face Inference API"""
     import urllib.request
 
-    # Use Mistral-7B-Instruct (fast, free, good quality)
-    url = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2"
+    # Use Meta Llama 3.2 (free, reliable, good quality)
+    url = "https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-3B-Instruct"
 
-    # Build prompt from messages
+    # Build prompt from messages (Llama 3.2 format)
     prompt = ""
     for msg in messages:
         role = msg['role']
         content = msg['content']
         if role == 'system':
-            prompt += f"<s>[INST] {content} [/INST]</s>\n"
+            prompt += f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n{content}<|eot_id|>"
         elif role == 'user':
-            prompt += f"<s>[INST] {content} [/INST]"
+            prompt += f"<|start_header_id|>user<|end_header_id|>\n{content}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
 
     data = {
         "inputs": prompt,
