@@ -194,7 +194,7 @@ class SimpleChatbot {
     }
   }
 
-  handleSend() {
+  async handleSend() {
     const input = document.getElementById('chatbot-input');
     const message = input.value.trim();
 
@@ -204,11 +204,63 @@ class SimpleChatbot {
     input.value = '';
     document.getElementById('chatbot-suggestions').innerHTML = '';
 
-    setTimeout(() => {
-      const response = this.findAnswer(message);
+    // Show typing indicator
+    this.addTypingIndicator();
+
+    try {
+      const response = await this.getAIResponse(message);
+      this.removeTypingIndicator();
       this.addBotMessage(response);
       this.showQuickReplies();
-    }, 500);
+    } catch (error) {
+      this.removeTypingIndicator();
+      this.addBotMessage('Mi dispiace, si è verificato un errore. Riprova tra poco.');
+      console.error('Chat error:', error);
+    }
+  }
+
+  async getAIResponse(message) {
+    // Check if we're in development (localhost) or production
+    const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+      ? 'http://localhost:3000/api/chat'
+      : '/api/chat';
+
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message })
+    });
+
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.response;
+  }
+
+  addTypingIndicator() {
+    const messagesDiv = document.getElementById('chatbot-messages');
+    const indicator = document.createElement('div');
+    indicator.className = 'chatbot-message chatbot-message-bot';
+    indicator.id = 'chatbot-typing';
+
+    const bubble = document.createElement('div');
+    bubble.className = 'chatbot-message-bubble chatbot-typing-indicator';
+    bubble.innerHTML = '<span></span><span></span><span></span>';
+
+    indicator.appendChild(bubble);
+    messagesDiv.appendChild(indicator);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  }
+
+  removeTypingIndicator() {
+    const indicator = document.getElementById('chatbot-typing');
+    if (indicator) {
+      indicator.remove();
+    }
   }
 
   findAnswer(userMessage) {

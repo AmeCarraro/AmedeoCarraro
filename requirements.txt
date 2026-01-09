@@ -1,0 +1,2 @@
+# No external dependencies needed!
+# Python standard library only for maximum simplicity and speed
