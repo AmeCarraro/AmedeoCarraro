@@ -1,5 +1,5 @@
 """
-RAG Chatbot API using Groq
+RAG Chatbot API using Hugging Face
 Serverless function for Vercel
 """
 
@@ -99,22 +99,31 @@ def init_rag():
         rag = SimpleRAG(knowledge_file)
 
 
-def call_groq(messages, api_key):
-    """Call Groq API"""
+def call_huggingface(messages, api_key):
+    """Call Hugging Face Inference API"""
     import urllib.request
 
-    url = "https://api.groq.com/openai/v1/chat/completions"
+    # Use Mistral-7B-Instruct (fast, free, good quality)
+    url = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2"
 
-    # Debug: check API key format
-    api_key = api_key.strip()  # Remove any whitespace
-    print(f"Calling Groq with key starting: {api_key[:10]}...")
-    print(f"Key ends with: ...{api_key[-10:]}")
+    # Build prompt from messages
+    prompt = ""
+    for msg in messages:
+        role = msg['role']
+        content = msg['content']
+        if role == 'system':
+            prompt += f"<s>[INST] {content} [/INST]</s>\n"
+        elif role == 'user':
+            prompt += f"<s>[INST] {content} [/INST]"
 
     data = {
-        "model": "llama-3.1-8b-instant",
-        "messages": messages,
-        "temperature": 0.7,
-        "max_tokens": 500
+        "inputs": prompt,
+        "parameters": {
+            "max_new_tokens": 500,
+            "temperature": 0.7,
+            "top_p": 0.95,
+            "return_full_text": False
+        }
     }
 
     headers = {
@@ -132,9 +141,12 @@ def call_groq(messages, api_key):
     try:
         with urllib.request.urlopen(req) as response:
             result = json.loads(response.read().decode('utf-8'))
-            return result['choices'][0]['message']['content']
+            # HF returns list of results
+            if isinstance(result, list) and len(result) > 0:
+                return result[0]['generated_text'].strip()
+            return result.get('generated_text', '').strip()
     except Exception as e:
-        print(f"Groq API error: {e}")
+        print(f"Hugging Face API error: {e}")
         return None
 
 
@@ -163,11 +175,9 @@ class handler(BaseHTTPRequestHandler):
                 self.send_error_response("Message is required", 400)
                 return
 
-            # Get Groq API key from environment
-            groq_api_key = os.environ.get('GROQ_API_KEY')
-            print(f"API Key present: {bool(groq_api_key)}")
-            print(f"API Key length: {len(groq_api_key) if groq_api_key else 0}")
-            if not groq_api_key:
+            # Get Hugging Face API key from environment
+            hf_api_key = os.environ.get('HUGGINGFACE_API_KEY')
+            if not hf_api_key:
                 self.send_error_response("API key not configured", 500)
                 return
 
@@ -198,8 +208,8 @@ Rispondi in modo conciso:"""
                 {"role": "user", "content": user_prompt}
             ]
 
-            # Call Groq
-            response = call_groq(messages, groq_api_key)
+            # Call Hugging Face
+            response = call_huggingface(messages, hf_api_key)
 
             if response:
                 self.send_json_response({"response": response})
