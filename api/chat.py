@@ -1,6 +1,6 @@
 """
-RAG Chatbot API using Hugging Face
-Serverless function for Vercel
+RAG Chatbot API - Pure keyword search
+Serverless function for Vercel (no external API dependencies)
 """
 
 import os
@@ -99,57 +99,6 @@ def init_rag():
         rag = SimpleRAG(knowledge_file)
 
 
-def call_huggingface(messages, api_key):
-    """Call Hugging Face Inference API"""
-    import urllib.request
-
-    # Use Meta Llama 3.2 (free, reliable, good quality)
-    url = "https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-3B-Instruct"
-
-    # Build prompt from messages (Llama 3.2 format)
-    prompt = ""
-    for msg in messages:
-        role = msg['role']
-        content = msg['content']
-        if role == 'system':
-            prompt += f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n{content}<|eot_id|>"
-        elif role == 'user':
-            prompt += f"<|start_header_id|>user<|end_header_id|>\n{content}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"
-
-    data = {
-        "inputs": prompt,
-        "parameters": {
-            "max_new_tokens": 500,
-            "temperature": 0.7,
-            "top_p": 0.95,
-            "return_full_text": False
-        }
-    }
-
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-
-    req = urllib.request.Request(
-        url,
-        data=json.dumps(data).encode('utf-8'),
-        headers=headers,
-        method='POST'
-    )
-
-    try:
-        with urllib.request.urlopen(req) as response:
-            result = json.loads(response.read().decode('utf-8'))
-            # HF returns list of results
-            if isinstance(result, list) and len(result) > 0:
-                return result[0]['generated_text'].strip()
-            return result.get('generated_text', '').strip()
-    except Exception as e:
-        print(f"Hugging Face API error: {e}")
-        return None
-
-
 class handler(BaseHTTPRequestHandler):
     def do_OPTIONS(self):
         """Handle CORS preflight"""
@@ -175,46 +124,25 @@ class handler(BaseHTTPRequestHandler):
                 self.send_error_response("Message is required", 400)
                 return
 
-            # Get Hugging Face API key from environment
-            hf_api_key = os.environ.get('HUGGINGFACE_API_KEY')
-            if not hf_api_key:
-                self.send_error_response("API key not configured", 500)
+            # Retrieve relevant context from FAQ
+            chunks = rag.retrieve(query, top_k=3)
+
+            if not chunks:
+                response = "Non ho trovato informazioni specifiche su questo. Per maggiori dettagli puoi contattare Amedeo su amedeo.carraro01@gmail.com"
+                self.send_json_response({"response": response})
                 return
 
-            # Retrieve relevant context
-            context = rag.get_context(query)
+            # Use the best matching answer directly
+            best_chunk = chunks[0]
+            response = best_chunk['answer']
 
-            # Build prompt
-            system_prompt = """Sei l'assistente AI di Amedeo Carraro, un AI Engineer specializzato in Machine Learning e LLMs.
+            # If asking for contact info, ensure email is included
+            query_lower = query.lower()
+            if any(word in query_lower for word in ['contatt', 'email', 'scrivere', 'parlare']):
+                if 'amedeo.carraro01@gmail.com' not in response:
+                    response += "\n\nPuoi contattarmi su amedeo.carraro01@gmail.com"
 
-Rispondi alle domande in modo conciso e professionale usando SOLO le informazioni fornite nel contesto.
-Se non trovi informazioni nel contesto, rispondi: "Non ho informazioni specifiche su questo. Puoi contattare Amedeo su amedeo.carraro01@gmail.com"
-
-Regole:
-- Risposte brevi (2-4 frasi max)
-- Usa un tono professionale ma amichevole
-- Se chiesto contatti, fornisci sempre l'email
-- Rispondi in italiano se la domanda è in italiano, altrimenti in inglese"""
-
-            user_prompt = f"""Contesto:
-{context}
-
-Domanda: {query}
-
-Rispondi in modo conciso:"""
-
-            messages = [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ]
-
-            # Call Hugging Face
-            response = call_huggingface(messages, hf_api_key)
-
-            if response:
-                self.send_json_response({"response": response})
-            else:
-                self.send_error_response("Failed to generate response", 500)
+            self.send_json_response({"response": response})
 
         except Exception as e:
             print(f"Error: {e}")
