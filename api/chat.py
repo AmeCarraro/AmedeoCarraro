@@ -160,6 +160,8 @@ class handler(BaseHTTPRequestHandler):
 
             # Get Groq API key from environment
             groq_api_key = os.environ.get('GROQ_API_KEY')
+            print(f"API Key present: {bool(groq_api_key)}")
+            print(f"API Key length: {len(groq_api_key) if groq_api_key else 0}")
             if not groq_api_key:
                 self.send_error_response("API key not configured", 500)
                 return
