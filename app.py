@@ -132,6 +132,35 @@ def init_llm():
             logger.warning("Falling back to RAG-only mode")
 
 
+def translate_query_to_english(query):
+    """Translate query to English for better RAG matching (if not already English)"""
+    if gemini_model is None:
+        return query
+
+    try:
+        # Quick translation to English for RAG matching
+        translation_prompt = f"""Translate this question to English. If it's already in English, return it unchanged. Only output the translated question, nothing else.
+
+Question: {query}
+
+English translation:"""
+
+        response = gemini_model.generate_content(
+            translation_prompt,
+            generation_config={
+                'max_output_tokens': 100,
+                'temperature': 0.1,  # Low temperature for consistent translation
+            }
+        )
+
+        translated = response.text.strip()
+        logger.info(f"Translated query: '{query}' -> '{translated}'")
+        return translated
+    except Exception as e:
+        logger.error(f"Translation error: {e}")
+        return query  # Fallback to original
+
+
 def generate_response(query, context):
     """Generate response using Gemini API or fallback to RAG"""
 
@@ -192,9 +221,13 @@ def chat():
         if not query:
             return jsonify({"error": "Message is required"}), 400
 
-        # Get context from RAG
-        context = rag.get_context(query)
-        logger.info(f"Query: {query}")
+        # Translate query to English for better RAG matching
+        query_for_rag = translate_query_to_english(query)
+
+        # Get context from RAG using translated query
+        context = rag.get_context(query_for_rag)
+        logger.info(f"Original query: {query}")
+        logger.info(f"Query for RAG: {query_for_rag}")
         logger.info(f"Context found: {context[:100] if context else 'None'}...")
         logger.info(f"Gemini available: {gemini_model is not None}")
 
