@@ -124,67 +124,51 @@ def init_llm():
 
 def generate_response(query, context):
     """Generate response using Gemini API or fallback to RAG"""
+
+    # Try Gemini first if available
     if gemini_model is not None:
         try:
-            # Build prompt with context
-            if context:
-                prompt = f"""Sei l'assistente AI di Amedeo Carraro. Rispondi in italiano in modo professionale e MOLTO conciso.
+            # Simple prompt for short answers
+            prompt = f"""Rispondi in italiano in 1 frase breve (max 80 caratteri).
 
-INFORMAZIONI:
-{context}
+Contesto: {context if context else 'Nessuna informazione disponibile'}
 
-DOMANDA: {query}
+Domanda: {query}
 
-ISTRUZIONI:
-- Rispondi con MASSIMO 2 frasi brevi
-- Se è un saluto (ciao, buongiorno), rispondi solo: "Ciao! Sono l'assistente di Amedeo Carraro."
-- Usa le informazioni fornite sopra
-- NON aggiungere dettagli extra
+Risposta breve:"""
 
-RISPOSTA:"""
-            else:
-                # No context found - handle greetings and general questions
-                prompt = f"""Sei l'assistente AI di Amedeo Carraro, un Computer Engineer specializzato in AI e Machine Learning.
-
-DOMANDA: {query}
-
-ISTRUZIONI:
-- Se è un saluto, rispondi: "Ciao! Sono l'assistente di Amedeo Carraro, Computer Engineer specializzato in AI."
-- Altrimenti rispondi: "Non ho informazioni specifiche. Contatta Amedeo su amedeo.carraro01@gmail.com"
-- MASSIMO 2 frasi
-
-RISPOSTA:"""
-
-            # Generate with strict token limit
             response = gemini_model.generate_content(
                 prompt,
                 generation_config={
-                    'max_output_tokens': 60,
-                    'temperature': 0.3,
+                    'max_output_tokens': 40,
+                    'temperature': 0.2,
                 }
             )
 
-            # Force truncate to 2 sentences max
             text = response.text.strip()
-            sentences = text.split('. ')
-            if len(sentences) > 2:
-                text = '. '.join(sentences[:2]) + '.'
 
-            # Hard limit: max 150 characters
-            if len(text) > 150:
-                text = text[:147] + '...'
+            # Hard limit: 100 chars
+            if len(text) > 100:
+                text = text[:97] + '...'
 
+            print(f"Gemini response: {text}")
             return text
 
         except Exception as e:
             print(f"Gemini API error: {e}")
+            # Continue to fallback
 
-    # Fallback: use best matching answer from RAG
+    # Fallback: use RAG answer but truncate it
     chunks = rag.retrieve(query, top_k=1)
     if chunks:
-        return chunks[0]['answer']
+        answer = chunks[0]['answer']
+        # Truncate to first sentence or 100 chars
+        first_sentence = answer.split('.')[0] + '.'
+        if len(first_sentence) > 100:
+            first_sentence = first_sentence[:97] + '...'
+        return first_sentence
 
-    return "Non ho trovato informazioni specifiche su questo. Per maggiori dettagli puoi contattare Amedeo su amedeo.carraro01@gmail.com"
+    return "Non ho info su questo. Scrivi ad amedeo.carraro01@gmail.com"
 
 
 @app.route('/health', methods=['GET'])
