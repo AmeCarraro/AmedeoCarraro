@@ -128,23 +128,41 @@ def generate_response(query, context):
         try:
             # Build prompt with context
             if context:
-                prompt = f"""Sei l'assistente AI di Amedeo Carraro. Rispondi alle domande in modo professionale e conciso usando le informazioni fornite.
+                prompt = f"""Sei l'assistente AI di Amedeo Carraro. Rispondi in italiano in modo professionale e MOLTO conciso.
 
-Informazioni disponibili:
+INFORMAZIONI:
 {context}
 
-Domanda: {query}
+DOMANDA: {query}
 
-Rispondi in modo naturale e conversazionale (massimo 2-3 frasi). Se la domanda è un saluto (ciao, buongiorno, ecc.), rispondi educatamente e presentati brevemente."""
+ISTRUZIONI:
+- Rispondi con MASSIMO 2 frasi brevi
+- Se è un saluto (ciao, buongiorno), rispondi solo: "Ciao! Sono l'assistente di Amedeo Carraro."
+- Usa le informazioni fornite sopra
+- NON aggiungere dettagli extra
+
+RISPOSTA:"""
             else:
                 # No context found - handle greetings and general questions
                 prompt = f"""Sei l'assistente AI di Amedeo Carraro, un Computer Engineer specializzato in AI e Machine Learning.
 
-Domanda: {query}
+DOMANDA: {query}
 
-Se è un saluto, rispondi educatamente e presentati brevemente. Altrimenti indica che non hai informazioni specifiche e invita a contattare Amedeo su amedeo.carraro01@gmail.com (massimo 2-3 frasi)."""
+ISTRUZIONI:
+- Se è un saluto, rispondi: "Ciao! Sono l'assistente di Amedeo Carraro, Computer Engineer specializzato in AI."
+- Altrimenti rispondi: "Non ho informazioni specifiche. Contatta Amedeo su amedeo.carraro01@gmail.com"
+- MASSIMO 2 frasi
 
-            response = gemini_model.generate_content(prompt)
+RISPOSTA:"""
+
+            # Generate with strict token limit
+            response = gemini_model.generate_content(
+                prompt,
+                generation_config={
+                    'max_output_tokens': 100,
+                    'temperature': 0.3,
+                }
+            )
             return response.text.strip()
 
         except Exception as e:
