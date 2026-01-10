@@ -206,6 +206,13 @@ def chat():
         if not query:
             return jsonify({"error": "Message is required"}), 400
 
+        # Handle greetings directly (no LLM needed)
+        query_lower = query.lower()
+        greetings = ['ciao', 'salve', 'buongiorno', 'buonasera', 'hey', 'hello', 'hi']
+        if any(greeting in query_lower for greeting in greetings):
+            response = "Ciao! Sono l'assistente di Amedeo. Come posso aiutarti?"
+            return jsonify({"response": response})
+
         # Get context from RAG
         context = rag.get_context(query)
 
