@@ -23,26 +23,29 @@ class SimpleRAG:
             with open(filepath, 'r', encoding='utf-8') as f:
                 content = f.read()
 
-            # Parse FAQ format
+            # Parse FAQ format (multi-line: Q: on one line, A: on next)
             lines = content.split('\n')
+            current_question = None
+
             for line in lines:
                 line = line.strip()
                 if not line or line.startswith('#'):
                     continue
 
-                if line.startswith('Q:') and 'A:' in line:
-                    parts = line.split('A:')
-                    question = parts[0].replace('Q:', '').strip()
-                    answer = parts[1].strip() if len(parts) > 1 else ""
-
+                if line.startswith('Q:'):
+                    current_question = line.replace('Q:', '').strip()
+                elif line.startswith('A:') and current_question:
+                    answer = line.replace('A:', '').strip()
                     if answer:
                         # Store multiple question variants
-                        questions = [q.strip() for q in question.split('|')]
+                        questions = [q.strip() for q in current_question.split('|')]
                         self.chunks.append({
                             'questions': questions,
                             'answer': answer,
                             'text': f"{questions[0]} {answer}"
                         })
+                    current_question = None
+
         except Exception as e:
             print(f"Error loading knowledge: {e}")
 
