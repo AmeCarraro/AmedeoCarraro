@@ -137,7 +137,7 @@ class SimpleChatbot {
 
   addWelcomeMessage() {
     this.addBotMessage(
-      'Hi! 👋 I\'m Amedeo\'s virtual assistant. Ask me about skills, projects, contacts or anything else!'
+      'Hi! 👋 I\'m Amedeo\'s virtual assistant. Ask me about skills, projects, contacts or anything else! (Note: First response may take 30s due to server startup)'
     );
     this.showQuickReplies();
   }

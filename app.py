@@ -184,7 +184,7 @@ def chat():
         query_lower = query.lower()
         greetings = ['ciao', 'salve', 'buongiorno', 'buonasera', 'hey', 'hello', 'hi']
         if any(greeting in query_lower for greeting in greetings):
-            response = "Hi! I'm Amedeo's assistant. How can I help you? (Note: First response may take 30s due to server startup)"
+            response = "Hi! I'm Amedeo's assistant. How can I help you?"
             return jsonify({"response": response})
 
         # Get context from RAG
