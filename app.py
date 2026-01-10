@@ -138,10 +138,8 @@ def generate_response(query, context):
     # Try Gemini first if available
     if gemini_model is not None:
         try:
-            # Improved prompt: explicitly tell Gemini to translate context if needed
-            prompt = f"""You are Amedeo's assistant. Answer briefly and naturally in the SAME LANGUAGE as the question.
-
-If the context is in English but the question is in another language, translate the relevant information to match the question's language.
+            # Simple prompt for concise answers (responds in same language as question)
+            prompt = f"""Answer briefly and naturally in the SAME LANGUAGE as the question below.
 
 Context: {context if context else 'No information available'}
 
@@ -192,6 +190,13 @@ def chat():
         if not query:
             return jsonify({"error": "Message is required"}), 400
 
+        # Handle greetings directly (no LLM needed)
+        query_lower = query.lower()
+        greetings = ['ciao', 'salve', 'buongiorno', 'buonasera', 'hey', 'hello', 'hi']
+        if any(greeting in query_lower for greeting in greetings):
+            response = "Hi! I'm Amedeo's assistant. How can I help you?"
+            return jsonify({"response": response})
+
         # Get context from RAG
         context = rag.get_context(query)
         logger.info(f"Query: {query}")
@@ -201,6 +206,11 @@ def chat():
         # Generate response
         response = generate_response(query, context)
         logger.info(f"Final response: {response}")
+
+        # Add contact info if asking for contact
+        if any(word in query_lower for word in ['contact', 'email', 'reach', 'write', 'contatt']):
+            if '@' not in response:
+                response += " Email: amedeo.carraro01@gmail.com"
 
         return jsonify({"response": response})
 
