@@ -189,9 +189,13 @@ def chat():
 
         # Get context from RAG
         context = rag.get_context(query)
+        print(f"Query: {query}")
+        print(f"Context found: {context[:100] if context else 'None'}...")
+        print(f"Gemini available: {gemini_model is not None}")
 
         # Generate response
         response = generate_response(query, context)
+        print(f"Final response: {response}")
 
         # Add contact info if asking for contact
         if any(word in query_lower for word in ['contact', 'email', 'reach', 'write', 'contatt']):
