@@ -128,29 +128,24 @@ def generate_response(query, context):
     # Try Gemini first if available
     if gemini_model is not None:
         try:
-            # Simple prompt for short answers
-            prompt = f"""Answer in English in 1 short sentence (max 80 characters).
+            # Simple prompt for concise answers
+            prompt = f"""Answer in English briefly and naturally.
 
 Context: {context if context else 'No information available'}
 
 Question: {query}
 
-Short answer:"""
+Answer:"""
 
             response = gemini_model.generate_content(
                 prompt,
                 generation_config={
-                    'max_output_tokens': 40,
-                    'temperature': 0.2,
+                    'max_output_tokens': 100,
+                    'temperature': 0.3,
                 }
             )
 
             text = response.text.strip()
-
-            # Hard limit: 100 chars
-            if len(text) > 100:
-                text = text[:97] + '...'
-
             print(f"Gemini response: {text}")
             return text
 
@@ -158,15 +153,10 @@ Short answer:"""
             print(f"Gemini API error: {e}")
             # Continue to fallback
 
-    # Fallback: use RAG answer but truncate it
+    # Fallback: use RAG answer directly (no truncation)
     chunks = rag.retrieve(query, top_k=1)
     if chunks:
-        answer = chunks[0]['answer']
-        # Truncate to first sentence or 100 chars
-        first_sentence = answer.split('.')[0] + '.'
-        if len(first_sentence) > 100:
-            first_sentence = first_sentence[:97] + '...'
-        return first_sentence
+        return chunks[0]['answer']
 
     return "I don't have info on this. Contact: amedeo.carraro01@gmail.com"
 
