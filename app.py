@@ -159,11 +159,22 @@ RISPOSTA:"""
             response = gemini_model.generate_content(
                 prompt,
                 generation_config={
-                    'max_output_tokens': 100,
+                    'max_output_tokens': 60,
                     'temperature': 0.3,
                 }
             )
-            return response.text.strip()
+
+            # Force truncate to 2 sentences max
+            text = response.text.strip()
+            sentences = text.split('. ')
+            if len(sentences) > 2:
+                text = '. '.join(sentences[:2]) + '.'
+
+            # Hard limit: max 150 characters
+            if len(text) > 150:
+                text = text[:147] + '...'
+
+            return text
 
         except Exception as e:
             print(f"Gemini API error: {e}")
