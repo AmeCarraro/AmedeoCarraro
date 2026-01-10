@@ -138,8 +138,8 @@ def generate_response(query, context):
     # Try Gemini first if available
     if gemini_model is not None:
         try:
-            # Simple prompt for concise answers
-            prompt = f"""Answer in English briefly and naturally.
+            # Simple prompt for concise answers (responds in same language as question)
+            prompt = f"""Answer briefly and naturally in the SAME LANGUAGE as the question below.
 
 Context: {context if context else 'No information available'}
 
