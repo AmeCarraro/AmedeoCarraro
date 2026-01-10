@@ -100,54 +100,55 @@ def init_rag():
         rag = SimpleRAG(knowledge_file)
         print(f"RAG initialized with {len(rag.chunks)} chunks")
 
-# LLM integration using llama-cpp-python
-llm = None
+# LLM integration using Google Gemini API
+gemini_model = None
 
 def init_llm():
-    global llm
-    if llm is None:
+    global gemini_model
+    if gemini_model is None:
         try:
-            from llama_cpp import Llama
+            import google.generativeai as genai
 
-            model_path = os.environ.get('MODEL_PATH', './models/phi-2.Q4_K_M.gguf')
+            api_key = os.environ.get('GEMINI_API_KEY')
+            if not api_key:
+                print("GEMINI_API_KEY not found, falling back to RAG-only mode")
+                return
 
-            print(f"Loading LLM from {model_path}...")
-            llm = Llama(
-                model_path=model_path,
-                n_ctx=2048,
-                n_threads=4,
-                n_gpu_layers=0  # CPU only for free tier
-            )
-            print("LLM loaded successfully!")
+            genai.configure(api_key=api_key)
+            gemini_model = genai.GenerativeModel('gemini-1.5-flash')
+            print("Gemini API initialized successfully!")
         except Exception as e:
-            print(f"Error loading LLM: {e}")
+            print(f"Error initializing Gemini: {e}")
             print("Falling back to RAG-only mode")
 
 
 def generate_response(query, context):
-    """Generate response using LLM or fallback to RAG"""
-    if llm is not None:
+    """Generate response using Gemini API or fallback to RAG"""
+    if gemini_model is not None:
         try:
-            prompt = f"""You are Amedeo Carraro's AI assistant. Answer questions professionally and concisely.
+            # Build prompt with context
+            if context:
+                prompt = f"""Sei l'assistente AI di Amedeo Carraro. Rispondi alle domande in modo professionale e conciso usando le informazioni fornite.
 
-Context:
+Informazioni disponibili:
 {context}
 
-Question: {query}
+Domanda: {query}
 
-Answer (2-3 sentences max):"""
+Rispondi in modo naturale e conversazionale (massimo 2-3 frasi). Se la domanda è un saluto (ciao, buongiorno, ecc.), rispondi educatamente e presentati brevemente."""
+            else:
+                # No context found - handle greetings and general questions
+                prompt = f"""Sei l'assistente AI di Amedeo Carraro, un Computer Engineer specializzato in AI e Machine Learning.
 
-            response = llm(
-                prompt,
-                max_tokens=200,
-                temperature=0.7,
-                stop=["Question:", "\n\n"],
-                echo=False
-            )
+Domanda: {query}
 
-            return response['choices'][0]['text'].strip()
+Se è un saluto, rispondi educatamente e presentati brevemente. Altrimenti indica che non hai informazioni specifiche e invita a contattare Amedeo su amedeo.carraro01@gmail.com (massimo 2-3 frasi)."""
+
+            response = gemini_model.generate_content(prompt)
+            return response.text.strip()
+
         except Exception as e:
-            print(f"LLM generation error: {e}")
+            print(f"Gemini API error: {e}")
 
     # Fallback: use best matching answer from RAG
     chunks = rag.retrieve(query, top_k=1)
@@ -160,7 +161,7 @@ Answer (2-3 sentences max):"""
 @app.route('/health', methods=['GET'])
 def health():
     """Health check endpoint"""
-    return jsonify({"status": "ok", "llm_loaded": llm is not None})
+    return jsonify({"status": "ok", "llm_loaded": gemini_model is not None})
 
 
 @app.route('/chat', methods=['POST', 'OPTIONS'])

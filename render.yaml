@@ -4,14 +4,11 @@ services:
     env: python
     region: frankfurt
     plan: free
-    buildCommand: |
-      pip install -r requirements.txt
-      mkdir -p models
-      wget -q https://huggingface.co/TheBloke/phi-2-GGUF/resolve/main/phi-2.Q4_K_M.gguf -O models/phi-2.Q4_K_M.gguf || echo "Model download skipped"
+    buildCommand: pip install -r requirements.txt
     startCommand: python app.py
     envVars:
       - key: PORT
         value: 10000
-      - key: MODEL_PATH
-        value: ./models/phi-2.Q4_K_M.gguf
+      - key: GEMINI_API_KEY
+        sync: false
     autoDeploy: true
