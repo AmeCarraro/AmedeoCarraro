@@ -125,7 +125,7 @@ def init_llm():
                 return
 
             genai.configure(api_key=api_key)
-            gemini_model = genai.GenerativeModel('gemini-pro')
+            gemini_model = genai.GenerativeModel('gemini-1.5-flash-latest')
             logger.info("Gemini API initialized successfully!")
         except Exception as e:
             logger.error(f"Error initializing Gemini: {e}")
