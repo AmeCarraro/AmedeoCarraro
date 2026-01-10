@@ -150,7 +150,7 @@ Answer:"""
             response = gemini_model.generate_content(
                 prompt,
                 generation_config={
-                    'max_output_tokens': 100,
+                    'max_output_tokens': 300,
                     'temperature': 0.3,
                 }
             )
