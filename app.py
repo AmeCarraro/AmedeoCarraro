@@ -7,9 +7,19 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
 import re
+import sys
+import logging
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
+
+# Configure logging to stdout
+logging.basicConfig(
+    stream=sys.stdout,
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
 # Simple RAG system (same as before)
 class SimpleRAG:
@@ -47,7 +57,7 @@ class SimpleRAG:
                     current_question = None
 
         except Exception as e:
-            print(f"Error loading knowledge: {e}")
+            logger.error(f"Error loading knowledge: {e}")
 
     def retrieve(self, query, top_k=3):
         """Simple keyword-based retrieval"""
@@ -98,7 +108,7 @@ def init_rag():
     if rag is None:
         knowledge_file = os.path.join(os.path.dirname(__file__), 'chatbot-data.txt')
         rag = SimpleRAG(knowledge_file)
-        print(f"RAG initialized with {len(rag.chunks)} chunks")
+        logger.info(f"RAG initialized with {len(rag.chunks)} chunks")
 
 # LLM integration using Google Gemini API
 gemini_model = None
@@ -111,15 +121,15 @@ def init_llm():
 
             api_key = os.environ.get('GEMINI_API_KEY')
             if not api_key:
-                print("GEMINI_API_KEY not found, falling back to RAG-only mode")
+                logger.warning("GEMINI_API_KEY not found, falling back to RAG-only mode")
                 return
 
             genai.configure(api_key=api_key)
             gemini_model = genai.GenerativeModel('gemini-1.5-flash')
-            print("Gemini API initialized successfully!")
+            logger.info("Gemini API initialized successfully!")
         except Exception as e:
-            print(f"Error initializing Gemini: {e}")
-            print("Falling back to RAG-only mode")
+            logger.error(f"Error initializing Gemini: {e}")
+            logger.warning("Falling back to RAG-only mode")
 
 
 def generate_response(query, context):
@@ -146,11 +156,11 @@ Answer:"""
             )
 
             text = response.text.strip()
-            print(f"Gemini response: {text}")
+            logger.info(f"Gemini response: {text}")
             return text
 
         except Exception as e:
-            print(f"Gemini API error: {e}")
+            logger.error(f"Gemini API error: {e}")
             # Continue to fallback
 
     # Fallback: use RAG answer directly (no truncation)
@@ -189,13 +199,13 @@ def chat():
 
         # Get context from RAG
         context = rag.get_context(query)
-        print(f"Query: {query}")
-        print(f"Context found: {context[:100] if context else 'None'}...")
-        print(f"Gemini available: {gemini_model is not None}")
+        logger.info(f"Query: {query}")
+        logger.info(f"Context found: {context[:100] if context else 'None'}...")
+        logger.info(f"Gemini available: {gemini_model is not None}")
 
         # Generate response
         response = generate_response(query, context)
-        print(f"Final response: {response}")
+        logger.info(f"Final response: {response}")
 
         # Add contact info if asking for contact
         if any(word in query_lower for word in ['contact', 'email', 'reach', 'write', 'contatt']):
@@ -205,7 +215,7 @@ def chat():
         return jsonify({"response": response})
 
     except Exception as e:
-        print(f"Error: {e}")
+        logger.error(f"Error: {e}")
         return jsonify({"error": str(e)}), 500
 
 
