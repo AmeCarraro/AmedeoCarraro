@@ -2,47 +2,47 @@
 # Format: Q: question | A: answer
 # Keywords are automatically extracted from questions for matching
 
-Q: Chi sei? | Chi è Amedeo Carraro?
-A: Sono Amedeo Carraro, un Computer Engineer specializzato in Artificial Intelligence e Machine Learning. Mi occupo di progettare, ottimizzare e deployare pipeline di reti neurali e Large Language Models (LLMs).
+Q: Who are you? | Who is Amedeo Carraro?
+A: I'm Amedeo Carraro, a Computer Engineer specialized in Artificial Intelligence and Machine Learning. I design, optimize and deploy neural network pipelines and Large Language Models (LLMs).
 
-Q: Quali sono le tue competenze principali? | Skills | Tecnologie
-A: Le mie competenze principali includono: Python, TensorFlow, PyTorch, scikit-learn, Keras, NumPy, pandas, Apache Spark, MLOps, GitHub. Ho esperienza con LLMs, Computer Vision, e sistemi di classificazione automatica.
+Q: What are your main skills? | Skills | Technologies
+A: My main skills include: Python, TensorFlow, PyTorch, scikit-learn, Keras, NumPy, pandas, Apache Spark, MLOps, GitHub. I have experience with LLMs, Computer Vision, and automatic classification systems.
 
-Q: Che linguaggi di programmazione conosci? | Linguaggi
-A: Conosco Python, Java, C, C++, C#, JavaScript, SQL, HTML, PHP, MATLAB, ROS, e R. Python è il mio linguaggio principale per progetti di AI/ML.
+Q: What programming languages do you know? | Languages
+A: I know Python, Java, C, C++, C#, JavaScript, SQL, HTML, PHP, MATLAB, ROS, and R. Python is my main language for AI/ML projects.
 
-Q: Quali certificazioni hai? | Certificati
-A: Ho le certificazioni OCI AI Foundations Associate e OCI Generative AI Professional.
+Q: What certifications do you have? | Certificates
+A: I have OCI AI Foundations Associate and OCI Generative AI Professional certifications.
 
-Q: Quali progetti hai realizzato? | Portfolio | Lavori
-A: Ho realizzato diversi progetti: Stellar Variability Classifier (LSTM/CNN per classificazione stelle variabili), Leukemia Cells Classifier (F1 84.66%), Fine-tuning di Mistral 7B con LoRA, YOLOv8 per difetti PCB con FastAPI/Docker, e RANSAC per predizione prezzi case svizzere.
+Q: What projects have you built? | Portfolio | Work
+A: I've built several projects: Stellar Variability Classifier (LSTM/CNN for variable star classification), Leukemia Cells Classifier (F1 84.66%), Mistral 7B fine-tuning with LoRA, YOLOv8 for PCB defect detection with FastAPI/Docker, and RANSAC for Swiss house price prediction.
 
-Q: Hai esperienza con LLMs? | Large Language Models
-A: Sì, ho esperienza con LLMs. Ho fatto fine-tuning parameter-efficient (LoRA) di Mistral 7B tramite Hugging Face, ottenendo BLEU 62%, ROUGE-1 81%, METEOR 78% per un sistema QA leggero.
+Q: Do you have experience with LLMs? | Large Language Models
+A: Yes, I have experience with LLMs. I did parameter-efficient fine-tuning (LoRA) of Mistral 7B via Hugging Face, achieving BLEU 62%, ROUGE-1 81%, METEOR 78% for a lightweight QA system.
 
-Q: Hai esperienza con Computer Vision? | CV | Immagini
-A: Sì, ho lavorato su diversi progetti di Computer Vision: classificazione cellule leucemiche con OpenCV, YOLOv8 per rilevamento difetti su PCB, e CNN su transform di curve di luce stellari.
+Q: Do you have Computer Vision experience? | CV | Images
+A: Yes, I've worked on several Computer Vision projects: leukemia cell classification with OpenCV, YOLOv8 for PCB defect detection, and CNN on stellar light curve transforms.
 
-Q: Come posso contattarti? | Contatto | Email
-A: Puoi contattarmi via email: amedeo.carraro01@gmail.com oppure tramite LinkedIn (linkedin.com/in/amedeo-carraro/) o GitHub (github.com/AmeCarraro).
+Q: How can I contact you? | Contact | Email
+A: You can contact me via email: amedeo.carraro01@gmail.com or through LinkedIn (linkedin.com/in/amedeo-carraro/) or GitHub (github.com/AmeCarraro).
 
-Q: Dove posso vedere il tuo CV? | Resume | Curriculum
-A: Puoi scaricare il mio CV in PDF direttamente da questo sito cliccando su "Download Resume" oppure al link: Amedeo_Carraro_resume.pdf
+Q: Where can I see your resume? | CV | Curriculum
+A: You can download my resume in PDF directly from this site by clicking "Download Resume" or at the link: Amedeo_Carraro_resume.pdf
 
-Q: Che lingue parli? | Languages
-A: Parlo Italiano (madrelingua), Inglese (livello C1) e Francese (livello A2).
+Q: What languages do you speak? | Languages spoken
+A: I speak Italian (native), English (C1 level) and French (A2 level).
 
-Q: Hai esperienza con deployment? | Production | MLOps
-A: Sì, ho esperienza nell'integrare soluzioni AI in ambienti di produzione con focus su performance, scalabilità e riduzione del tempo di inferenza. Uso Docker, FastAPI e strumenti MLOps.
+Q: Do you have deployment experience? | Production | MLOps
+A: Yes, I have experience integrating AI solutions in production environments with focus on performance, scalability and reducing inference time. I use Docker, FastAPI and MLOps tools.
 
-Q: Lavori in team? | Collaborazione
-A: Sì, ho ottime capacità di lavorare in team interdisciplinari e gestire progetti tecnici complessi rispettando obiettivi funzionali e temporali stringenti.
+Q: Do you work in teams? | Collaboration
+A: Yes, I have excellent ability to work in interdisciplinary teams and manage complex technical projects while meeting tight functional and temporal objectives.
 
-Q: Che frameworks ML usi? | Machine Learning tools
-A: Uso principalmente TensorFlow, PyTorch, Keras, scikit-learn per ML, e Apache Spark per big data. Ho esperienza anche con Hugging Face Transformers per LLMs.
+Q: What ML frameworks do you use? | Machine Learning tools
+A: I mainly use TensorFlow, PyTorch, Keras, scikit-learn for ML, and Apache Spark for big data. I also have experience with Hugging Face Transformers for LLMs.
 
-Q: Dove trovo i tuoi progetti? | Repository | GitHub
-A: Tutti i miei progetti sono disponibili su GitHub: github.com/AmeCarraro. Lì trovi i repository con codice sorgente, documentazione e dettagli di implementazione.
+Q: Where can I find your projects? | Repository | GitHub
+A: All my projects are available on GitHub: github.com/AmeCarraro. There you'll find repositories with source code, documentation and implementation details.
 
-Q: Cosa fai esattamente? | Lavoro | Ruolo
-A: Sono un AI Engineer: progetto e implemento soluzioni di intelligenza artificiale, ottimizzando modelli di deep learning e LLMs per l'integrazione in produzione con focus su prestazioni e scalabilità.
+Q: What exactly do you do? | Work | Role
+A: I'm an AI Engineer: I design and implement artificial intelligence solutions, optimizing deep learning models and LLMs for production integration with focus on performance and scalability.

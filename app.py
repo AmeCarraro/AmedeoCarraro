@@ -129,13 +129,13 @@ def generate_response(query, context):
     if gemini_model is not None:
         try:
             # Simple prompt for short answers
-            prompt = f"""Rispondi in italiano in 1 frase breve (max 80 caratteri).
+            prompt = f"""Answer in English in 1 short sentence (max 80 characters).
 
-Contesto: {context if context else 'Nessuna informazione disponibile'}
+Context: {context if context else 'No information available'}
 
-Domanda: {query}
+Question: {query}
 
-Risposta breve:"""
+Short answer:"""
 
             response = gemini_model.generate_content(
                 prompt,
@@ -168,7 +168,7 @@ Risposta breve:"""
             first_sentence = first_sentence[:97] + '...'
         return first_sentence
 
-    return "Non ho info su questo. Scrivi ad amedeo.carraro01@gmail.com"
+    return "I don't have info on this. Contact: amedeo.carraro01@gmail.com"
 
 
 @app.route('/health', methods=['GET'])
@@ -194,7 +194,7 @@ def chat():
         query_lower = query.lower()
         greetings = ['ciao', 'salve', 'buongiorno', 'buonasera', 'hey', 'hello', 'hi']
         if any(greeting in query_lower for greeting in greetings):
-            response = "Ciao! Sono l'assistente di Amedeo. Come posso aiutarti?"
+            response = "Hi! I'm Amedeo's assistant. How can I help you? (Note: First response may take 30s due to server startup)"
             return jsonify({"response": response})
 
         # Get context from RAG
@@ -204,10 +204,9 @@ def chat():
         response = generate_response(query, context)
 
         # Add contact info if asking for contact
-        query_lower = query.lower()
-        if any(word in query_lower for word in ['contatt', 'email', 'scrivere', 'parlare']):
-            if 'amedeo.carraro01@gmail.com' not in response:
-                response += "\n\nPuoi contattarmi su amedeo.carraro01@gmail.com"
+        if any(word in query_lower for word in ['contact', 'email', 'reach', 'write', 'contatt']):
+            if '@' not in response:
+                response += " Email: amedeo.carraro01@gmail.com"
 
         return jsonify({"response": response})
 
