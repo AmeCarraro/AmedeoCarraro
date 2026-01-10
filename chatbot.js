@@ -26,8 +26,8 @@ class SimpleChatbot {
     } catch (error) {
       console.error('Error loading FAQ data:', error);
       this.faqData = [{
-        questions: ['errore'],
-        answer: 'Mi dispiace, non riesco a caricare i dati. Riprova più tardi.'
+        questions: ['error'],
+        answer: 'Sorry, I couldn\'t load the data. Please try again later.'
       }];
     }
   }
@@ -54,7 +54,7 @@ class SimpleChatbot {
     const html = `
       <div id="chatbot-container">
         <!-- Bubble button -->
-        <button id="chatbot-bubble" aria-label="Open chat" title="Hai domande? Chiedimi!">
+        <button id="chatbot-bubble" aria-label="Open chat" title="Got questions? Ask me!">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
           </svg>
@@ -66,8 +66,8 @@ class SimpleChatbot {
             <div class="chatbot-header-content">
               <div class="chatbot-avatar">AC</div>
               <div>
-                <div class="chatbot-title">Assistente AI</div>
-                <div class="chatbot-subtitle">Chiedimi qualsiasi cosa</div>
+                <div class="chatbot-title">AI Assistant</div>
+                <div class="chatbot-subtitle">Ask me anything</div>
               </div>
             </div>
             <button id="chatbot-close" aria-label="Close chat">
@@ -84,7 +84,7 @@ class SimpleChatbot {
             <input
               type="text"
               id="chatbot-input"
-              placeholder="Scrivi la tua domanda..."
+              placeholder="Type your question..."
               aria-label="Chat message input"
             />
             <button id="chatbot-send" aria-label="Send message">
@@ -137,17 +137,17 @@ class SimpleChatbot {
 
   addWelcomeMessage() {
     this.addBotMessage(
-      'Ciao! 👋 Sono l\'assistente virtuale di Amedeo. Chiedimi informazioni su competenze, progetti, contatti o altro!'
+      'Hi! 👋 I\'m Amedeo\'s virtual assistant. Ask me about skills, projects, contacts or anything else!'
     );
     this.showQuickReplies();
   }
 
   showQuickReplies() {
     const quickReplies = [
-      'Chi sei?',
-      'Quali sono le tue skills?',
-      'Mostrami i progetti',
-      'Come ti contatto?'
+      'Who are you?',
+      'What are your skills?',
+      'Show me projects',
+      'How to contact?'
     ];
 
     const suggestionsDiv = document.getElementById('chatbot-suggestions');
