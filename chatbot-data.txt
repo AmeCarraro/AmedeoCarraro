@@ -1,0 +1,207 @@
+# Chatbot FAQ Data
+# Format: Q: question | alternative question | A: answer
+
+## GENERAL INFO
+Q: Who are you? | What are you? | Tell me about yourself | What is this?
+A: Hi! I'm Amedeo's AI assistant. I'm here to answer any questions about his background, skills, projects, or experience. What would you like to know?
+
+Q: Who is Amedeo Carraro? | Who is Amedeo? | Tell me about Amedeo | What does Amedeo do?
+A: Amedeo is an AI and Machine Learning Engineer passionate about building intelligent systems. He has a Master's in Computer Engineering: AI and Robotics from University of Padua and specializes in neural networks, LLMs, and Generative AI. Currently, he's working at Terya Spa developing conversational AI solutions.
+
+Q: What makes Amedeo unique? | Why Amedeo? | What's special about him?
+A: Amedeo brings a unique blend of deep technical expertise and practical production experience. He doesn't just build models - he deploys them in real-world systems. Plus, he's worked across different domains: from astronomical research to enterprise AI solutions, always focusing on making AI actually work in production.
+
+Q: Where is Amedeo based? | Location | Where does he live?
+A: Amedeo is based in the Padova/Veneto region of Italy. He's an Italian citizen and is available to relocate for the right opportunities.
+
+Q: Is Amedeo available for work? | Hiring | Open to opportunities | Looking for job?
+A: Yes! Amedeo is always interested in exciting AI/ML opportunities, especially involving LLMs, production systems, or innovative applications. Feel free to reach out at amedeo.carraro01@gmail.com
+
+## EDUCATION
+Q: Where did Amedeo study? | Education | University | Academic background
+A: Amedeo has a Master's in Computer Engineering: Artificial Intelligence and Robotics from University of Padua (2022-2025) and a Bachelor's in Computer Engineering from the same university (2016-2022). He also did an Erasmus+ at the University of Cyprus in 2024.
+
+Q: What was the Erasmus about? | Study abroad | Cyprus experience
+A: During his Erasmus+ at University of Cyprus, Amedeo focused on Natural Language Processing, AI in Medicine, and Entrepreneurial AI. It was a great opportunity to work with international teams and explore cutting-edge AI applications.
+
+Q: Master thesis? | Thesis topic | Research project | What did Amedeo research?
+A: Amedeo's thesis was on "Neural Network Approaches for Classifying Variable Star Light Curves". He built hybrid CNN-LSTM architectures to classify stars from astronomical data, achieving over 95% F1-score on the ZTF dataset. Pretty cool mix of deep learning and astronomy!
+
+Q: What courses did Amedeo take? | Subjects | Academic curriculum
+A: Key courses include Machine & Deep Learning, Computer Vision, Intelligent Robotics, NLP, AI in Medicine, Software Engineering, Databases, and Operating Systems. A solid mix of theory and practical skills.
+
+Q: Any certifications? | Professional credentials | Certificates
+A: Yes! Amedeo has three Oracle Cloud certifications: OCI AI Foundations Associate, OCI Generative AI Professional, and OCI AI Vector Search Professional.
+
+## WORK EXPERIENCE
+Q: Current job? | Where does Amedeo work? | What's his current role?
+A: Amedeo is an AI and Machine Learning Engineer at Terya Spa in Bassano del Grappa. He designs and deploys conversational AI systems - chatbots, voicebots, and AI agents - integrated with existing ERP systems for real business applications.
+
+Q: What does Amedeo do at Terya? | Terya projects | Current work
+A: At Terya, Amedeo builds production-ready conversational AI using RAG architectures and LLMs. He also develops API integrations with ERP systems, ensuring everything is scalable and reliable. It's all about making AI work in real enterprise environments.
+
+Q: Tell me about the research internship | University research | Star classification
+A: From October 2024 to March 2025, Amedeo worked on neural networks for variable star classification at University of Padua. He analyzed state-of-the-art techniques and implemented hybrid CNN-LSTM architectures, achieving exceptional performance (F1 >95%, peaks at 99%) on real astronomical data.
+
+Q: Full-stack experience? | Web development | Frontend/backend
+A: Yes! Amedeo worked as a Full-Stack Developer at ITReview in Padua (Nov-Dec 2023). He built web apps with React and Node.js, integrated RESTful APIs, and contributed to code reviews that improved database performance by about 20%.
+
+Q: ERP experience? | Enterprise systems | Business software
+A: During his internship at AppLibra (Oct-Dec 2021), Amedeo managed an ERP migration from Navision to Dynamics 365. He developed custom modules, built Docker-based systems for data integration, and reduced deployment times by ~50%. Solid experience with enterprise software!
+
+Q: Healthcare experience? | Medical field | Data analysis
+A: Amedeo worked as a Data Analyst at ULSS 7 Pedemontana (Jun-Aug 2015), where he deployed a digital signature system across the regional healthcare network. He automated workflows, eliminating manual errors and achieving 3-4× faster processing.
+
+Q: Other work experience? | Non-tech jobs | Hospitality
+A: While studying, Amedeo worked in hospitality - as a bartender in Dublin, General Manager at Birrone Padova, and Staff Manager at The Monkey Shoulder Bar. These roles taught him stress management, customer relations, and adaptability.
+
+## TECHNICAL SKILLS
+Q: Programming languages? | What languages does Amedeo code in? | Coding skills
+A: Amedeo's main language is Python for AI/ML. He also knows Java, C, C++, C#, JavaScript, SQL, HTML, PHP, MATLAB, and more. He's comfortable across the full stack.
+
+Q: Python libraries? | AI frameworks | ML tools
+A: For AI/ML, Amedeo uses TensorFlow, PyTorch, Keras, scikit-learn, NumPy, pandas, SciPy, Matplotlib, and Hugging Face Transformers. He's also familiar with Apache Spark for big data and various MLOps tools.
+
+Q: Does Amedeo know Docker? | Containerization | DevOps
+A: Absolutely! Amedeo uses Docker extensively for containerizing applications and ML models. He's built Docker-based systems that reduced deployment downtime significantly.
+
+Q: LLM experience? | Large Language Models | GPT | Transformers
+A: Yes, Amedeo works with LLMs daily at Terya. He's built chatbots, voicebots, and AI agents using state-of-the-art models. He's also fine-tuned Mistral 7B with LoRA for specialized tasks, achieving strong performance (BLEU 62%, ROUGE-1 81%).
+
+Q: RAG systems? | Retrieval-Augmented Generation | Vector search
+A: Definitely! Amedeo implements RAG architectures at Terya to enhance LLM responses with relevant context. He combines vector search with language models for more accurate and contextual AI systems.
+
+Q: Computer vision? | CV experience | Image processing
+A: Amedeo has solid computer vision experience. He's worked on leukemia cell classification (F1 84.66%), PCB defect detection with YOLOv8, and stellar image analysis with CNNs. He uses OpenCV, TensorFlow, and PyTorch for CV projects.
+
+Q: Time series analysis? | Sequential data | LSTM
+A: Yes! Amedeo's thesis focused on time-series data from astronomical observations. He built LSTM networks for sequence analysis and achieved exceptional results on variable star classification.
+
+Q: API development? | REST APIs | Backend integration
+A: Amedeo develops APIs for production ML systems. At Terya, he builds API integrations connecting AI with ERP systems. He's used FastAPI for serving models and Node.js for backend development.
+
+Q: Database skills? | SQL | Data management
+A: Amedeo is proficient in SQL and database design. He's optimized database queries (20% improvement at ITReview) and worked with various database systems in his projects.
+
+Q: Cloud platforms? | AWS | Azure | GCP | Oracle Cloud
+A: Amedeo has Oracle Cloud certifications (AI Foundations, Generative AI, Vector Search). He's familiar with cloud-based AI services and deployment strategies.
+
+## PROJECTS
+Q: Show me projects | Portfolio | What has Amedeo built? | Project examples
+A: Amedeo's built some cool stuff! Variable star classifier with LSTM/CNN (F1 >95%), leukemia cell classifier (F1 84.66%), fine-tuned Mistral 7B (BLEU 62%), PCB defect detector with YOLOv8, and more. All on his GitHub!
+
+Q: Star classification project? | Astronomy project | Thesis project
+A: This was Amedeo's Master's thesis! He built neural networks to classify variable stars from light curves. Using hybrid CNN-LSTM architectures on ZTF data, he achieved F1-scores over 95% (peaks at 99%). Cool intersection of AI and astronomy!
+
+Q: Medical AI project? | Healthcare ML | Leukemia classifier
+A: Amedeo built a leukemia cell classifier combining OpenCV preprocessing with handcrafted features. After GridSearch tuning, he achieved F1-score of 84.66%. It shows his ability to apply AI to real medical challenges.
+
+Q: LLM fine-tuning project? | Mistral | LoRA | Model training
+A: Amedeo did parameter-efficient fine-tuning of Mistral 7B using LoRA. He built a lightweight QA system for memory-constrained environments, achieving BLEU 62%, ROUGE-1 81%, and METEOR 78%. Great results with efficient training!
+
+Q: Computer vision projects? | Object detection | Image classification
+A: Amedeo's worked on several CV projects: leukemia cell classification with OpenCV and TensorFlow, PCB defect detection using YOLOv8 (6 defect classes on DeepPCB dataset), and stellar image analysis with CNNs. All production-focused!
+
+Q: PCB defect detection? | Manufacturing AI | Quality control
+A: Amedeo built a YOLOv8-based system for detecting defects on printed circuit boards. It identifies 6 types of defects using the DeepPCB dataset and is deployed with FastAPI and Docker for production use.
+
+Q: RANSAC project? | Regression | Price prediction
+A: Amedeo used RANSAC for robust regression on Swiss house prices. It's a great example of applying traditional ML algorithms effectively to handle outliers in real-world data.
+
+Q: Personal projects? | Side projects | Hobby coding
+A: Besides work and academic projects, Amedeo explores various AI topics through personal projects. Check his GitHub for the latest - he's always building something new!
+
+## SOFT SKILLS & PERSONALITY
+Q: Can Amedeo work in teams? | Teamwork | Collaboration
+A: Absolutely! Amedeo thrives in interdisciplinary teams. He's worked with researchers, developers, and business stakeholders, translating technical solutions into business value. His hospitality background also strengthened his people skills.
+
+Q: Communication skills? | Can Amedeo explain technical stuff? | Presentation
+A: Yes! Amedeo can explain complex AI concepts clearly to both technical and non-technical audiences. His diverse experience helps him bridge the gap between technical implementation and business needs.
+
+Q: Problem-solving approach? | How does Amedeo work? | Work style
+A: Amedeo focuses on practical solutions that actually work in production. He balances accuracy with efficiency, always considering real-world constraints like scalability and computational resources.
+
+Q: Stress management? | Handle pressure | Deadlines
+A: Amedeo has excellent stress management skills, honed through both technical work and hospitality roles. He's comfortable handling multiple priorities and tight deadlines.
+
+Q: Learning ability? | Quick learner | Adaptability
+A: Amedeo continuously learns and adapts. From software programming fundamentals to cutting-edge Generative AI, he's always expanding his skills. His diverse project portfolio shows his adaptability.
+
+## LANGUAGES & LOCATION
+Q: What languages does Amedeo speak? | Spoken languages | Language skills
+A: Amedeo speaks Italian (native), English (C1 level), and French (A2 level). He's comfortable working in international environments.
+
+Q: Can Amedeo relocate? | Move for work | Remote work
+A: Yes! Amedeo is based in Padova, Italy, but is available to relocate for interesting opportunities. He's also open to remote work arrangements.
+
+## INTERESTS & MOTIVATION
+Q: Why AI? | What motivates Amedeo? | Passion for technology
+A: Technology has always fascinated Amedeo. He loves seeing AI systems come to life and solve real problems. From software fundamentals to cutting-edge AI, his journey has been driven by curiosity and the desire to make machines not just work, but think.
+
+Q: Favorite part of AI? | What does Amedeo enjoy most? | Interests
+A: Amedeo especially enjoys bridging research and production - taking innovative AI concepts and making them work in real systems. He loves the challenge of optimizing models for real-world constraints.
+
+Q: Future goals? | Career aspirations | What's next?
+A: Amedeo wants to continue pushing the boundaries of production AI systems, especially in LLMs and Generative AI. He's excited about opportunities that combine technical innovation with real business impact.
+
+## CONTACT & RESOURCES
+Q: How to contact? | Email | Reach out | Get in touch
+A: You can reach Amedeo at: Email: amedeo.carraro01@gmail.com, LinkedIn: linkedin.com/in/amedeo-carraro/, GitHub: github.com/AmeCarraro, Phone: +39 3451625121
+
+Q: GitHub? | Source code | Where's the code? | Portfolio code
+A: All of Amedeo's projects are on GitHub at github.com/AmeCarraro - complete with source code, documentation, and implementation details. Go check it out!
+
+Q: Download CV? | Resume PDF | Curriculum vitae
+A: Yes! You can download Amedeo's full resume by clicking "Download Resume (PDF)" on this site or directly access Amedeo_Carraro_resume.pdf
+
+Q: LinkedIn profile? | Professional network | Connect on LinkedIn
+A: Find Amedeo on LinkedIn at linkedin.com/in/amedeo-carraro/ - feel free to connect!
+
+Q: Website? | Personal site | Portfolio website
+A: You're on it! This is Amedeo's portfolio website where you can learn about his work, download his resume, and explore his projects.
+
+## SPECIFIC TECHNOLOGIES
+Q: PyTorch or TensorFlow? | Preferred framework | Which framework?
+A: Amedeo works with both PyTorch and TensorFlow depending on the project needs. His thesis used PyTorch, while some other projects use TensorFlow. He's comfortable with both!
+
+Q: Hugging Face? | Transformers library | Model hub
+A: Yes! Amedeo uses Hugging Face extensively for working with LLMs. He's fine-tuned models like Mistral 7B and regularly uses the Transformers library for NLP tasks.
+
+Q: FastAPI experience? | API framework | Web frameworks
+A: Amedeo uses FastAPI for deploying ML models as production APIs. It's his go-to choice for building fast, scalable API services for AI systems.
+
+Q: Git/GitHub? | Version control | Collaboration tools
+A: Of course! Amedeo uses Git/GitHub for all his projects. He follows best practices for version control and collaborative development.
+
+Q: Jupyter notebooks? | Data science tools | Development environment
+A: Yes, Amedeo uses Jupyter notebooks for exploratory data analysis, experimentation, and prototyping ML models before production deployment.
+
+## FUN/CASUAL
+Q: Coffee or tea? | Favorite drink | What fuels Amedeo?
+A: Given his bartending background, Amedeo probably appreciates a good coffee! ☕
+
+Q: Hobbies? | Outside work | What does Amedeo do for fun?
+A: Besides coding and AI, Amedeo has experience in hospitality and bartending. He's worked at award-winning establishments in Dublin and Italy!
+
+Q: Why should I hire Amedeo? | What makes him good? | Convince me
+A: Amedeo combines strong technical skills with real production experience. He doesn't just train models - he deploys them. Plus, he's worked across domains from astronomy to enterprise systems, showing versatility and adaptability. His code is on GitHub if you want proof!
+
+Q: Any cool facts? | Interesting things | Tell me something interesting
+A: Amedeo's worked with everything from classifying stars in space to detecting defects on circuit boards. He's also managed bars while getting his AI degree. Talk about range!
+
+## META/CHATBOT
+Q: How does this work? | How do you know this? | Are you really AI?
+A: I'm an AI assistant trained on information about Amedeo. I can answer questions about his background, skills, and projects. If you want more details, check out his full resume or GitHub!
+
+Q: Can you do other things? | What else can you do? | Your capabilities
+A: I'm focused on answering questions about Amedeo. For anything else, you'll need to reach out to him directly at amedeo.carraro01@gmail.com!
+
+Q: Who made you? | Who built this chatbot? | Creator
+A: Amedeo built me as part of his portfolio website to help answer questions about his background and work. Pretty meta, right?
+
+## DEFAULT/FALLBACK
+Q: Thanks | Thank you | Appreciate it
+A: You're welcome! Let me know if you have any other questions about Amedeo.
+
+Q: Bye | Goodbye | See you | Talk later
+A: See you! Feel free to come back if you have more questions. You can also reach Amedeo directly at amedeo.carraro01@gmail.com
