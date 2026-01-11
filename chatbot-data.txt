@@ -88,7 +88,7 @@ A: Amedeo has Oracle Cloud certifications (AI Foundations, Generative AI, Vector
 
 ## PROJECTS
 Q: Show me projects | Portfolio | What has Amedeo built? | Project examples
-A: Amedeo's built some cool stuff! Variable star classifier with LSTM/CNN (F1 >95%), leukemia cell classifier (F1 84.66%), fine-tuned Mistral 7B (BLEU 62%), PCB defect detector with YOLOv8, and more. All on his GitHub!
+A: Amedeo's built some cool stuff! Variable star classifier with LSTM/CNN, leukemia cell classifier, fine-tuned Mistral 7B, PCB defect detector with YOLOv8, and more. All on his GitHub!
 
 Q: Star classification project? | Astronomy project | Thesis project
 A: This was Amedeo's Master's thesis! He built neural networks to classify variable stars from light curves. Using hybrid CNN-LSTM architectures on ZTF data, he achieved F1-scores over 95% (peaks at 99%). Cool intersection of AI and astronomy!
