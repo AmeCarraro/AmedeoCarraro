@@ -19,7 +19,7 @@ A: Yes! Amedeo is always interested in exciting AI/ML opportunities, especially 
 
 ## EDUCATION
 Q: Where did Amedeo study? | Education | University | Academic background
-A: Amedeo has a Master's in Computer Engineering: Artificial Intelligence and Robotics from University of Padua (2022-2025) and a Bachelor's in Computer Engineering from the same university (2016-2022). He also did an Erasmus+ at the University of Cyprus in 2024.
+A: Amedeo has a Master's in Computer Engineering: Artificial Intelligence and Robotics from University of Padua and a Bachelor's in Computer Engineering from the same university. He also did an Erasmus+ at the University of Cyprus in 2024.
 
 Q: What was the Erasmus about? | Study abroad | Cyprus experience
 A: During his Erasmus+ at University of Cyprus, Amedeo focused on Natural Language Processing, AI in Medicine, and Entrepreneurial AI. It was a great opportunity to work with international teams and explore cutting-edge AI applications.
@@ -41,7 +41,7 @@ Q: What does Amedeo do at Terya? | Terya projects | Current work
 A: At Terya, Amedeo builds production-ready conversational AI using RAG architectures and LLMs. He also develops API integrations with ERP systems, ensuring everything is scalable and reliable. It's all about making AI work in real enterprise environments.
 
 Q: Tell me about the research internship | University research | Star classification
-A: From October 2024 to March 2025, Amedeo worked on neural networks for variable star classification at University of Padua. He analyzed state-of-the-art techniques and implemented hybrid CNN-LSTM architectures, achieving exceptional performance (F1 >95%, peaks at 99%) on real astronomical data.
+A: From October 2024 to March 2025, Amedeo worked on neural networks for variable star classification at University of Padua. He analyzed state-of-the-art techniques and implemented hybrid CNN-LSTM architectures, achieving exceptional performance (F1 >95%) on real astronomical data.
 
 Q: Full-stack experience? | Web development | Frontend/backend
 A: Yes! Amedeo worked as a Full-Stack Developer at ITReview in Padua (Nov-Dec 2023). He built web apps with React and Node.js, integrated RESTful APIs, and contributed to code reviews that improved database performance by about 20%.
@@ -50,7 +50,7 @@ Q: ERP experience? | Enterprise systems | Business software
 A: During his internship at AppLibra (Oct-Dec 2021), Amedeo managed an ERP migration from Navision to Dynamics 365. He developed custom modules, built Docker-based systems for data integration, and reduced deployment times by ~50%. Solid experience with enterprise software!
 
 Q: Healthcare experience? | Medical field | Data analysis
-A: Amedeo worked as a Data Analyst at ULSS 7 Pedemontana (Jun-Aug 2015), where he deployed a digital signature system across the regional healthcare network. He automated workflows, eliminating manual errors and achieving 3-4× faster processing.
+A: Amedeo worked as a Data Analyst at ULSS 7 Pedemontana, where he deployed a digital signature system across the regional healthcare network. He automated workflows, eliminating manual errors and achieving 3-4× faster processing.
 
 Q: Other work experience? | Non-tech jobs | Hospitality
 A: While studying, Amedeo worked in hospitality - as a bartender in Dublin, General Manager at Birrone Padova, and Staff Manager at The Monkey Shoulder Bar. These roles taught him stress management, customer relations, and adaptability.
@@ -173,18 +173,15 @@ A: Amedeo uses FastAPI for deploying ML models as production APIs. It's his go-t
 Q: Git/GitHub? | Version control | Collaboration tools
 A: Of course! Amedeo uses Git/GitHub for all his projects. He follows best practices for version control and collaborative development.
 
-Q: Jupyter notebooks? | Data science tools | Development environment
-A: Yes, Amedeo uses Jupyter notebooks for exploratory data analysis, experimentation, and prototyping ML models before production deployment.
-
 ## FUN/CASUAL
 Q: Coffee or tea? | Favorite drink | What fuels Amedeo?
 A: Given his bartending background, Amedeo probably appreciates a good coffee! ☕
 
 Q: Hobbies? | Outside work | What does Amedeo do for fun?
-A: Besides coding and AI, Amedeo has experience in hospitality and bartending. He's worked at award-winning establishments in Dublin and Italy!
+A: Outside of coding, Amedeo enjoys staying active with gym sessions and team sports, cooking, and occasional gaming. Above all, he loves learning new things. This year, he's committed to reading more regularly!
 
 Q: Why should I hire Amedeo? | What makes him good? | Convince me
-A: Amedeo combines strong technical skills with real production experience. He doesn't just train models - he deploys them. Plus, he's worked across domains from astronomy to enterprise systems, showing versatility and adaptability. His code is on GitHub if you want proof!
+A: Well, obviously his skills speak for themselves, but if you're reaching out to me, I'd say I've already convinced you a bit, haven't I?
 
 Q: Any cool facts? | Interesting things | Tell me something interesting
 A: Amedeo's worked with everything from classifying stars in space to detecting defects on circuit boards. He's also managed bars while getting his AI degree. Talk about range!
