@@ -1,294 +1,198 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>About — Amedeo Carraro</title>
-  <meta name="description" content="More about Amedeo Carraro: education, work experience, and extras." />
-  <meta property="og:title" content="About — Amedeo Carraro" />
-  <meta property="og:description" content="Education, work experience, certifications, and extras." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://amecarraro.github.io/AmedeoCarraro/about.html" />
-  <meta name="theme-color" content="#0f172a" />
-  <link rel="stylesheet" href="chatbot.css" />
-  <style>
-    :root {
-      --bg: #0b1020;
-      --bg-soft: #111735;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --brand: #60a5fa;
-      --card: #0f1530;
-      --ring: rgba(96,165,250,.35);
-    }
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #f8fafc;
-        --bg-soft: #eef2ff;
-        --text: #0f172a;
-        --muted: #475569;
-        --brand: #2563eb;
-        --card: #ffffff;
-        --ring: rgba(37, 99, 235, .25);
-      }
-    }
-
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial;
-      background: radial-gradient(1200px 600px at 80% -10%, rgba(96,165,250,.15), transparent 60%), var(--bg);
-      color: var(--text);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-    a { color: var(--brand); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
-
-    header { position: sticky; top: 0; backdrop-filter: saturate(180%) blur(8px); background: color-mix(in oklab, var(--bg) 80%, transparent); border-bottom: 1px solid color-mix(in oklab, var(--text) 10%, transparent); z-index: 20; }
-    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: .3px; }
-    .brand .logo { width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(135deg, var(--brand), #22d3ee); box-shadow: 0 0 0 6px var(--ring); }
-    nav a { margin-left: 16px; padding: 8px 12px; border-radius: 10px; }
-    nav a:hover { background: color-mix(in oklab, var(--brand) 15%, transparent); text-decoration: none; }
-
-    .hero { display: grid; gap: 16px; padding: 40px 0 16px; }
-    .hero h1 { font-size: clamp(26px, 4.7vw, 40px); line-height: 1.15; margin: 0 0 6px; }
-    .hero p { color: var(--muted); margin: 0; }
-    .cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 12px; background: var(--brand); color: white; font-weight: 600; border: 1px solid color-mix(in oklab, black 10%, var(--brand)); box-shadow: 0 6px 24px -8px var(--ring); }
-    .btn.secondary { background: transparent; color: var(--text); border: 1px solid color-mix(in oklab, var(--text) 18%, transparent); }
-
-    section { padding: 28px 0; }
-    h2 { font-size: 22px; margin: 0 0 16px; }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .card { background: var(--card); border: 1px solid color-mix(in oklab, var(--text) 10%, transparent); border-radius: 16px; padding: 16px; }
-    .card h3 { margin: 0 0 8px; font-size: 18px; }
-    .muted { color: var(--muted); }
-    ul { margin: 8px 0 0 18px; }
-
-    footer { border-top: 1px solid color-mix(in oklab, var(--text) 10%, transparent); color: var(--muted); padding: 24px 0 48px; }
-
-    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
-
-    /* --- Timeline styles --- */
-    .timeline { position: relative; padding-left: 22px; margin: 0; }
-    .timeline::before { content: ""; position: absolute; top: 4px; bottom: 4px; left: 8px; width: 2px; background: color-mix(in oklab, var(--text) 14%, transparent); }
-    .tl-item { position: relative; margin: 0 0 18px 0; padding-left: 18px; }
-    .tl-item::before { content: ""; position: absolute; left: 2px; top: 6px; width: 12px; height: 12px; border-radius: 999px; background: var(--brand); box-shadow: 0 0 0 4px color-mix(in oklab, var(--brand) 20%, transparent); }
-    .tl-meta { font-size: 12px; color: var(--muted); margin-top: -2px; }
-
-    /* Auto-hide/reveal header on scroll */
-    header { transition: transform .25s ease; will-change: transform; }
-    .header-hidden { transform: translateY(-100%); }
-    @media (prefers-reduced-motion: reduce) { header { transition: none; } }
-  </style>
+  <meta name="description" content="About Amedeo Carraro: education, technical skills, certifications, languages, hospitality experience and contact details.">
+  <link rel="canonical" href="https://www.amedeocarraro.com/about.html">
+  <meta property="og:title" content="About — Amedeo Carraro">
+  <meta property="og:description" content="Education, technical skills, certifications, languages, other experience and contact details.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.amedeocarraro.com/about.html">
+  <meta name="theme-color" content="#fbfaf7">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f5f59'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='27' font-weight='700' text-anchor='middle' fill='white'%3EAC%3C/text%3E%3C/svg%3E">
+  <script>try { var t = localStorage.getItem('theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="chatbot.css">
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <span>Amedeo Carraro</span>
-      </div>
-      <nav aria-label="Primary">
-        <a class="btn secondary" href="#education">Education</a>
-        <a class="btn secondary" href="#experience">Work Experience</a>
-        <a class="btn secondary" href="#extra-experience">Extra Experience</a>
-        <a class="btn secondary" href="#extras">Extras</a>
-        <a class="btn" href="index.html">← Back to Home</a>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html">Amedeo Carraro</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html"><span>01</span>Experience</a>
+        <a href="projects.html"><span>02</span>Projects</a>
+        <a href="about.html" aria-current="page"><span>03</span>About</a>
       </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch between light and dark theme">
+        <svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
     </div>
   </header>
 
-  <main class="container">
-    <section class="hero">
-      <h1>More about me</h1>
-      <p>Additional details on my <strong>education</strong>, <strong>work experience</strong>, and some <strong>extras</strong>. Use the buttons below to go back to the homepage or open my résumé.</p>
-      <div class="cta">
-        <a class="btn" href="index.html">← Back to Home</a>
-        <a class="btn" href="Amedeo_Carraro_resume.pdf" target="_blank" rel="noopener noreferrer">Open resume (PDF)</a>
-      </div>
+  <main id="main" class="wrap">
+
+    <div class="page-title">
+      <p class="eyebrow">03 · About</p>
+      <h1>About</h1>
+      <p>Everything that does not fit on the first two pages: who I am, what I studied, what I know, and the years I spent behind a bar.</p>
+    </div>
+
+    <section class="block" aria-labelledby="bio">
+      <h2 id="bio">In short</h2>
+      <p style="margin-top:18px">Technology has been my thing for as long as I can remember. I started with the fundamentals, as a software developer, and moved step by step towards machine learning: first neural networks for images and time series, then large language models, which are what I build with today.</p>
+      <p>What I like most is the stretch between research and production: taking a technique that works in a notebook and making it work for the people who have to use it, within the limits of real hardware, real data and real deadlines.</p>
+      <p>I am Italian, I live near Vicenza and I work at Terya, in Bassano del Grappa. Outside work I go to the gym, play team sports, cook and read.</p>
     </section>
 
-    <!-- Education -->
-    <section id="education">
-      <h2>Education</h2>
-      <p class="muted">Technology has always been my passion, and this drive has shaped my entire academic journey. I started from the fundamentals as a software programmer, building a solid foundation in computer science, and gradually worked my way up to specializing in Artificial Intelligence. This path has allowed me to evolve from writing code to creating intelligent systems that can learn and adapt.</p>
-      <div class="card">
-        <div class="timeline">
-          <div class="tl-item">
-            <h3>M.Sc. in Computer Engineering: Artificial Intelligence and Robotics — University of Padua, Italy</h3>
-            <p class="tl-meta">Sep 2022 – Mar 2025 · Grade: 93/110 (≈ 3.4 GPA)</p>
-            <ul>
-              <li><strong>Relevant Modules:</strong> Machine and Deep Learning, Artificial Intelligence, Computer Vision, Intelligent Robotics.</li>
-              <li><strong>Thesis:</strong> <em>Neural Network Approaches for Classifying Variable Star Light Curves</em> (ZTF; LSTM &amp; CNN on DMDT/light-curve representations).</li>
-            </ul>
-          </div>
-          <div class="tl-item">
-            <h3>Erasmus+ in Computer Science: Artificial Intelligence — University of Cyprus</h3>
-            <p class="tl-meta">Jan 2024 – May 2024</p>
-            <ul>
-              <li><strong>Relevant Modules:</strong> Natural Language Processing (NLP), AI in Medicine, Entrepreneur AI.</li>
-            </ul>
-          </div>
-          <div class="tl-item">
-            <h3>B.Sc. in Computer Engineering — University of Padua, Italy</h3>
-            <p class="tl-meta">Sep 2016 – Mar 2022 · Grade: 85/110 (≈ 3.1 GPA)</p>
-            <ul>
-              <li><strong>Relevant Modules:</strong> Software Engineering, Databases, Operating Systems, Data Structures &amp; Algorithms.</li>
-            </ul>
-          </div>
-          <div class="tl-item">
-            <h3>Technical High School Diploma — Istituto Tecnico Tecnologico G.Chilesotti, Thiene (VI), Italy</h3>
-            <p class="tl-meta">Sep 2011 – Jun 2016</p>
-          </div>
+    <section class="block" aria-labelledby="education">
+      <h2 id="education">Education</h2>
+      <dl class="rows">
+        <div>
+          <dt>Sep 2022 – Mar 2025</dt>
+          <dd>
+            <p><strong>MSc in Computer Engineering: Artificial Intelligence and Robotics</strong><br>University of Padua, Italy · Grade 93/110</p>
+            <p>Main courses: Machine and Deep Learning, Artificial Intelligence, Computer Vision, Intelligent Robotics.</p>
+            <p>Thesis: <em>Neural Network Approaches for Classifying Variable Star Light Curves</em>, a 2D-CNN and a CNN-LSTM trained on Zwicky Transient Facility data. <a href="projects.html#stars">See the project</a>.</p>
+          </dd>
         </div>
-      </div>
+        <div>
+          <dt>Jan 2024 – Jun 2024</dt>
+          <dd>
+            <p><strong>Erasmus+ semester, MSc courses in Artificial Intelligence</strong><br>University of Cyprus</p>
+            <p>Courses: Natural Language Processing, AI in Medicine, Entrepreneurship in AI.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Sep 2016 – Mar 2022</dt>
+          <dd>
+            <p><strong>BSc in Computer Engineering</strong><br>University of Padua, Italy · Grade 85/110</p>
+            <p>Main courses: Software Engineering, Databases, Operating Systems, Data Structures and Algorithms.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Sep 2011 – Jun 2016</dt>
+          <dd>
+            <p><strong>Technical High School Diploma</strong><br>Istituto Tecnico Tecnologico G. Chilesotti, Thiene, Italy</p>
+          </dd>
+        </div>
+      </dl>
     </section>
 
-    <!-- Work Experience -->
-    <section id="experience">
-      <h2>Work Experience</h2>
-      <p class="muted">I have built practical experience through internships during my academic path, complemented by my current full-time role in AI and Machine Learning. During my Master's degree, I completed both a full-stack development internship and a research internship that became my Master's thesis on neural networks for astronomical data. These experiences span software development, enterprise systems, and applied AI research.</p>
-      <div class="card">
-        <div class="timeline">
-          <div class="tl-item">
-            <h3>AI and Machine Learning Engineer — Terya Spa, Bassano del Grappa, Italy</h3>
-            <p class="tl-meta">Nov 2024 – Ongoing</p>
+    <section class="block" aria-labelledby="certs">
+      <h2 id="certs">Certifications</h2>
+      <dl class="rows">
+        <div>
+          <dt>Oracle</dt>
+          <dd>
             <ul>
-              <li>Designed and deployed production-ready conversational AI solutions including RAG-based chatbots and autonomous agents for internal service desk operations, implementing hybrid semantic and full-text search pipelines with Elasticsearch, custom document processing workflows, and LLM-powered response generation, fully containerized with Docker.</li>
-              <li>Developed a real-time voice assistant integrated with enterprise telephony infrastructure for automated phone support, leveraging OpenAI Realtime API for bidirectional voice conversations, audio preprocessing pipelines, automated ticket creation via REST API, and intelligent call routing with escalation to human operators.</li>
+              <li>Agentic AI Certified Foundations Associate · 2026</li>
+              <li>Oracle AI Vector Search Certified Professional · 2025</li>
+              <li>Oracle Cloud Infrastructure 2025 Certified Generative AI Professional · 2025</li>
+              <li>Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate · 2025</li>
             </ul>
-          </div>
-          <div class="tl-item">
-            <h3>Research Intern — Neural Networks for Variable Star Classification, University of Padua, Italy</h3>
-            <p class="tl-meta">Sep 2024 – Mar 2025</p>
-            <ul>
-              <li>Conducted comprehensive literature review of state-of-the-art astronomical classification techniques and synthesized insights from multiple peer-reviewed publications to design and implement two hybrid deep learning architectures combining Convolutional Neural Networks and Long Short-Term Memory networks, specifically optimized for identifying and categorizing variable star patterns from large-scale time-series photometric data.</li>
-              <li>Achieved exceptional classification performance with F1-scores consistently exceeding 95% across diverse stellar categories, with peak accuracy surpassing 99% using 2D-CNN architecture on the complete Zwicky Transient Facility open dataset, while carefully balancing model complexity and computational efficiency to ensure practical applicability for large-scale astronomical surveys.</li>
-            </ul>
-          </div>
-          <div class="tl-item">
-            <h3>Full-Stack Developer Intern — ITReview, Padua, Italy</h3>
-            <p class="tl-meta">Nov 2023 – Dec 2023</p>
-            <ul>
-              <li>Contributed to the development of responsive full-stack web applications by implementing dynamic user interfaces using React for the frontend and building scalable server-side architecture with Node.js and Express for the backend, while designing and integrating RESTful API endpoints and managing data persistence across both PostgreSQL (via the native pg client with raw SQL queries) and MongoDB (with Mongoose), adapting to different project requirements and data modeling needs.</li>
-              <li>Actively participated in collaborative code review sessions and performance optimization initiatives, identifying bottlenecks in database query patterns and implementing indexing strategies and query refactoring techniques that resulted in approximately 15% reduction (measured via EXPLAIN ANALYZE) in database response times, thereby improving overall application responsiveness and backend efficiency.</li>
-            </ul>
-          </div>
-          <div class="tl-item">
-            <h3>Deep Learning & DevOps Intern — AppLibra s.r.l., Thiene, Italy</h3>
-            <p class="tl-meta">Oct 2021 – Dec 2021</p>
-            <ul>
-              <li>Developed and deployed a real-time computer vision quality control system using YOLOv5 (PyTorch) and OpenCV to detect bottle cap defects (missing, misaligned, or correctly placed caps) on six-bottle crates moving along a production conveyor belt, handling the full pipeline from dataset annotation using LabelImg to model training on GPU (CUDA) and real-time inference via command line on a Docker-based Linux environment.</li>
-              <li>Configured and deployed a BaGet server within a Docker container on Linux to serve as a private NuGet package repository for internal .NET development teams, standardizing the distribution and version control of shared libraries across projects and eliminating manual dependency management workflows that were previously prone to versioning conflicts and inconsistencies.</li>
-              <li>Contributed to an enterprise resource planning migration from Microsoft Dynamics Navision to Dynamics 365 Business Central, developing custom pages and forms using both C/AL (C/SIDE) and AL (VSCode), building XMLports for structured data import/export to ensure accurate data migration across client organizations, and adapting existing business logic to meet the specific operational requirements of diverse client environments.</li>
-            </ul>
-          </div>
-          <div class="tl-item">
-            <h3>Data Analyst Intern — ULSS 7 Pedemontana, Thiene, Italy</h3>
-            <p class="tl-meta">Jun 2015 – Aug 2015</p>
-            <ul>
-              <li>Independently configured and tested a digital signature system across public-facing offices in a regional hospital, establishing secure document authentication workflows and ensuring compliance with healthcare data privacy regulations.</li>
-              <li>Set up a network-based data collection and sharing system between hospital departments, automating previously manual document management processes and reducing paper-based workflows across administrative offices.</li>
-            </ul>
-          </div>
+          </dd>
         </div>
-      </div>
+        <div>
+          <dt>IBM</dt>
+          <dd>
+            <ul>
+              <li>Introduction to Containers, Kubernetes, and OpenShift · 2026</li>
+              <li>Docker Essentials: A Developer Introduction · 2026</li>
+            </ul>
+          </dd>
+        </div>
+      </dl>
     </section>
 
-    <!-- Extra Experience -->
-    <section id="extra-experience">
-      <h2>Extra Experience</h2>
-      <p class="muted">Throughout my academic journey in IT, I have always valued direct interaction with people and thriving in dynamic environments. To support my studies financially, I worked extensively in the hospitality industry, developing strong skills in stress management, customer relations, and adaptability while operating in fast-paced, people-centered settings that complemented my technical education.</p>
-      <div class="card">
-        <div class="timeline">
-          <div class="tl-item">
-            <h3>Bartender — 4 Dame Lane, Dublin 2, Ireland</h3>
-            <p class="tl-meta">Nov 2024 – Mar 2025</p>
-            <ul>
-              <li>While completing my Master's thesis research, I sought to further enhance my English language proficiency and gain international work experience beyond my Erasmus exchange, serving as a bartender in one of Dublin's most prestigious venues—awarded Best Live Entertainment Bar of the Year 2024 and Irish Pub Award Best Music Pub 2025, alongside a runners-up Silver for Late Bar/Nightclub of the Year 2024—where I engaged with diverse international clientele in a high-energy entertainment environment.</li>
-            </ul>
-          </div>
-          <div class="tl-item">
-            <h3>General Manager, Account Management, Bartender — Birrone Padova (Biba Spa), Padua, Italy</h3>
-            <p class="tl-meta">Sep 2022 – Dec 2023</p>
-            <ul>
-              <li>Rapidly advanced to venue management responsibilities, overseeing comprehensive operational aspects including supply chain management and vendor relations, client acquisition and retention strategies, event planning and execution, staff scheduling and supervision, while maintaining hands-on involvement in daily operations across bartending, table service, and kitchen coordination to ensure seamless customer experiences and business continuity.</li>
-            </ul>
-          </div>
-          <div class="tl-item">
-            <h3>Staff Manager, Bartender — The Monkey Shoulder Bar, Dueville (VI), Italy</h3>
-            <p class="tl-meta">Feb 2019 – Feb 2021</p>
-            <ul>
-              <li>Supervised team operations by coordinating shift assignments, providing staff guidance, and fostering a productive work environment, while also curating and executing special events to expand the customer base and preparing craft cocktails with a strong emphasis on personalized customer service and satisfaction.</li>
-            </ul>
-          </div>
+    <section class="block" aria-labelledby="skills">
+      <h2 id="skills">Skills</h2>
+      <dl class="rows">
+        <div>
+          <dt>LLMs and agents</dt>
+          <dd>Retrieval-augmented generation (hybrid search, reciprocal rank fusion, reranking), function calling, Model Context Protocol (MCP), OpenAI API, Anthropic Claude, vLLM, Ollama, LangChain, LangGraph, LlamaIndex, Hugging Face Transformers, LoRA and QLoRA fine-tuning, FastEmbed</dd>
         </div>
-      </div>
+        <div>
+          <dt>Machine learning</dt>
+          <dd>PyTorch, TensorFlow, Keras, scikit-learn, YOLO, OpenCV, CNN and LSTM models for time series, MLflow, ONNX, NumPy, pandas, SciPy, Matplotlib, Apache Spark</dd>
+        </div>
+        <div>
+          <dt>Backend and data</dt>
+          <dd>Python (FastAPI, asyncio), C# and .NET, SQL, PostgreSQL with pgvector, Elasticsearch, ChromaDB, MongoDB, REST APIs, Streamlit, JavaScript (React, Node.js, Express)</dd>
+        </div>
+        <div>
+          <dt>Infrastructure</dt>
+          <dd>Docker, Kubernetes (K3s), Linux, Git, GitHub, GitLab</dd>
+        </div>
+        <div>
+          <dt>Also used</dt>
+          <dd>Java, C, C++, PHP, HTML and CSS, MATLAB, R, ROS, C/AL and AL (Microsoft Dynamics)</dd>
+        </div>
+        <div>
+          <dt>Languages</dt>
+          <dd>Italian (native), English (C1), French (A2)</dd>
+        </div>
+      </dl>
     </section>
 
-    <!-- Extras -->
-    <section id="extras">
-      <h2>Extras</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Certifications</h3>
-          <ul>
-            <li>OCI AI Foundations Associate</li>
-            <li>OCI Generative AI Professional</li>
-            <li>OCI AI Vector Search Professional</li>
-          </ul>
+    <section class="block" aria-labelledby="hospitality">
+      <h2 id="hospitality">Other experience</h2>
+      <p style="margin-top:18px">I paid for my studies by working in bars. It is not on my CV, but it is where I learned to stay calm under pressure, to deal with all kinds of people and to run a team.</p>
+
+      <article class="entry">
+        <div class="when">Nov 2024 – Mar 2025<span>Dublin, Ireland</span></div>
+        <div>
+          <h3>Bartender</h3>
+          <p class="org">4 Dame Lane</p>
+          <p>While writing my Master's thesis I moved to Dublin, to work abroad beyond my Erasmus semester and to improve my English. I worked behind the bar of one of the city's best-known live-music venues, named Best Live Entertainment Bar of the Year 2024 and Best Music Pub at the Irish Pub Awards 2025, with an international crowd every night.</p>
         </div>
-        <div class="card">
-          <h3>Languages</h3>
-          <ul>
-            <li>Italian — mother tongue</li>
-            <li>English — C1</li>
-            <li>French — A2</li>
-          </ul>
+      </article>
+
+      <article class="entry">
+        <div class="when">Sep 2022 – Dec 2023<span>Padua, Italy</span></div>
+        <div>
+          <h3>General Manager, Account Management, Bartender</h3>
+          <p class="org">Birrone Padova (Biba Spa)</p>
+          <p>I moved up quickly to running the venue: suppliers and stock, finding and keeping clients, planning and running events, staff schedules and supervision. I kept working shifts at the bar, on the floor and with the kitchen.</p>
         </div>
-        <div class="card">
-          <h3>Selected Skills</h3>
-          <ul>
-            <li><strong>Programming:</strong> Python, Java, C, C++, JavaScript, C#, SQL, HTML, PHP, MATLAB, ROS, R, C/BASE, C/AL</li>
-            <li><strong>Tools:</strong> TensorFlow, PyTorch, Keras, scikit-learn, NumPy, pandas, SciPy, Matplotlib, Apache Spark, GitHub &amp; MLOps</li>
-          </ul>
+      </article>
+
+      <article class="entry">
+        <div class="when">Feb 2019 – Feb 2021<span>Dueville, Italy</span></div>
+        <div>
+          <h3>Staff Manager, Bartender</h3>
+          <p class="org">The Monkey Shoulder Bar</p>
+          <p>I coordinated shifts and guided the team, organised special events to bring in new customers, and prepared craft cocktails.</p>
         </div>
-      </div>
+      </article>
+    </section>
+
+    <section class="block" aria-labelledby="contact">
+      <h2 id="contact">Contact</h2>
+      <p style="margin-top:18px">The quickest way to reach me is email: <a href="mailto:amedeo.carraro01@gmail.com">amedeo.carraro01@gmail.com</a>.</p>
+      <ul class="links">
+        <li><a href="https://github.com/AmeCarraro" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/amedeo-carraro/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="Amedeo_Carraro_resume.pdf" target="_blank" rel="noopener noreferrer">CV (PDF)</a></li>
+      </ul>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <small>© 2025 Amedeo Carraro. All rights reserved.</small>
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 Amedeo Carraro</span>
+      <a href="mailto:amedeo.carraro01@gmail.com">amedeo.carraro01@gmail.com</a>
+      <a href="https://github.com/AmeCarraro" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/in/amedeo-carraro/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </div>
   </footer>
 
-  <!-- Auto-hide/reveal header on scroll -->
-  <script>
-  (() => {
-    const header = document.querySelector('header');
-    if (!header) return;
-    let lastY = window.scrollY || 0;
-    const threshold = 10;
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY || 0;
-      const delta = y - lastY;
-      if (y < 10) { header.classList.remove('header-hidden'); lastY = y; return; }
-      if (Math.abs(delta) < threshold) return;
-      if (delta > 0) header.classList.add('header-hidden');
-      else header.classList.remove('header-hidden');
-      lastY = y;
-    }, { passive: true });
-  })();
-  </script>
-
-  <!-- Chatbot Widget -->
-  <script src="chatbot.js"></script>
+  <script src="site.js"></script>
+  <script src="assistant-core.js" defer></script>
+  <script src="chatbot.js" defer></script>
 </body>
 </html>

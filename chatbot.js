@@ -1,342 +1,216 @@
 /**
- * Simple Text-Based Chatbot Widget
- * No server, no API costs - pure client-side search
+ * Portfolio assistant widget.
+ *
+ * Answers come from chatbot-data.txt, a small set of questions and answers about
+ * Amedeo. The widget matches the visitor's question against that file in the
+ * browser (rules in assistant-core.js), so it replies at once and works without
+ * any server.
+ *
+ * If the optional backend (app.py) reports that a language model is configured,
+ * questions are sent there instead and the local match is used as a fallback.
  */
+(function () {
+  'use strict';
 
-class SimpleChatbot {
-  constructor() {
-    this.faqData = [];
-    this.isOpen = false;
-    this.messageHistory = [];
-    this.init();
+  var BACKEND = 'https://amedeocarraro.onrender.com';
+  var DATA_FILE = 'chatbot-data.txt';
+  var QUICK_REPLIES = ['Who is Amedeo?', 'What does he build at work?', 'Show me projects', 'How to contact?'];
+
+  var faq = [];
+  var useBackend = false;
+  var isOpen = false;
+  var els = {};
+
+  // ---------- data ----------
+
+  // The matching rules live in assistant-core.js, shared with the test page.
+  function localAnswer(message) {
+    return window.AssistantCore.match(faq, message).answer;
   }
 
-  async init() {
-    await this.loadFAQData();
-    this.createWidget();
-    this.attachEventListeners();
-    this.addWelcomeMessage();
+  function timeout(ms) {
+    return new Promise(function (resolve, reject) { setTimeout(function () { reject(new Error('timeout')); }, ms); });
   }
 
-  async loadFAQData() {
-    try {
-      const response = await fetch('chatbot-data.txt');
-      const text = await response.text();
-      this.parseFAQData(text);
-    } catch (error) {
-      console.error('Error loading FAQ data:', error);
-      this.faqData = [{
-        questions: ['error'],
-        answer: 'Sorry, I couldn\'t load the data. Please try again later.'
-      }];
-    }
-  }
-
-  parseFAQData(text) {
-    const lines = text.split('\n').filter(line =>
-      line.trim() && !line.startsWith('#')
-    );
-
-    lines.forEach(line => {
-      if (line.startsWith('Q:') && line.includes('|') && line.includes('A:')) {
-        const [qPart, aPart] = line.split('A:');
-        const questions = qPart.replace('Q:', '').split('|').map(q => q.trim().toLowerCase());
-        const answer = aPart.trim();
-
-        if (questions.length > 0 && answer) {
-          this.faqData.push({ questions, answer });
-        }
-      }
-    });
-  }
-
-  createWidget() {
-    const html = `
-      <div id="chatbot-container">
-        <!-- Bubble button -->
-        <button id="chatbot-bubble" aria-label="Open chat" title="Got questions? Ask me!">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-          </svg>
-        </button>
-
-        <!-- Chat window -->
-        <div id="chatbot-window" class="chatbot-hidden">
-          <div id="chatbot-header">
-            <div class="chatbot-header-content">
-              <div class="chatbot-avatar">AC</div>
-              <div>
-                <div class="chatbot-title">AI Assistant</div>
-                <div class="chatbot-subtitle">WIP - answers might not be perfect</div>
-              </div>
-            </div>
-            <button id="chatbot-close" aria-label="Close chat">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            </button>
-          </div>
-
-          <div id="chatbot-messages"></div>
-
-          <div id="chatbot-input-area">
-            <input
-              type="text"
-              id="chatbot-input"
-              placeholder="Type your question..."
-              aria-label="Chat message input"
-            />
-            <button id="chatbot-send" aria-label="Send message">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="22" y1="2" x2="11" y2="13"></line>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-              </svg>
-            </button>
-          </div>
-
-          <div id="chatbot-suggestions"></div>
-        </div>
-      </div>
-    `;
-
-    document.body.insertAdjacentHTML('beforeend', html);
-  }
-
-  attachEventListeners() {
-    const bubble = document.getElementById('chatbot-bubble');
-    const closeBtn = document.getElementById('chatbot-close');
-    const sendBtn = document.getElementById('chatbot-send');
-    const input = document.getElementById('chatbot-input');
-
-    bubble.addEventListener('click', () => this.toggleChat());
-    closeBtn.addEventListener('click', () => this.toggleChat());
-    sendBtn.addEventListener('click', () => this.handleSend());
-
-    input.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') this.handleSend();
-    });
-
-    input.addEventListener('input', () => this.updateSuggestions());
-  }
-
-  toggleChat() {
-    this.isOpen = !this.isOpen;
-    const window = document.getElementById('chatbot-window');
-    const bubble = document.getElementById('chatbot-bubble');
-
-    if (this.isOpen) {
-      window.classList.remove('chatbot-hidden');
-      bubble.style.display = 'none';
-      document.getElementById('chatbot-input').focus();
-    } else {
-      window.classList.add('chatbot-hidden');
-      bubble.style.display = 'flex';
-    }
-  }
-
-  addWelcomeMessage() {
-    this.addBotMessage(
-      'Hi! 👋 I\'m Amedeo\'s virtual assistant. Ask me about skills, projects, contacts or more! (First response may take 30s due to server startup)<br>Who am I talking to?'
-    );
-    this.showQuickReplies();
-  }
-
-  showQuickReplies() {
-    const quickReplies = [
-      'Who are you?',
-      'Who is Amedeo?',
-      'Show me projects',
-      'How to contact?'
-    ];
-
-    const suggestionsDiv = document.getElementById('chatbot-suggestions');
-    suggestionsDiv.innerHTML = quickReplies.map(reply =>
-      `<button class="chatbot-quick-reply" data-reply="${reply}">${reply}</button>`
-    ).join('');
-
-    suggestionsDiv.querySelectorAll('.chatbot-quick-reply').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const reply = e.target.getAttribute('data-reply');
-        document.getElementById('chatbot-input').value = reply;
-        this.handleSend();
-      });
-    });
-  }
-
-  updateSuggestions() {
-    const input = document.getElementById('chatbot-input').value.toLowerCase().trim();
-    const suggestionsDiv = document.getElementById('chatbot-suggestions');
-
-    if (!input) {
-      this.showQuickReplies();
-      return;
-    }
-
-    const matches = this.faqData
-      .filter(faq => faq.questions.some(q => q.includes(input)))
-      .slice(0, 3);
-
-    if (matches.length > 0) {
-      suggestionsDiv.innerHTML = matches.map(faq =>
-        `<button class="chatbot-quick-reply" data-reply="${faq.questions[0]}">${this.capitalize(faq.questions[0])}</button>`
-      ).join('');
-
-      suggestionsDiv.querySelectorAll('.chatbot-quick-reply').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const reply = e.target.getAttribute('data-reply');
-          document.getElementById('chatbot-input').value = reply;
-          this.handleSend();
-        });
-      });
-    } else {
-      suggestionsDiv.innerHTML = '';
-    }
-  }
-
-  async handleSend() {
-    const input = document.getElementById('chatbot-input');
-    const message = input.value.trim();
-
-    if (!message) return;
-
-    this.addUserMessage(message);
-    input.value = '';
-    document.getElementById('chatbot-suggestions').innerHTML = '';
-
-    // Show typing indicator
-    this.addTypingIndicator();
-
-    try {
-      const response = await this.getAIResponse(message);
-      this.removeTypingIndicator();
-      this.addBotMessage(response);
-      this.showQuickReplies();
-    } catch (error) {
-      this.removeTypingIndicator();
-      this.addBotMessage('Mi dispiace, si è verificato un errore. Riprova tra poco.');
-      console.error('Chat error:', error);
-    }
-  }
-
-  async getAIResponse(message) {
-    // Use Render backend
-    const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-      ? 'http://localhost:5000/chat'
-      : 'https://amedeocarraro.onrender.com/chat';
-
-    const response = await fetch(apiUrl, {
+  function backendAnswer(message) {
+    var request = fetch(BACKEND + '/chat', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ message })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: message })
+    }).then(function (res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    }).then(function (data) {
+      if (!data || !data.response) throw new Error('empty response');
+      return String(data.response);
     });
-
-    if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data.response;
+    return Promise.race([request, timeout(12000)]);
   }
 
-  addTypingIndicator() {
-    const messagesDiv = document.getElementById('chatbot-messages');
-    const indicator = document.createElement('div');
-    indicator.className = 'chatbot-message chatbot-message-bot';
-    indicator.id = 'chatbot-typing';
-
-    const bubble = document.createElement('div');
-    bubble.className = 'chatbot-message-bubble chatbot-typing-indicator';
-    bubble.innerHTML = '<span></span><span></span><span></span>';
-
-    indicator.appendChild(bubble);
-    messagesDiv.appendChild(indicator);
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  function answer(message) {
+    if (!useBackend) return Promise.resolve(localAnswer(message));
+    return backendAnswer(message).catch(function () { return localAnswer(message); });
   }
 
-  removeTypingIndicator() {
-    const indicator = document.getElementById('chatbot-typing');
-    if (indicator) {
-      indicator.remove();
-    }
+  // The backend sleeps when idle. Checking it on load wakes it up; until it says
+  // a language model is available, answers are matched locally.
+  function checkBackend() {
+    fetch(BACKEND + '/health').then(function (res) { return res.json(); }).then(function (data) {
+      useBackend = !!(data && data.llm_loaded);
+    }).catch(function () { useBackend = false; });
   }
 
-  findAnswer(userMessage) {
-    const query = userMessage.toLowerCase().trim();
-    const words = query.split(/\s+/);
+  // ---------- interface ----------
 
-    let bestMatch = null;
-    let bestScore = 0;
-
-    this.faqData.forEach(faq => {
-      let score = 0;
-
-      faq.questions.forEach(question => {
-        // Exact match
-        if (question === query) {
-          score += 100;
-        }
-        // Contains full query
-        else if (question.includes(query)) {
-          score += 50;
-        }
-        // Word matching
-        else {
-          const questionWords = question.split(/\s+/);
-          words.forEach(word => {
-            if (word.length > 2 && questionWords.some(qw => qw.includes(word) || word.includes(qw))) {
-              score += 10;
-            }
-          });
-        }
-      });
-
-      if (score > bestScore) {
-        bestScore = score;
-        bestMatch = faq;
-      }
+  function el(tag, attrs, children) {
+    var node = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (key) {
+      if (key === 'text') node.textContent = attrs[key];
+      else node.setAttribute(key, attrs[key]);
     });
+    (children || []).forEach(function (child) { node.appendChild(child); });
+    return node;
+  }
 
-    if (bestScore > 8) {
-      return bestMatch.answer;
-    } else {
-      return `Mi dispiace, non ho trovato una risposta specifica. Prova a riformulare la domanda o contatta direttamente Amedeo su <a href="mailto:amedeo.carraro01@gmail.com">amedeo.carraro01@gmail.com</a>`;
+  function icon(paths) {
+    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('width', '18'); svg.setAttribute('height', '18'); svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('fill', 'none'); svg.setAttribute('stroke', 'currentColor'); svg.setAttribute('stroke-width', '2');
+    svg.setAttribute('stroke-linecap', 'round'); svg.setAttribute('stroke-linejoin', 'round'); svg.setAttribute('aria-hidden', 'true');
+    paths.forEach(function (d) {
+      var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', d);
+      svg.appendChild(path);
+    });
+    return svg;
+  }
+
+  // Text only, with email addresses and URLs turned into links. Never innerHTML.
+  function fillWithLinks(node, text) {
+    var pattern = /([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})|((?:https?:\/\/)?(?:www\.)?(?:[a-z0-9-]+\.)+(?:com|dev|io|org|net)(?:\/[^\s,;)]*)?)/gi;
+    var last = 0;
+    var match;
+    while ((match = pattern.exec(text))) {
+      var found = match[0].replace(/[.]+$/, '');
+      node.appendChild(document.createTextNode(text.slice(last, match.index)));
+      var href = match[1] ? 'mailto:' + found : (/^https?:\/\//i.test(found) ? found : 'https://' + found);
+      var link = el('a', { href: href, text: found });
+      if (!match[1]) { link.setAttribute('target', '_blank'); link.setAttribute('rel', 'noopener noreferrer'); }
+      node.appendChild(link);
+      last = match.index + found.length;
+      pattern.lastIndex = last;
     }
+    node.appendChild(document.createTextNode(text.slice(last)));
   }
 
-  addUserMessage(text) {
-    this.addMessage(text, 'user');
+  function addMessage(text, sender) {
+    var bubble = el('div', { 'class': 'chatbot-message-bubble' });
+    if (sender === 'bot') fillWithLinks(bubble, text); else bubble.textContent = text;
+    els.messages.appendChild(el('div', { 'class': 'chatbot-message chatbot-message-' + sender }, [bubble]));
+    els.messages.scrollTop = els.messages.scrollHeight;
   }
 
-  addBotMessage(text) {
-    this.addMessage(text, 'bot');
+  function showTyping() {
+    var dots = el('div', { 'class': 'chatbot-message-bubble chatbot-typing-indicator' }, [el('span'), el('span'), el('span')]);
+    els.messages.appendChild(el('div', { 'class': 'chatbot-message chatbot-message-bot', id: 'chatbot-typing' }, [dots]));
+    els.messages.scrollTop = els.messages.scrollHeight;
   }
 
-  addMessage(text, sender) {
-    const messagesDiv = document.getElementById('chatbot-messages');
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `chatbot-message chatbot-message-${sender}`;
-
-    const bubble = document.createElement('div');
-    bubble.className = 'chatbot-message-bubble';
-    bubble.innerHTML = text;
-
-    messageDiv.appendChild(bubble);
-    messagesDiv.appendChild(messageDiv);
-
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  function hideTyping() {
+    var typing = document.getElementById('chatbot-typing');
+    if (typing) typing.remove();
   }
 
-  capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
+  function showSuggestions(list) {
+    els.suggestions.textContent = '';
+    list.forEach(function (text) {
+      var button = el('button', { 'class': 'chatbot-quick-reply', type: 'button', text: text });
+      button.addEventListener('click', function () { send(text); });
+      els.suggestions.appendChild(button);
+    });
   }
-}
 
-// Initialize chatbot when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => new SimpleChatbot());
-} else {
-  new SimpleChatbot();
-}
+  function updateSuggestions() {
+    var typed = window.AssistantCore.normalise(els.input.value);
+    if (!typed) { showSuggestions(QUICK_REPLIES); return; }
+    var matches = faq.filter(function (item) {
+      return item.phrases.some(function (q) { return q.indexOf(typed) !== -1; });
+    }).slice(0, 3).map(function (item) { return item.questions[0]; });
+    showSuggestions(matches);
+  }
+
+  function send(text) {
+    var message = (text || els.input.value).trim();
+    if (!message) return;
+    addMessage(message, 'user');
+    els.input.value = '';
+    els.suggestions.textContent = '';
+    showTyping();
+    var started = Date.now();
+    answer(message).then(function (reply) {
+      // A short pause so the reply does not appear before the question has settled.
+      var wait = Math.max(0, 350 - (Date.now() - started));
+      setTimeout(function () {
+        hideTyping();
+        addMessage(reply, 'bot');
+        showSuggestions(QUICK_REPLIES);
+      }, wait);
+    });
+  }
+
+  function toggle() {
+    isOpen = !isOpen;
+    els.window.classList.toggle('chatbot-hidden', !isOpen);
+    els.bubble.hidden = isOpen;
+    els.bubble.setAttribute('aria-expanded', String(isOpen));
+    if (isOpen) els.input.focus(); else els.bubble.focus();
+  }
+
+  function build() {
+    els.bubble = el('button', { id: 'chatbot-bubble', type: 'button', 'aria-expanded': 'false', 'aria-controls': 'chatbot-window' },
+      [icon(['M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z']), el('span', { text: 'Ask about me' })]);
+
+    els.close = el('button', { id: 'chatbot-close', type: 'button', 'aria-label': 'Close the assistant' }, [icon(['M18 6 6 18', 'M6 6l12 12'])]);
+    var header = el('div', { id: 'chatbot-header' }, [
+      el('div', { 'class': 'chatbot-header-content' }, [
+        el('div', { 'class': 'chatbot-avatar', text: 'AC', 'aria-hidden': 'true' }),
+        el('div', {}, [
+          el('div', { 'class': 'chatbot-title', text: 'Assistant' }),
+          el('div', { 'class': 'chatbot-subtitle', text: 'Answers questions about Amedeo' })
+        ])
+      ]),
+      els.close
+    ]);
+
+    els.messages = el('div', { id: 'chatbot-messages', 'aria-live': 'polite' });
+    els.suggestions = el('div', { id: 'chatbot-suggestions' });
+    els.input = el('input', { id: 'chatbot-input', type: 'text', placeholder: 'Type your question…', 'aria-label': 'Your question', autocomplete: 'off', maxlength: '300' });
+    els.send = el('button', { id: 'chatbot-send', type: 'button', 'aria-label': 'Send' }, [icon(['M22 2 11 13', 'M22 2l-7 20-4-9-9-4z'])]);
+
+    els.window = el('div', { id: 'chatbot-window', 'class': 'chatbot-hidden', role: 'dialog', 'aria-label': 'Assistant' }, [
+      header, els.messages, els.suggestions, el('div', { id: 'chatbot-input-area' }, [els.input, els.send])
+    ]);
+
+    document.body.appendChild(el('div', { id: 'chatbot-container' }, [els.bubble, els.window]));
+
+    els.bubble.addEventListener('click', toggle);
+    els.close.addEventListener('click', toggle);
+    els.send.addEventListener('click', function () { send(); });
+    els.input.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') send();
+      if (event.key === 'Escape') toggle();
+    });
+    els.input.addEventListener('input', updateSuggestions);
+
+    addMessage("Hi! I can answer questions about Amedeo's work, projects, skills and education. What would you like to know?", 'bot');
+    showSuggestions(QUICK_REPLIES);
+  }
+
+  function init() {
+    build();
+    fetch(DATA_FILE).then(function (res) { return res.text(); }).then(function (text) { faq = window.AssistantCore.parse(text); }).catch(function () { faq = []; });
+    checkBackend();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();

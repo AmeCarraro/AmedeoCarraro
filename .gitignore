@@ -22,3 +22,6 @@ __pycache__/
 # OS
 .DS_Store
 Thumbs.db
+
+# Local copy of the previous version of the site (also in the git history)
+old-site/

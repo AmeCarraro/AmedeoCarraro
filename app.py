@@ -192,8 +192,9 @@ def chat():
 
         # Handle greetings directly (no LLM needed)
         query_lower = query.lower()
-        greetings = ['ciao', 'salve', 'buongiorno', 'buonasera', 'hey', 'hello', 'hi']
-        if any(greeting in query_lower for greeting in greetings):
+        # Whole words only, and only for short messages: "hi" must not match "which" or "this".
+        greetings = r'\b(ciao|salve|buongiorno|buonasera|hey|hello|hi)\b'
+        if re.search(greetings, query_lower) and len(query_lower.split()) <= 3:
             response = "Hi! I'm Amedeo's assistant. How can I help you?"
             return jsonify({"response": response})
 

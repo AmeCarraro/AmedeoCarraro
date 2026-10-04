@@ -1,332 +1,190 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Amedeo Carraro — Portfolio</title>
-  <meta name="description" content="Personal website of Amedeo Carraro: projects, skills, and contact information." />
-  <meta property="og:title" content="Amedeo Carraro — Portfolio" />
-  <meta property="og:description" content="Projects, skills, and contact info." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://amecarraro.github.io/AmedeoCarraro/" />
-  <meta name="theme-color" content="#0f172a" />
-  <link rel="stylesheet" href="chatbot.css" />
-  <style>
-    :root {
-      --bg: #0b1020;
-      --bg-soft: #111735;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --brand: #60a5fa;
-      --card: #0f1530;
-      --ring: rgba(96,165,250,.35);
-    }
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #f8fafc;
-        --bg-soft: #eef2ff;
-        --text: #0f172a;
-        --muted: #475569;
-        --brand: #2563eb;
-        --card: #ffffff;
-        --ring: rgba(37, 99, 235, .25);
-      }
-    }
-
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      background: radial-gradient(1200px 600px at 80% -10%, rgba(96,165,250,.15), transparent 60%) , var(--bg);
-      color: var(--text);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-    a { color: var(--brand); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
-
-    /* Header */
-    header { position: sticky; top: 0; backdrop-filter: saturate(180%) blur(8px); background: color-mix(in oklab, var(--bg) 80%, transparent); border-bottom: 1px solid color-mix(in oklab, var(--text) 10%, transparent); z-index: 20; }
-    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: .3px; }
-    .brand .logo { width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(135deg, var(--brand), #22d3ee); box-shadow: 0 0 0 6px var(--ring); }
-    nav a { margin-left: 16px; padding: 8px 12px; border-radius: 10px; }
-    nav a:hover { background: color-mix(in oklab, var(--brand) 15%, transparent); text-decoration: none; }
-
-    /* Hero */
-    .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: center; padding: 56px 0 28px; }
-    .hero h1 { font-size: clamp(28px, 5vw, 44px); line-height: 1.15; margin: 0 0 12px; }
-    .hero p { color: var(--muted); margin: 0 0 20px; }
-    .hero .cta { display: flex; gap: 12px; flex-wrap: wrap; }
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 12px; background: var(--brand); color: white; font-weight: 600; border: 1px solid color-mix(in oklab, black 10%, var(--brand)); box-shadow: 0 6px 24px -8px var(--ring); }
-    .btn.secondary { background: transparent; color: var(--text); border: 1px solid color-mix(in oklab, var(--text) 18%, transparent); }
-
-    /* Cards & grids */
-    .card { background: var(--card); border: 1px solid color-mix(in oklab, var(--text) 10%, transparent); border-radius: 16px; padding: 16px; }
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .pill { display: inline-block; font-size: 12px; padding: 4px 8px; border-radius: 999px; background: color-mix(in oklab, var(--brand) 16%, transparent); border: 1px solid color-mix(in oklab, var(--brand) 40%, transparent); margin-right: 6px; }
-    .muted { color: var(--muted); }
-
-    /* Stats (square boxes) */
-    .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
-    .stat { background: var(--bg-soft); border: 1px dashed color-mix(in oklab, var(--text) 14%, transparent); padding: 10px; border-radius: 14px; text-align: center; aspect-ratio: 1 / 1; display: grid; place-content: center; gap: 4px; }
-    .stat .v { font-weight: 800; font-size: 18px; line-height: 1.2; }
-    .stat .k { font-size: 12px; color: var(--muted); line-height: 1.2; }
-
-    /* Hero media (avatar + stats) */
-    .media-col { display: grid; gap: 16px; justify-items: center; }
-    .hero-img { margin: 0; overflow: hidden; background: var(--card); box-shadow: 0 12px 24px -12px rgba(0,0,0,.4); width: 100%; max-width: 120px; margin-inline: auto; border-radius: 9999px; border: 2px solid color-mix(in oklab, var(--text) 18%, transparent); }
-    .hero-img img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
-
-    /* Sections */
-    section { padding: 36px 0; }
-    h2 { font-size: 22px; margin: 0 0 16px; }
-    .card h3 { margin: 0 0 8px; font-size: 18px; }
-    .card p { margin: 0 12px 12px 0; color: var(--muted); }
-
-    /* Footer */
-    footer { border-top: 1px solid color-mix(in oklab, var(--text) 10%, transparent); color: var(--muted); padding: 24px 0 48px; }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
-      .grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 600px) {
-      /* nav was previously hidden here; kept visible for easy access */
-      .grid { grid-template-columns: 1fr; }
-      .stats { grid-template-columns: 1fr 1fr; }
-    }
-
-    /* Auto-hide/reveal header on scroll */
-    header { transition: transform .25s ease; will-change: transform; }
-    .header-hidden { transform: translateY(-100%); }
-    @media (prefers-reduced-motion: reduce) { header { transition: none; } }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amedeo Carraro — AI Engineer</title>
+  <meta name="description" content="Amedeo Carraro, AI Engineer. LLM agents, retrieval-augmented generation, real-time voice agents and self-hosted inference. Work experience, projects and background.">
+  <link rel="canonical" href="https://www.amedeocarraro.com/">
+  <meta property="og:title" content="Amedeo Carraro — AI Engineer">
+  <meta property="og:description" content="LLM agents, RAG, real-time voice agents and self-hosted inference. Work experience, projects and background.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.amedeocarraro.com/">
+  <meta property="og:image" content="https://www.amedeocarraro.com/images/portrait.jpg">
+  <meta name="theme-color" content="#fbfaf7">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f5f59'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='27' font-weight='700' text-anchor='middle' fill='white'%3EAC%3C/text%3E%3C/svg%3E">
+  <script>try { var t = localStorage.getItem('theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="chatbot.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Amedeo Carraro",
+    "jobTitle": "AI Engineer",
+    "url": "https://www.amedeocarraro.com/",
+    "image": "https://www.amedeocarraro.com/images/portrait.jpg",
+    "email": "mailto:amedeo.carraro01@gmail.com",
+    "worksFor": { "@type": "Organization", "name": "Terya" },
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "University of Padua" },
+    "sameAs": ["https://github.com/AmeCarraro", "https://www.linkedin.com/in/amedeo-carraro/"]
+  }
+  </script>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <span>Amedeo Carraro</span>
-      </div>
-      <nav aria-label="Primary">
-        <a href="#projects">Projects</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <a class="btn" href="about.html">Full profile</a>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html">Amedeo Carraro</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html" aria-current="page"><span>01</span>Experience</a>
+        <a href="projects.html"><span>02</span>Projects</a>
+        <a href="about.html"><span>03</span>About</a>
       </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch between light and dark theme">
+        <svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
     </div>
   </header>
 
-  <main class="container">
-    <!-- Hero -->
-    <section class="hero" id="home">
-      <div>
-        <h1>Amedeo Carraro<br><span class="role">AI Engineer</span></h1>
-        <p>
-          Hello world! It's a pleasure to meet you. I'm a Computer Engineer specialized in Artificial Intelligence and Machine Learning, with a particular passion for neural networks and Generative AI. <a href="https://github.com/AmeCarraro" target="_blank" rel="noopener noreferrer">Visit my GitHub</a> to explore projects in AI and robotics, or ask my assistant anything you want to know about me!
-        </p>
-        <div class="cta">
-          <a class="btn" href="#projects">View projects</a>
-          <a class="btn secondary" href="https://github.com/AmeCarraro" target="_blank" rel="noopener noreferrer">GitHub profile</a>
-          <a class="btn" href="Amedeo_Carraro_resume.pdf" target="_blank" rel="noopener noreferrer" title="Open resume PDF">Download Resume (PDF)</a>
-        </div>
+  <main id="main" class="wrap">
+
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">AI Engineer · Vicenza, Italy</p>
+        <h1>Amedeo Carraro</h1>
+        <p class="lead">I build LLM systems that run on real company data and real phone lines: retrieval-augmented generation, agents that call tools and real-time voice. I work as an AI Engineer at Terya (TeamSystem Group) and hold an MSc in Computer Engineering, Artificial Intelligence and Robotics, from the University of Padua.</p>
+        <ul class="links">
+          <li><a class="primary" href="mailto:amedeo.carraro01@gmail.com">Email</a></li>
+          <li><a href="https://github.com/AmeCarraro" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/amedeo-carraro/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="Amedeo_Carraro_resume.pdf" target="_blank" rel="noopener noreferrer">CV (PDF)</a></li>
+        </ul>
       </div>
-      <div class="media-col">
-        <figure class="hero-img">
-          <img src="images/portrait.jpg" alt="Amedeo Carraro portrait" width="800" height="1000" loading="eager" decoding="async" />
-        </figure>
-        <div class="card" role="complementary" aria-label="Quick stats">
-          <strong>At a glance</strong>
-          <div class="stats" aria-hidden="true">
-            <div class="stat"><div class="v" id="projectsCount">…</div><div class="k">Repos</div></div>
-            <div class="stat"><div class="v">AI · ML · LLMs</div><div class="k">Focus</div></div>
-          </div>
-        </div>
-      </div>
+      <img class="portrait" src="images/portrait.jpg" alt="Portrait of Amedeo Carraro" width="104" height="104">
     </section>
 
-    <!-- Projects -->
-    <section id="projects">
-      <h2>Selected projects</h2>
-      <div class="grid">
-        <article class="card">
-          <h3>Stellar Variability Classifier</h3>
-          <p>Neural network approaches for classifying variable star light curves (ZTF). LSTM on sequences and CNN on image-like transforms (incl. DMDT); evaluated with 5-fold CV on 5- and 10-class setups.</p>
-          <div>
-            <span class="pill">LSTM</span>
-            <span class="pill">CNN</span>
-            <span class="pill">PyTorch</span>
-          </div>
-          <p><a href="https://github.com/AmeCarraro/thesis-variable-stars-nn" target="_blank" rel="noopener noreferrer">Source</a></p>
-        </article>
+    <section class="block" aria-labelledby="work">
+      <h2 id="work">Work experience</h2>
 
-        <article class="card">
-          <h3>Leukemia cells Classifier</h3>
-          <p>Leukemic cell classifier combining OpenCV preprocessing &amp; augmentation with handcrafted features and tuned hyperparameters (GridSearch); achieved F1 score of 84.66%.</p>
-          <div>
-            <span class="pill">OpenCV</span>
-            <span class="pill">Classification</span>
-            <span class="pill">TensorFlow</span>
-          </div>
-          <p><a href="https://github.com/AmeCarraro/Project_Leukemia" target="_blank" rel="noopener noreferrer">Source</a></p>
-        </article>
+      <article class="entry">
+        <div class="when">Nov 2025 – Present<span>Bassano del Grappa, Italy</span><span>Hybrid</span></div>
+        <div>
+          <h3>AI Engineer</h3>
+          <p class="org">Terya (TeamSystem Group)</p>
+          <p>Terya makes management software for retail, food service and the food industry. I work on the AI side of its LLM-based systems: retrieval, prompts, tool calling, evaluation and deployment. These are the main ones.</p>
 
-        <article class="card">
-          <h3>Mistral 7b PEFT Fine tune</h3>
-          <p>Parameter-efficient fine-tuning (LoRA) of Mistral 7B via Hugging Face to build a lightweight QA system for memory-constrained environments; BLEU 62%, ROUGE-1 81%, METEOR 78%.</p>
-          <div>
-            <span class="pill">LoRA</span>
-            <span class="pill">LLMs</span>
-            <span class="pill">Hugging Face</span>
-          </div>
-          <p><a href="https://github.com/AmeCarraro/Erasmus_Hardgainers" target="_blank" rel="noopener noreferrer">Source</a></p>
-        </article>
-
-        <article class="card">
-          <h3>YOLOv8 on PCB</h3>
-          <p>YOLO implementation for detecting PCB defects using the DeepPCB dataset, featuring six defect classes. Built with FastAPI for serving and Docker for deployment.</p>
-          <div>
-            <span class="pill">YOLO</span>
-            <span class="pill">FastAPI</span>
-            <span class="pill">Docker</span>
-          </div>
-          <p><a href="https://github.com/AmeCarraro/PCB_yolo" target="_blank" rel="noopener noreferrer">Source</a></p>
-        </article>
-
-        <article class="card">
-          <h3>RANSAC Swiss House Price Prediction</h3>
-          <p>Compare Linear Regression vs RANSAC to estimate Swiss house prices from <em>LivingSpace</em>. RANSAC is robust to outliers and yields more reliable fits on anomalous price points.</p>
-          <div>
-            <span class="pill">RANSAC</span>
-            <span class="pill">Regression</span>
-            <span class="pill">scikit-learn</span>
-          </div>
-          <p><a href="https://github.com/AmeCarraro/Ransac_Swiss-House-Price-Prediction" target="_blank" rel="noopener noreferrer">Source</a></p>
-        </article>
-
-        <article class="card">
-          <h3>RL PyBullet Navigation</h3>
-          <p>Autonomous robot navigation using SAC reinforcement learning. A two-wheeled robot learns to reach goals while avoiding obstacles via 24-ray LIDAR in a PyBullet simulation.</p>
-          <div>
-            <span class="pill">ROS2</span>
-            <span class="pill">RL</span>
-            <span class="pill">PyTorch</span>
-          </div>
-          <p><a href="https://github.com/AmeCarraro/rl-pybullet-nav" target="_blank" rel="noopener noreferrer">Source</a></p>
-        </article>
-
-        <article class="card">
-          <h3>TIAGO Robot Navigation</h3>
-          <p>Navigation and manipulation system for the TIAGO robot using ROS and Actionlib. Includes obstacle avoidance with laser sensors and object pick-and-place via MoveIt!.</p>
-          <div>
-            <span class="pill">ROS</span>
-            <span class="pill">MoveIt!</span>
-            <span class="pill">C++</span>
-          </div>
-          <p><a href="https://github.com/AmeCarraro/Intelligent-Robotics" target="_blank" rel="noopener noreferrer">Source</a></p>
-        </article>
-      </div>
-    </section>
-
-    <!-- About (short) -->
-    <section id="about">
-      <h2>About</h2>
-      <div class="card">
-        <p>I hold a Master's degree in Computer Engineering: Artificial Intelligence and Robotics from the University of Padua, with international experience gained during my studies abroad. Throughout my academic journey and professional career, I've specialized in designing, optimizing, and deploying end-to-end Neural Network pipelines, including architectures like CNNs and LSTMs. I have hands-on experience working with Large Language Models (LLMs), developing AI solutions that bridge the gap between research and production. I thrive in interdisciplinary teams, collaborating across different domains to deliver scalable and impactful projects, while also pursuing personal projects that fuel my passion for innovation in AI and robotics. For my complete background, visit my <a href="about.html">full profile</a>.</p>
-        <div style="display:grid; gap:10px; margin-top:12px">
-          <div>
-            <strong>Programming Languages</strong>
-            <p class="muted">Python, Java, C, C++, C#, JavaScript, SQL, HTML, PHP, C/BASE, C/AL, MATLAB, ROS, R</p>
-          </div>
-          <div>
-            <strong>IT Knowledge</strong>
-            <p class="muted">TensorFlow, NumPy, pandas, SciPy, Matplotlib, Keras, PyTorch, scikit-learn, Apache Spark, GitHub &amp; MLOps</p>
-          </div>
-          <div>
-            <strong>Languages</strong>
-            <p class="muted">Italian (mother tongue), English (C1), French (A2)</p>
-          </div>
-          <div>
-            <strong>Certifications</strong>
-            <p class="muted">OCI AI Foundations Associate, OCI Generative AI Professional, OCI AI Vector Search Professional</p>
+          <div class="systems">
+            <section class="system">
+              <h4 data-n="01">Service-desk RAG assistant</h4>
+              <p>An assistant for the service desk that answers support questions from several hundred technical manuals, so an operator gets the right procedure without searching for it.</p>
+              <p>The manuals are split into paragraphs following an internal procedure, which makes retrieval more accurate. Every question is searched twice, by meaning and by keywords, and the passages found go through a final ranking. The answer is detailed and precise, and it is built only from what the manuals say, to avoid hallucinations.</p>
+              <ul class="tags"><li>FastAPI</li><li>PostgreSQL / pgvector</li><li>Hybrid search</li><li>Reranking</li><li>Docker</li></ul>
+            </section>
+            <section class="system">
+              <h4 data-n="02">Voice agent for support calls</h4>
+              <p>A speech-to-speech agent that answers support calls in real time. The caller speaks naturally and can interrupt it at any moment, while the agent collects the information it needs and saves it in the ticketing system.</p>
+              <ul class="tags"><li>Python asyncio</li><li>OpenAI Realtime API</li><li>Function calling</li></ul>
+            </section>
+            <section class="system">
+              <h4 data-n="03">Internal RAG platform and MCP</h4>
+              <p>An indexed codebase: the code is converted into documents, so that questions about it can be asked in plain language.</p>
+              <p>Every question runs a double search, on the documents and on the code. The same procedure can be called through a Model Context Protocol (MCP) server and its tools. Answers adapt to the person asking: a consultant gets a different answer from a developer, and not everyone is shown the code. They also adapt to the type of request, such as an impact analysis or documentation.</p>
+              <ul class="tags"><li>.NET</li><li>PostgreSQL / pgvector</li><li>MCP</li></ul>
+            </section>
+            <section class="system">
+              <h4 data-n="04">Tool-calling orchestration for the ERP</h4>
+              <p>A tool-calling agent for the ERP: its data can be queried and edited in natural language, without knowing the tables behind it.</p>
+              <p>The available functions are not hard-coded: they are discovered dynamically at request time. The actions are the usual database operations on tables and business objects: view, add, edit, delete and count records. Deleting always asks for a confirmation first.</p>
+              <ul class="tags"><li>FastAPI</li><li>Function calling</li><li>JSON Schema</li></ul>
+            </section>
+            <section class="system">
+              <h4 data-n="05">Self-hosted inference</h4>
+              <p>Language, embedding and reranking models run on an on-premises GPU server instead of a cloud API, so internal data stays inside the company network. All the systems here use it, with cloud models as a fallback.</p>
+              <ul class="tags"><li>vLLM</li><li>Open-weight models</li><li>On-premises GPU</li></ul>
+            </section>
+            <section class="system">
+              <h4 data-n="06">Second-level support agent <span class="status">in development</span></h4>
+              <p>An AI agent for second-level support that works out dynamically how to use the information it is given. For each request it picks the sources and tools it needs, among tickets, knowledge bases, logs, the ERP and the internal code platform, and combines what it finds into one answer with its sources.</p>
+              <ul class="tags"><li>FastAPI</li><li>Agent loop</li><li>Dynamic tools</li><li>PostgreSQL</li></ul>
+            </section>
           </div>
         </div>
-      </div>
-    </section>
+      </article>
 
-    <!-- Contact -->
-    <section id="contact">
-      <h2>Contact</h2>
-      <div class="card">
-        <p>Spotted a bug or want to say hi? Reach me here:</p>
-        <p>
-          <a href="mailto:amedeo.carraro01@gmail.com">amedeo.carraro01@gmail.com</a> ·
-          <a href="https://github.com/AmeCarraro" target="_blank" rel="noopener noreferrer">GitHub</a> ·
-          <a href="https://www.linkedin.com/in/amedeo-carraro/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        </p>
-        <p><strong>Resume:</strong> <a href="Amedeo_Carraro_resume.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a></p>
-      </div>
+      <article class="entry">
+        <div class="when">Sep 2024 – Mar 2025<span>University of Padua</span><span>Remote</span></div>
+        <div>
+          <h3>Research Intern, Deep Learning</h3>
+          <p class="org">University of Padua · MSc thesis, supervised by Prof. Loris Nanni</p>
+          <p>Thesis: <em>Neural Network Approaches for Classifying Variable Star Light Curves</em>.</p>
+          <ul>
+            <li>Reviewed recent work on classifying astronomical time series and built two PyTorch models for Zwicky Transient Facility (ZTF) light curves: a 2D-CNN on image-like representations of the curves and a hybrid CNN-LSTM on the reconstructed sequences.</li>
+            <li>With 5-fold cross-validation, the 2D-CNN reached 99.95% accuracy (F1 0.9995) on the full 5-class dataset, 94.6% on a balanced 5-class subset and 88.7% on 10 classes.</li>
+            <li>The CNN-LSTM reached 90.0% on the full dataset while training about three times faster, which makes it the better option when compute is limited.</li>
+          </ul>
+          <ul class="tags"><li>PyTorch</li><li>2D-CNN</li><li>CNN-LSTM</li><li>Time series</li></ul>
+          <p class="small" style="margin-top:10px"><a href="projects.html#stars">More about the project</a></p>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="when">Nov 2023 – Dec 2023<span>Padua, Italy</span></div>
+        <div>
+          <h3>Full Stack Developer Intern</h3>
+          <p class="org">ITReview (TeamSystem Group)</p>
+          <ul>
+            <li>Built responsive web applications: React interfaces on the front end, Node.js and Express on the back end, REST API endpoints in between.</li>
+            <li>Worked with PostgreSQL (native <code>pg</code> client, raw SQL) and MongoDB (Mongoose), depending on the project.</li>
+            <li>Took part in code reviews and performance work: indexing and query refactoring cut database response times by about 15%, measured with <code>EXPLAIN ANALYZE</code>.</li>
+          </ul>
+          <ul class="tags"><li>React</li><li>Node.js</li><li>Express</li><li>PostgreSQL</li><li>MongoDB</li></ul>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="when">Oct 2021 – Dec 2021<span>Thiene, Italy</span></div>
+        <div>
+          <h3>Deep Learning &amp; DevOps Intern</h3>
+          <p class="org">AppLibra S.r.l.</p>
+          <ul>
+            <li>Built and deployed a real-time computer-vision quality check with YOLOv5 (PyTorch) and OpenCV. It detects missing or misaligned caps on six-bottle crates moving on a conveyor belt. I handled the whole pipeline: annotation with LabelImg, training on GPU, real-time inference in a Docker-based Linux environment.</li>
+            <li>Set up a BaGet server in Docker as a private NuGet repository, so that .NET teams share and version internal libraries in one place instead of managing dependencies by hand.</li>
+            <li>Contributed to an ERP migration from Microsoft Dynamics NAV to Dynamics 365 Business Central: custom pages and forms in C/AL and AL, and XMLports for data import and export.</li>
+          </ul>
+          <ul class="tags"><li>YOLOv5</li><li>PyTorch</li><li>OpenCV</li><li>Docker</li><li>.NET / NuGet</li><li>Dynamics 365</li></ul>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="when">Jun 2015 – Aug 2015<span>Thiene, Italy</span></div>
+        <div>
+          <h3>Data Analyst Intern</h3>
+          <p class="org">ULSS 7 Pedemontana, regional hospital</p>
+          <ul>
+            <li>Configured and tested a digital signature system across the public-facing offices of the hospital.</li>
+            <li>Set up a network-based system to collect and share data between departments, replacing manual, paper-based document handling.</li>
+          </ul>
+        </div>
+      </article>
+
+      <p class="note">Personal and university projects are on the <a href="projects.html">Projects</a> page. Education, skills, certifications and my years in hospitality are on the <a href="about.html">About</a> page.</p>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <small>© 2025 Amedeo Carraro. All rights reserved.</small>
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 Amedeo Carraro</span>
+      <a href="mailto:amedeo.carraro01@gmail.com">amedeo.carraro01@gmail.com</a>
+      <a href="https://github.com/AmeCarraro" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/in/amedeo-carraro/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </div>
   </footer>
 
-  <script>
-    // Smooth scrolling for browsers that support it
-    if ('scrollBehavior' in document.documentElement.style) {
-      document.documentElement.style.scrollBehavior = 'smooth';
-    }
-
-    // Dynamically count total public repositories (non-forks) for your GitHub account
-    async function updateProjectCountFromGitHub(username) {
-      try {
-        let page = 1, repos = [];
-        while (true) {
-          const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&page=${page}`);
-          if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
-          const data = await res.json();
-          repos = repos.concat(data);
-          if (data.length < 100) break;
-          page++;
-        }
-        const count = repos.filter(r => !r.fork).length; // exclude forks
-        const el = document.getElementById('projectsCount');
-        if (el) el.textContent = count;
-      } catch (err) { console.error(err); }
-    }
-    updateProjectCountFromGitHub('AmeCarraro');
-  </script>
-
-  <!-- Auto-hide/reveal header on scroll -->
-  <script>
-  (() => {
-    const header = document.querySelector('header');
-    if (!header) return;
-    let lastY = window.scrollY || 0;
-    const threshold = 10;
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY || 0;
-      const delta = y - lastY;
-      if (y < 10) { header.classList.remove('header-hidden'); lastY = y; return; }
-      if (Math.abs(delta) < threshold) return;
-      if (delta > 0) header.classList.add('header-hidden');
-      else header.classList.remove('header-hidden');
-      lastY = y;
-    }, { passive: true });
-  })();
-  </script>
-
-  <!-- Chatbot Widget -->
-  <script src="chatbot.js"></script>
+  <script src="site.js"></script>
+  <script src="assistant-core.js" defer></script>
+  <script src="chatbot.js" defer></script>
 </body>
 </html>

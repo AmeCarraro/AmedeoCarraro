@@ -1,132 +1,38 @@
-# RAG Chatbot Setup Guide
+# Assistant widget
 
-Il chatbot usa un sistema RAG (Retrieval-Augmented Generation) completamente **GRATUITO** con Vercel + Groq.
+The small assistant in the corner of the site answers questions about me from `chatbot-data.txt`.
 
-## 🚀 Deploy su Vercel (GRATIS)
+## How it works
 
-### 1. Ottieni la Groq API Key (GRATUITA)
+1. `chatbot.js` loads `chatbot-data.txt` and matches the visitor's question against it in the browser. This works without any server and replies at once.
+2. On page load the widget also calls `/health` on the optional backend (`app.py`). If the backend reports that a language model is configured (`llm_loaded: true`), questions are sent to `/chat`: the backend retrieves the closest entries from the same file and asks the model to write the answer from them. If the backend is asleep, slow or fails, the browser match is used instead.
 
-1. Vai su [https://console.groq.com/](https://console.groq.com/)
-2. Crea un account gratuito
-3. Vai su "API Keys" e crea una nuova chiave
-4. **Limiti gratuiti**: 70 richieste/minuto, 14,400 richieste/giorno
+## Files
 
-### 2. Deploy su Vercel
+| File | Purpose |
+|---|---|
+| `chatbot-data.txt` | Knowledge base: a `Q:` line with variants separated by `\|` (English or Italian), then an `A:` line |
+| `assistant-core.js` | Matching rules, shared by the widget and the test page |
+| `chatbot.js` | Widget and optional backend call |
+| `tests/assistant-test.html` | Runs the questions in `tests/assistant-questions.json` and checks which entry answers each one |
+| `chatbot.css` | Widget styles, using the colour variables of `styles.css` |
+| `app.py` | Optional Flask backend (retrieval + Gemini), deployed on Render |
+| `render.yaml`, `requirements.txt` | Backend deployment |
+| `api/chat.py` | Older serverless variant, not used by the site |
 
-#### Opzione A: Via GitHub (Consigliato)
+## Backend setup (optional)
 
-1. Push del codice su GitHub (già fatto ✓)
-2. Vai su [https://vercel.com/](https://vercel.com/)
-3. Clicca "Import Project"
-4. Seleziona il repository `AmedeoCarraro`
-5. Aggiungi la variabile d'ambiente:
-   - Nome: `GROQ_API_KEY`
-   - Valore: la tua chiave Groq
-6. Clicca "Deploy"
+The backend needs one environment variable, `GEMINI_API_KEY`, set in the Render dashboard. Without it the service still runs and answers with the closest entry.
 
-#### Opzione B: Via CLI
-
-```bash
-# Installa Vercel CLI
-npm install -g vercel
-
-# Deploy
-cd AmedeoCarraro
-vercel
-
-# Aggiungi la API key
-vercel env add GROQ_API_KEY
-# Incolla la tua chiave Groq quando richiesto
-```
-
-### 3. Configura il Custom Domain (Opzionale)
-
-1. In Vercel Dashboard → Settings → Domains
-2. Aggiungi `tuodominio.com`
-3. Configura i DNS come indicato
-
-## 📁 Struttura del Progetto
-
-```
-AmedeoCarraro/
-├── api/
-│   └── chat.py          # Backend serverless con RAG
-├── chatbot.js           # Frontend widget
-├── chatbot.css          # Stili
-├── chatbot-data.txt     # Knowledge base (FAQ)
-├── vercel.json          # Configurazione Vercel
-├── requirements.txt     # Dipendenze Python (nessuna!)
-└── .env.example         # Template variabili d'ambiente
-```
-
-## 🎯 Come Funziona
-
-1. **Utente** fa una domanda nel widget
-2. **Frontend** (chatbot.js) invia richiesta a `/api/chat`
-3. **Backend** (api/chat.py):
-   - Cerca nel file `chatbot-data.txt` (RAG retrieval)
-   - Trova i 3 chunks più relevanti
-   - Invia a Groq LLM con il contesto
-4. **Groq** genera risposta usando il contesto
-5. **Frontend** mostra la risposta
-
-## 💰 Costi
-
-- **Vercel**: GRATIS (100GB bandwidth, invocazioni illimitate per hobby)
-- **Groq**: GRATIS (70 req/min, 14,400 req/giorno)
-- **Totale**: €0/mese 🎉
-
-## 📝 Aggiungere Nuove FAQ
-
-Modifica `chatbot-data.txt`:
-
-```txt
-Q: domanda principale | variante 1 | variante 2
-A: la risposta qui
-```
-
-Push su GitHub → Vercel fa re-deploy automaticamente.
-
-## 🔧 Test Locale (Opzionale)
+Local run:
 
 ```bash
-# Installa Vercel CLI
-npm install -g vercel
-
-# Crea file .env
-cp .env.example .env
-# Aggiungi la tua GROQ_API_KEY nel file .env
-
-# Avvia server locale
-vercel dev
-
-# Apri http://localhost:3000
+pip install -r requirements.txt
+GEMINI_API_KEY=... python app.py
 ```
 
-## 🚨 Troubleshooting
+Then open the site from a local server on `localhost`; set `BACKEND` in `chatbot.js` to `http://localhost:5000` while testing.
 
-### Errore: "API key not configured"
-- Verifica di aver aggiunto `GROQ_API_KEY` nelle environment variables di Vercel
-- Re-deploy dopo aver aggiunto la variabile
+## Updating the answers
 
-### Errore: "Failed to generate response"
-- Verifica che la chiave Groq sia valida
-- Controlla i limiti rate (70 req/min)
-- Guarda i logs in Vercel Dashboard
-
-### Il widget non appare
-- Verifica che `chatbot.css` e `chatbot.js` siano inclusi in `index.html` e `about.html`
-- Controlla la console browser per errori
-
-## 📊 Monitoring
-
-- Logs: Vercel Dashboard → Project → Functions
-- Usage Groq: [https://console.groq.com/](https://console.groq.com/) → Usage
-
-## 🎨 Personalizzazione
-
-- **Colori**: Modifica `chatbot.css`
-- **Prompt**: Modifica `system_prompt` in `api/chat.py`
-- **FAQ**: Modifica `chatbot-data.txt`
-- **Modello LLM**: Cambia `model` in `api/chat.py` (es: `llama-3.1-8b-instant` per velocità)
-# Clean repository
+Edit `chatbot-data.txt`, then open `tests/assistant-test.html` through a local server (`python -m http.server 8000`) and check that every question is still answered by the expected entry. Add a line to `tests/assistant-questions.json` for each new kind of question. Keep the answers in line with the CV and the pages of the site.

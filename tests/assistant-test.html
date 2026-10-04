@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Assistant test</title>
+  <style>
+    body { font: 14px/1.5 system-ui, -apple-system, "Segoe UI", Arial, sans-serif; margin: 0; padding: 20px; color: #15181c; background: #fbfaf7; }
+    h1 { font-size: 20px; margin: 0 0 4px; }
+    #summary { margin: 0 0 16px; font-weight: 600; }
+    .scroll { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; background: #fff; }
+    th, td { border: 1px solid #e4e1d9; padding: 6px 9px; text-align: left; vertical-align: top; }
+    th { background: #f1efe9; font-size: 12.5px; }
+    td.ok { color: #17643a; font-weight: 700; }
+    td.ko { color: #a3271f; font-weight: 700; }
+    tr.fail td { background: #fdecea; }
+    .answer { color: #5d6570; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <h1>Assistant test</h1>
+  <p>Runs every question in <code>assistant-questions.json</code> through the same matching rules as the widget
+    (<code>assistant-core.js</code>) and checks which entry of <code>chatbot-data.txt</code> answers it.</p>
+  <p id="summary">Running…</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>#</th><th>Question</th><th>Expected entry</th><th>Answered by</th><th></th><th>Answer</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <script src="../assistant-core.js"></script>
+  <script>
+    (function () {
+      function cell(text, className) {
+        var td = document.createElement('td');
+        td.textContent = text;
+        if (className) td.className = className;
+        return td;
+      }
+      Promise.all([
+        fetch('../chatbot-data.txt', { cache: 'no-store' }).then(function (r) { return r.text(); }),
+        fetch('assistant-questions.json', { cache: 'no-store' }).then(function (r) { return r.json(); })
+      ]).then(function (loaded) {
+        var entries = AssistantCore.parse(loaded[0]);
+        var cases = loaded[1].cases;
+        var rows = document.getElementById('rows');
+        var passed = 0;
+        var results = [];
+        cases.forEach(function (c, i) {
+          var result = AssistantCore.match(entries, c[0]);
+          var got = result.kind === 'match' ? result.entry.questions[0] : result.kind.toUpperCase();
+          var ok = got === c[1];
+          if (ok) passed += 1;
+          results.push({ question: c[0], expected: c[1], got: got, ok: ok, answer: result.answer });
+          var tr = document.createElement('tr');
+          if (!ok) tr.className = 'fail';
+          tr.appendChild(cell(String(i + 1)));
+          tr.appendChild(cell(c[0]));
+          tr.appendChild(cell(c[1]));
+          tr.appendChild(cell(got));
+          tr.appendChild(cell(ok ? 'ok' : 'FAIL', ok ? 'ok' : 'ko'));
+          tr.appendChild(cell(result.answer, 'answer'));
+          rows.appendChild(tr);
+        });
+        document.getElementById('summary').textContent = passed + ' of ' + cases.length + ' questions answered by the expected entry (' + entries.length + ' entries in the knowledge base).';
+        window.assistantTestResults = { passed: passed, total: cases.length, entries: entries.length, results: results };
+      }).catch(function (error) {
+        document.getElementById('summary').textContent = 'Could not run the test: ' + error.message + '. Open this page through a local server, not as a file.';
+      });
+    })();
+  </script>
+</body>
+</html>
