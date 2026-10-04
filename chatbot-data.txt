@@ -42,8 +42,8 @@ A: The internal RAG platform is built on the company's indexed codebase: the cod
 Q: ERP orchestrator? | Orchestrator | Tool calling | Function calling | Agents | Guardrails
 A: A tool-calling agent for the ERP: its data can be queried and edited in natural language. The available functions are discovered dynamically at request time, and the actions are the usual database operations on tables and business objects: view, add, edit, delete and count records. Deleting always asks for a confirmation first.
 
-Q: Self-hosted inference? | Local models | vLLM | Which models does he use? | Open source models | On-premises
-A: Language, embedding and reranking models run on an on-premises GPU server instead of a cloud API, so internal data stays inside the company network. All the systems use it, with cloud models as a fallback.
+Q: Self-hosted inference? | Local models | vLLM | Which models does he use? | Open source models | On-premises | DGX Spark | Qwen | NVIDIA
+A: An NVIDIA DGX Spark on the premises runs all the models, language, embedding and reranking, instead of a cloud API, so internal data stays inside the company network. The language models are from the Qwen family and are served with vLLM. All the systems use it, with cloud models as a fallback.
 
 Q: Second-level support agent? | Agentic assistant | What is in development? | In development | New project | Latest project
 A: An AI agent for second-level support, still in development. It works out dynamically how to use the information it is given: for each request it picks the sources and tools it needs, among tickets, knowledge bases, logs, the ERP and the internal code platform, and combines what it finds into one answer with its sources.
