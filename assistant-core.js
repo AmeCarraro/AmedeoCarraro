@@ -4,6 +4,7 @@
  *
  * AssistantCore.parse(text)            -> entries of chatbot-data.txt
  * AssistantCore.match(entries, text)   -> { kind: 'match' | 'greeting' | 'fallback', answer, entry }
+ * AssistantCore.rank(entries, text, n) -> the n closest entries, best first
  */
 (function (root) {
   'use strict';
@@ -70,6 +71,28 @@
     return entries;
   }
 
+  // How close an entry is to a question: a whole phrase counts most, then words
+  // shared with its questions, then words shared with its answer.
+  function rate(entry, query, words) {
+    var score = 0;
+    var inQuestion = 0;
+    var inAnswer = 0;
+    var exact = false;
+    entry.phrases.forEach(function (phrase) {
+      if (phrase === query) { score += 100; exact = true; }
+      else if (containsPhrase(query, phrase)) score += 40;
+      else if (query.length > 3 && containsPhrase(phrase, query)) score += 40;
+    });
+    words.forEach(function (w) {
+      if (entry.questionTokens.indexOf(w) !== -1) { score += 10; inQuestion += 1; }
+      else if (entry.answerTokens.indexOf(w) !== -1) { score += 3; inAnswer += 1; }
+    });
+    // One shared word is not enough for a longer question: it has to share a whole
+    // phrase, two words, or a word plus something from the answer.
+    var enough = score >= 40 || inQuestion >= 2 || (inQuestion >= 1 && (inAnswer >= 1 || words.length === 1));
+    return { score: score, enough: enough, exact: exact };
+  }
+
   function match(entries, message) {
     var query = normalise(message);
     var words = tokens(message);
@@ -80,26 +103,14 @@
 
     var best = null;
     var bestScore = 0;
+    var exact = false;
     entries.forEach(function (entry) {
-      var score = 0;
-      var inQuestion = 0;
-      var inAnswer = 0;
-      entry.phrases.forEach(function (phrase) {
-        if (phrase === query) score += 100;
-        else if (containsPhrase(query, phrase)) score += 40;
-        else if (query.length > 3 && containsPhrase(phrase, query)) score += 40;
-      });
-      words.forEach(function (w) {
-        if (entry.questionTokens.indexOf(w) !== -1) { score += 10; inQuestion += 1; }
-        else if (entry.answerTokens.indexOf(w) !== -1) { score += 3; inAnswer += 1; }
-      });
-      // One shared word is not enough for a longer question: it has to share a whole
-      // phrase, two words, or a word plus something from the answer.
-      var enough = score >= 40 || inQuestion >= 2 || (inQuestion >= 1 && (inAnswer >= 1 || words.length === 1));
-      if (enough && score > bestScore) { bestScore = score; best = entry; }
+      var rated = rate(entry, query, words);
+      if (rated.enough && rated.score > bestScore) { bestScore = rated.score; best = entry; exact = rated.exact; }
     });
 
-    if (best) return { kind: 'match', entry: best, answer: best.answer };
+    // "exact" says the question was typed as one of the variants in the file.
+    if (best) return { kind: 'match', entry: best, answer: best.answer, exact: exact };
     return {
       kind: 'fallback',
       entry: null,
@@ -107,5 +118,19 @@
     };
   }
 
-  root.AssistantCore = { parse: parse, match: match, normalise: normalise, tokens: tokens };
+  // The entries closest to a question, best first: what the language model is given
+  // to write its answer from. The entry match() would pick always comes first.
+  function rank(entries, message, limit) {
+    var query = normalise(message);
+    var words = tokens(message);
+    return entries.map(function (entry) {
+      return { entry: entry, rated: rate(entry, query, words) };
+    }).filter(function (item) {
+      return item.rated.score > 0;
+    }).sort(function (a, b) {
+      return (b.rated.enough - a.rated.enough) || (b.rated.score - a.rated.score);
+    }).slice(0, limit).map(function (item) { return item.entry; });
+  }
+
+  root.AssistantCore = { parse: parse, match: match, rank: rank, normalise: normalise, tokens: tokens };
 })(window);

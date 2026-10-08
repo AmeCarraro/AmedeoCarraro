@@ -6,13 +6,15 @@
  * browser (rules in assistant-core.js), so it replies at once and works without
  * any server.
  *
- * If the optional backend (app.py) reports that a language model is configured,
- * questions are sent there instead and the local match is used as a fallback.
+ * If the endpoint of the site (api/chat.py) reports that a language model is
+ * configured, the model writes the answer from the closest entries of the file,
+ * and the local match is used as a fallback.
  */
 (function () {
   'use strict';
 
-  var BACKEND = 'https://amedeocarraro.onrender.com';
+  var ENDPOINT = '/api/chat';
+  var CONTEXT_ENTRIES = 4;
   var DATA_FILE = 'chatbot-data.txt';
   var QUICK_REPLIES = ['Who is Amedeo?', 'What does he build at work?', 'Show me projects', 'How to contact?'];
 
@@ -23,20 +25,17 @@
 
   // ---------- data ----------
 
-  // The matching rules live in assistant-core.js, shared with the test page.
-  function localAnswer(message) {
-    return window.AssistantCore.match(faq, message).answer;
-  }
-
   function timeout(ms) {
     return new Promise(function (resolve, reject) { setTimeout(function () { reject(new Error('timeout')); }, ms); });
   }
 
-  function backendAnswer(message) {
-    var request = fetch(BACKEND + '/chat', {
+  // The endpoint is sent the question and the titles of the closest entries, and
+  // asks the model to write the answer from those entries.
+  function backendAnswer(message, topics) {
+    var request = fetch(ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: message })
+      body: JSON.stringify({ message: message, topics: topics })
     }).then(function (res) {
       if (!res.ok) throw new Error('HTTP ' + res.status);
       return res.json();
@@ -44,19 +43,27 @@
       if (!data || !data.response) throw new Error('empty response');
       return String(data.response);
     });
-    return Promise.race([request, timeout(12000)]);
+    return Promise.race([request, timeout(10000)]);
   }
 
+  // The matching rules live in assistant-core.js, shared with the test page. The
+  // answer written in the file is used as it is for a greeting and for a question
+  // typed exactly as in the file. Any other question goes to the model, when there
+  // is one: with the closest entries if the match found one, with no titles (the
+  // model then reads the whole file) if it did not.
   function answer(message) {
-    if (!useBackend) return Promise.resolve(localAnswer(message));
-    return backendAnswer(message).catch(function () { return localAnswer(message); });
+    var local = window.AssistantCore.match(faq, message);
+    if (!useBackend || local.kind === 'greeting' || local.exact) return Promise.resolve(local.answer);
+    var topics = local.kind === 'match'
+      ? window.AssistantCore.rank(faq, message, CONTEXT_ENTRIES).map(function (entry) { return entry.questions[0]; })
+      : [];
+    return backendAnswer(message, topics).catch(function () { return local.answer; });
   }
 
-  // The backend sleeps when idle. Checking it on load wakes it up; until it says
-  // a language model is available, answers are matched locally.
+  // Until the endpoint says a language model is configured, answers are matched locally.
   function checkBackend() {
-    fetch(BACKEND + '/health').then(function (res) { return res.json(); }).then(function (data) {
-      useBackend = !!(data && data.llm_loaded);
+    fetch(ENDPOINT).then(function (res) { return res.ok ? res.json() : {}; }).then(function (data) {
+      useBackend = !!(data && data.llm);
     }).catch(function () { useBackend = false; });
   }
 

@@ -5,7 +5,8 @@ The small assistant in the corner of the site answers questions about me from `c
 ## How it works
 
 1. `chatbot.js` loads `chatbot-data.txt` and matches the visitor's question against it in the browser. This works without any server and replies at once.
-2. On page load the widget also calls `/health` on the optional backend (`app.py`). If the backend reports that a language model is configured (`llm_loaded: true`), questions are sent to `/chat`: the backend retrieves the closest entries from the same file and asks the model to write the answer from them. If the backend is asleep, slow or fails, the browser match is used instead.
+2. On page load the widget also asks `/api/chat` (the function in `api/chat.py`, which runs on Vercel with the site) whether a language model is configured. If it is, a question that is not typed exactly as in the file is sent there with the titles of the closest entries, and the model writes the answer from those entries. When the match finds nothing close, often because the question is not in English, the model is given the whole file instead.
+3. If the endpoint is slow, fails, or the free quota of the provider is used up, the answer matched in the browser is shown instead.
 
 ## Files
 
@@ -13,25 +14,32 @@ The small assistant in the corner of the site answers questions about me from `c
 |---|---|
 | `chatbot-data.txt` | Knowledge base: a `Q:` line with variants separated by `\|` (English or Italian), then an `A:` line |
 | `assistant-core.js` | Matching rules, shared by the widget and the test page |
-| `chatbot.js` | Widget and optional backend call |
+| `chatbot.js` | Widget and call to the endpoint |
+| `api/chat.py` | Endpoint on Vercel: gives the model the chosen entries and returns its answer |
 | `tests/assistant-test.html` | Runs the questions in `tests/assistant-questions.json` and checks which entry answers each one |
+| `tests/dev_server.py` | Local preview of the site with the endpoint |
 | `chatbot.css` | Widget styles, using the colour variables of `styles.css` |
-| `app.py` | Optional Flask backend (retrieval + Gemini), deployed on Render |
-| `render.yaml`, `requirements.txt` | Backend deployment |
-| `api/chat.py` | Older serverless variant, not used by the site |
+| `app.py`, `render.yaml`, `requirements.txt` | Previous backend (Flask and Gemini on Render), no longer called by the widget |
 
-## Backend setup (optional)
+## Language model setup (optional)
 
-The backend needs one environment variable, `GEMINI_API_KEY`, set in the Render dashboard. Without it the service still runs and answers with the closest entry.
+The endpoint works with any provider that has an OpenAI-compatible API. It is configured with environment variables, set in the Vercel project (Settings → Environment Variables) and applied from the next deployment:
 
-Local run:
+| Variable | Value |
+|---|---|
+| `LLM_API_KEY` | Key of the provider. Without it the widget answers with the browser match only |
+| `LLM_BASE_URL` | Optional. Default `https://api.groq.com/openai/v1`; for Gemini `https://generativelanguage.googleapis.com/v1beta/openai` |
+| `LLM_MODEL` | Optional. Default `llama-3.3-70b-versatile`; for Gemini for example `gemini-2.5-flash-lite` |
+
+A question answered from the closest entries takes about 500 tokens, one answered from the whole file about 3,000. Use a key from a free plan with no payment method: when the quota is used up the provider refuses the request and the widget falls back to the browser match, so nothing can be charged.
+
+Local run, with the same variables in a `.env` file:
 
 ```bash
-pip install -r requirements.txt
-GEMINI_API_KEY=... python app.py
+python tests/dev_server.py
 ```
 
-Then open the site from a local server on `localhost`; set `BACKEND` in `chatbot.js` to `http://localhost:5000` while testing.
+Then open `http://localhost:8766`.
 
 ## Updating the answers
 
