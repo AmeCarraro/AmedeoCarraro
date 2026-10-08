@@ -46,14 +46,13 @@
     return Promise.race([request, timeout(10000)]);
   }
 
-  // The matching rules live in assistant-core.js, shared with the test page. The
-  // answer written in the file is used as it is for a greeting and for a question
-  // typed exactly as in the file. Any other question goes to the model, when there
-  // is one: with the closest entries if the match found one, with no titles (the
+  // The matching rules live in assistant-core.js, shared with the test page. A
+  // greeting is answered here. Any other question goes to the model, when there is
+  // one: with the closest entries if the match found one, with no titles (the
   // model then reads the whole file) if it did not.
   function answer(message) {
     var local = window.AssistantCore.match(faq, message);
-    if (!useBackend || local.kind === 'greeting' || local.exact) return Promise.resolve(local.answer);
+    if (!useBackend || local.kind === 'greeting') return Promise.resolve(local.answer);
     var topics = local.kind === 'match'
       ? window.AssistantCore.rank(faq, message, CONTEXT_ENTRIES).map(function (entry) { return entry.questions[0]; })
       : [];

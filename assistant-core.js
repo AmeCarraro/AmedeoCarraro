@@ -77,9 +77,8 @@
     var score = 0;
     var inQuestion = 0;
     var inAnswer = 0;
-    var exact = false;
     entry.phrases.forEach(function (phrase) {
-      if (phrase === query) { score += 100; exact = true; }
+      if (phrase === query) score += 100;
       else if (containsPhrase(query, phrase)) score += 40;
       else if (query.length > 3 && containsPhrase(phrase, query)) score += 40;
     });
@@ -90,7 +89,7 @@
     // One shared word is not enough for a longer question: it has to share a whole
     // phrase, two words, or a word plus something from the answer.
     var enough = score >= 40 || inQuestion >= 2 || (inQuestion >= 1 && (inAnswer >= 1 || words.length === 1));
-    return { score: score, enough: enough, exact: exact };
+    return { score: score, enough: enough };
   }
 
   function match(entries, message) {
@@ -103,14 +102,12 @@
 
     var best = null;
     var bestScore = 0;
-    var exact = false;
     entries.forEach(function (entry) {
       var rated = rate(entry, query, words);
-      if (rated.enough && rated.score > bestScore) { bestScore = rated.score; best = entry; exact = rated.exact; }
+      if (rated.enough && rated.score > bestScore) { bestScore = rated.score; best = entry; }
     });
 
-    // "exact" says the question was typed as one of the variants in the file.
-    if (best) return { kind: 'match', entry: best, answer: best.answer, exact: exact };
+    if (best) return { kind: 'match', entry: best, answer: best.answer };
     return {
       kind: 'fallback',
       entry: null,

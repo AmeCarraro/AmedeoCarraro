@@ -5,7 +5,7 @@ The small assistant in the corner of the site answers questions about me from `c
 ## How it works
 
 1. `chatbot.js` loads `chatbot-data.txt` and matches the visitor's question against it in the browser. This works without any server and replies at once.
-2. On page load the widget also asks `/api/chat` (the function in `api/chat.py`, which runs on Vercel with the site) whether a language model is configured. If it is, a question that is not typed exactly as in the file is sent there with the titles of the closest entries, and the model writes the answer from those entries. When the match finds nothing close, often because the question is not in English, the model is given the whole file instead.
+2. On page load the widget also asks `/api/chat` (the function in `api/chat.py`, which runs on Vercel with the site) whether a language model is configured. If it is, every question except a greeting is sent there with the titles of the closest entries, and the model writes the answer from those entries. When the match finds nothing close, often because the question is not in English, the model is given the whole file instead.
 3. If the endpoint is slow, fails, or the free quota of the provider is used up, the answer matched in the browser is shown instead.
 
 ## Files
@@ -19,7 +19,6 @@ The small assistant in the corner of the site answers questions about me from `c
 | `tests/assistant-test.html` | Runs the questions in `tests/assistant-questions.json` and checks which entry answers each one |
 | `tests/dev_server.py` | Local preview of the site with the endpoint |
 | `chatbot.css` | Widget styles, using the colour variables of `styles.css` |
-| `app.py`, `render.yaml`, `requirements.txt` | Previous backend (Flask and Gemini on Render), no longer called by the widget |
 
 ## Language model setup (optional)
 
