@@ -12,7 +12,7 @@ text: the model is given nothing but what that file already publishes.
 Any provider with an OpenAI-compatible API can be used. Environment variables:
   LLM_API_KEY    key of the provider; without it the endpoint reports "llm": false
   LLM_BASE_URL   default: Groq
-  LLM_MODEL      default: llama-3.3-70b-versatile
+  LLM_MODEL      default: openai/gpt-oss-120b
 
 On any failure (no key, quota used up, timeout) the reply is 503 and the widget
 falls back to the answer matched in the browser.
@@ -25,7 +25,7 @@ import urllib.request
 from http.server import BaseHTTPRequestHandler
 
 DEFAULT_BASE_URL = 'https://api.groq.com/openai/v1'
-DEFAULT_MODEL = 'llama-3.3-70b-versatile'
+DEFAULT_MODEL = 'openai/gpt-oss-120b'
 KNOWLEDGE_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'chatbot-data.txt')
 
 MAX_MESSAGE = 300   # same as the input field of the widget
@@ -71,7 +71,8 @@ def ask_model(question, notes):
             {'role': 'user', 'content': question},
         ],
         'temperature': 0.3,
-        'max_tokens': 400,
+        # Room for the answer and for the reasoning of the models that reason first.
+        'max_tokens': 1000,
     }).encode('utf-8')
     request = urllib.request.Request(
         (os.environ.get('LLM_BASE_URL') or DEFAULT_BASE_URL).rstrip('/') + '/chat/completions',
@@ -126,7 +127,7 @@ class handler(BaseHTTPRequestHandler):
             text = ask_model(question, notes)
         except urllib.error.HTTPError as error:
             # 429 here means the free quota of the provider is used up.
-            print(f'Provider replied {error.code}')
+            print(f'Provider replied {error.code}: {error.read(300).decode("utf-8", "replace")}')
             return self.reply(503, {'error': 'language model unavailable'})
         except Exception as error:
             print(f'Provider call failed: {type(error).__name__}: {error}')

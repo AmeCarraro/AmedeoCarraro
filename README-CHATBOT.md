@@ -29,7 +29,7 @@ The endpoint works with any provider that has an OpenAI-compatible API. It is co
 |---|---|
 | `LLM_API_KEY` | Key of the provider. Without it the widget answers with the browser match only |
 | `LLM_BASE_URL` | Optional. Default `https://api.groq.com/openai/v1`; for Gemini `https://generativelanguage.googleapis.com/v1beta/openai` |
-| `LLM_MODEL` | Optional. Default `llama-3.3-70b-versatile`; for Gemini for example `gemini-2.5-flash-lite` |
+| `LLM_MODEL` | Optional. Default `openai/gpt-oss-120b`; for Gemini for example `gemini-2.5-flash-lite` |
 
 A question answered from the closest entries takes about 500 tokens, one answered from the whole file about 3,000. Use a key from a free plan with no payment method: when the quota is used up the provider refuses the request and the widget falls back to the browser match, so nothing can be charged.
 
