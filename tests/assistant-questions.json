@@ -59,6 +59,12 @@
     ["Does he work with LLMs?", "LLM experience?"],
     ["Is he a team player?", "Soft skills?"],
     ["What are his strengths?", "What makes Amedeo different?"],
+    ["Why should we hire him?", "Why hire Amedeo?"],
+    ["Why should I recruit Amedeo?", "Why hire Amedeo?"],
+    ["What makes him a good hire for an AI team?", "Why hire Amedeo?"],
+    ["Perché dovremmo assumerlo?", "Why hire Amedeo?"],
+    ["Does he use Ollama?", "Self-hosted inference?"],
+    ["Che modelli usa in locale?", "Self-hosted inference?"],
 
     ["What projects has he done?", "Show me projects"],
     ["Tell me about the star classification project", "Master thesis?"],

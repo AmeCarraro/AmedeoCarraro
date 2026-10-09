@@ -14,6 +14,9 @@ A: Amedeo Carraro is an AI Engineer at Terya (TeamSystem Group) in Bassano del G
 Q: What makes Amedeo different? | Why Amedeo? | What is special about him? | Strengths | Punti di forza
 A: He works on the stretch between research and production: he takes a technique that works in a notebook and makes it work for the people who use it, on real data and real hardware.
 
+Q: Why hire Amedeo? | Why should we hire him? | Why should I hire him? | Why hire him? | Hire | Recruit | Good hire | Good fit | Why choose him? | Perché assumerlo | Perché dovremmo assumerlo | Assumere | Assumerlo | Perché sceglierlo
+A: Because he fits into different kinds of teams. He started in software development, with full-stack web work and an ERP migration, and now focuses on AI: LLM agents, retrieval-augmented generation and voice systems at Terya, with an MSc in Artificial Intelligence and Robotics behind it. Every role meant a new stack, so he is used to picking things up quickly, and he keeps studying: six certifications in 2025 and 2026.
+
 Q: Where is Amedeo based? | Where is he based? | Location | Where does he live? | City | Nationality | Dove vive | Dove abita
 A: Amedeo is Italian. He lives near Vicenza, in the Veneto region, and works in Bassano del Grappa in a hybrid setup.
 
@@ -42,8 +45,8 @@ A: The internal RAG platform is built on the company's indexed codebase: the cod
 Q: ERP orchestrator? | Orchestrator | Tool calling | Function calling | Agents | Guardrails
 A: A tool-calling agent for the ERP: its data can be queried and edited in natural language. The available functions are discovered dynamically at request time, and the actions are the usual database operations on tables and business objects: view, add, edit, delete and count records. Deleting always asks for a confirmation first.
 
-Q: Self-hosted inference? | Local models | vLLM | Which models does he use? | Open source models | On-premises | DGX Spark | Qwen | NVIDIA
-A: An NVIDIA DGX Spark on the premises runs all the models, language, embedding and reranking, instead of a cloud API, so internal data stays inside the company network. The language models are from the Qwen family and are served with vLLM. All the systems use it, with cloud models as a fallback.
+Q: Self-hosted inference? | Local models | vLLM | Ollama | Which models does he use? | Open source models | On-premises | DGX Spark | Qwen | NVIDIA | Modelli locali | Modelli in locale | Che modelli usa
+A: An NVIDIA DGX Spark on the premises runs all the models, language, embedding and reranking, instead of a cloud API, so internal data stays inside the company network. The language models are from the Qwen family and are served with vLLM and Ollama. All the systems use it, with cloud models as a fallback.
 
 Q: Second-level support agent? | Agentic assistant | What is in development? | In development | New project | Latest project
 A: An AI agent for second-level support, still in development. It works out dynamically how to use the information it is given: for each request it picks the sources and tools it needs, among tickets, knowledge bases, logs, the ERP and the internal code platform, and combines what it finds into one answer with its sources.
