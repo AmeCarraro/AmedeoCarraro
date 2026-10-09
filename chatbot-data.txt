@@ -126,7 +126,7 @@ Q: Soft skills? | Team player | Teamwork | Communication | Work style
 A: Amedeo is used to working in small engineering groups, and before that he coordinated staff and dealt with customers every day in hospitality. He is comfortable explaining technical topics to people who are not technical.
 
 Q: Work under pressure? | Under pressure | Pressure | Stress | Can he handle stress? | Deadlines | Tight deadlines | Lavorare sotto pressione | Sotto pressione | Pressione | Scadenze | Gestione dello stress
-A: Yes, he is used to working under pressure. Deadlines are part of his daily work, and have been in every software role he has had. He also spent years in hospitality, from running a venue and its staff to a very busy bar in Dublin, where he learned to stay calm when the pressure is high.
+A: Yes, he is used to working under pressure. Deadlines are part of his daily work, and have been in every software role he has had. He also spent years in hospitality: he ran a venue and its staff, and later worked behind the counter of a very busy bar in Dublin. That is where he learned to stay calm when the pressure is high.
 
 ## PROJECTS
 Q: Show me projects | Projects | Portfolio | What projects has he done? | What has Amedeo built? | Side projects | Personal projects | Progetti | Che progetti ha fatto
