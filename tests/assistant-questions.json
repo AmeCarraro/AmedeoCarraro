@@ -64,6 +64,10 @@
     ["What makes him a good hire for an AI team?", "Why hire Amedeo?"],
     ["Perché dovremmo assumerlo?", "Why hire Amedeo?"],
     ["Does he use Ollama?", "Self-hosted inference?"],
+    ["Can he work under pressure?", "Work under pressure?"],
+    ["Sa lavorare sotto pressione?", "Work under pressure?"],
+    ["How does he handle stress and tight deadlines?", "Work under pressure?"],
+    ["Come gestisce le scadenze?", "Work under pressure?"],
     ["Che modelli usa in locale?", "Self-hosted inference?"],
 
     ["What projects has he done?", "Show me projects"],
