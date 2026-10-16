@@ -86,29 +86,29 @@
           <div class="systems">
             <section class="system">
               <figure class="fig"><svg viewBox="0 0 160 110" aria-hidden="true"><rect class="p" x="20" y="28" width="46" height="60" rx="4"/><rect class="p" x="27" y="21" width="46" height="60" rx="4"/><rect class="f" x="34" y="14" width="46" height="60" rx="4"/><path class="d" d="M42 27h30M42 35h30M42 43h20M42 51h14"/><circle class="p" cx="76" cy="60" r="13"/><circle class="s" cx="76" cy="60" r="13"/><path class="s k" d="M86.5 70.500l8 8" style="stroke-width:3.4"/><path class="f" d="M106 30h34a5 5 0 0 1 5 5v22a5 5 0 0 1-5 5h-20l-9 8v-8h-5a5 5 0 0 1-5-5V35a5 5 0 0 1 5-5z"/><path class="s" d="M110 41h26M110 50h16"/></svg></figure>
-              <h4 data-n="01">Service-desk RAG assistant</h4>
-              <p>An assistant for the service desk that answers support questions from several hundred technical manuals, so an operator gets the right procedure without searching for it.</p>
-              <p>The manuals are split into paragraphs following an internal procedure, which makes retrieval more accurate. Every question is searched twice, by meaning and by keywords, and the passages found go through a final ranking. The answer is detailed and precise, and it is built only from what the manuals say, to avoid hallucinations.</p>
-              <ul class="tags"><li>FastAPI</li><li>PostgreSQL / pgvector</li><li>Hybrid search</li><li>Reranking</li><li>Docker</li></ul>
+              <h4 data-n="01">Chatbot on hundreds of technical manuals</h4>
+              <p>A chatbot for the service desk that answers support questions from several hundred technical manuals and documents, so an operator gets the right procedure without searching for it.</p>
+              <p>The manuals are split into clearly delimited paragraphs following an internal procedure, which makes retrieval more accurate. Every question is searched twice, by meaning and by keywords, and the passages found go through a final ranking. The answer is detailed and precise, and it is built only from what the manuals say, to avoid hallucinations.</p>
+              <ul class="tags"><li>RAG</li><li>FastAPI</li><li>PostgreSQL / pgvector</li><li>Hybrid search</li><li>Reranking</li><li>Docker</li></ul>
             </section>
             <section class="system">
               <figure class="fig"><svg viewBox="0 0 160 110" aria-hidden="true"><path class="s" d="M24 62V52a24 24 0 0 1 48 0v10"/><rect class="f" x="18" y="58" width="12" height="22" rx="5"/><rect class="f" x="66" y="58" width="12" height="22" rx="5"/><path class="s" d="M72 80v3a8 8 0 0 1-8 8h-9"/><circle class="a" cx="52" cy="91" r="3.2"/><g class="wave a"><rect x="94" y="46" width="4.5" height="18" rx="2.25"/><rect x="103" y="37" width="4.5" height="36" rx="2.25"/><rect x="112" y="27" width="4.5" height="56" rx="2.25"/><rect x="121" y="40" width="4.5" height="30" rx="2.25"/><rect x="130" y="33" width="4.5" height="44" rx="2.25"/><rect x="139" y="45" width="4.5" height="20" rx="2.25"/></g></svg></figure>
-              <h4 data-n="02">Voice agent for support calls</h4>
+              <h4 data-n="02">Speech-to-speech voice agent for support calls</h4>
               <p>A speech-to-speech agent that answers support calls in real time. The caller speaks naturally and can interrupt it at any moment, while the agent collects the information it needs and saves it in the ticketing system.</p>
               <ul class="tags"><li>Python asyncio</li><li>OpenAI Realtime API</li><li>Function calling</li></ul>
             </section>
             <section class="system">
               <figure class="fig"><svg viewBox="0 0 160 110" aria-hidden="true"><rect class="p" x="14" y="16" width="64" height="46" rx="5"/><path class="d" d="M14 28h64"/><g class="a"><circle cx="21" cy="22" r="1.7"/><circle cx="27" cy="22" r="1.7"/><circle cx="33" cy="22" r="1.7"/></g><path class="s" d="M36 38l-7 7 7 7M56 38l7 7-7 7M50 35l-8 20"/><rect class="f" x="98" y="12" width="46" height="56" rx="4"/><path class="d" d="M106 24h30M106 32h30M106 40h22M106 48h30M106 56h16"/><path class="s" d="M46 62v14a6 6 0 0 0 6 6h12M121 68v8a6 6 0 0 1-6 6H98"/><rect class="f" x="64" y="71" width="34" height="22" rx="11"/><circle class="s" cx="79" cy="81" r="4.5"/><path class="s" d="M82.5 84.500l3.5 3.5"/></svg></figure>
-              <h4 data-n="03">Internal RAG platform and MCP</h4>
-              <p>An indexed codebase: the code is converted into documents, so that questions about it can be asked in plain language.</p>
-              <p>Every question runs a double search, on the documents and on the code. The same procedure can be called through a Model Context Protocol (MCP) server and its tools. Answers adapt to the person asking: a consultant gets a different answer from a developer, and not everyone is shown the code. They also adapt to the type of request, such as an impact analysis or documentation.</p>
-              <ul class="tags"><li>.NET</li><li>PostgreSQL / pgvector</li><li>MCP</li></ul>
+              <h4 data-n="03">Code knowledge agent</h4>
+              <p>A knowledge base built on the company's codebase: the code is indexed and turned into documentation, so that questions about it can be asked in plain language.</p>
+              <p>The documentation and the processed code then serve as context, as in a RAG system, to make development work faster: more context for each task, and fewer tokens spent on paid models. Answers also adapt to who is asking and to the type of request, such as an impact analysis or documentation.</p>
+              <ul class="tags"><li>RAG</li><li>MCP</li><li>.NET</li><li>PostgreSQL / pgvector</li></ul>
             </section>
             <section class="system">
               <figure class="fig"><svg viewBox="0 0 160 110" aria-hidden="true"><path class="f" d="M14 16h40a5 5 0 0 1 5 5v16a5 5 0 0 1-5 5H32l-8 7v-7H14a5 5 0 0 1-5-5V21a5 5 0 0 1 5-5z"/><path class="s" d="M17 26h34M17 33h20"/><path class="s" d="M63 29h13M72 25l4 4-4 4"/><circle class="f" cx="91" cy="29" r="11"/><path class="s" d="M93 22l-6 8h8l-6 8"/><path class="s" d="M91 40v20M102 29h10"/><rect class="p" x="114" y="12" width="34" height="9" rx="4.5"/><rect class="p" x="114" y="25" width="34" height="9" rx="4.5"/><rect class="p" x="114" y="38" width="34" height="9" rx="4.5"/><rect class="p" x="30" y="60" width="118" height="36" rx="5"/><rect class="a" x="31" y="72.5" width="116" height="11" opacity=".22"/><path class="d" d="M30 72h118M30 84h118M66 60v36M108 60v36"/></svg></figure>
               <h4 data-n="04">Tool-calling orchestration for the ERP</h4>
-              <p>A tool-calling agent for the ERP: its data can be queried and edited in natural language, without knowing the tables behind it.</p>
-              <p>The available functions are not hard-coded: they are discovered dynamically at request time. The actions are the usual database operations on tables and business objects: view, add, edit, delete and count records. Deleting always asks for a confirmation first.</p>
+              <p>An orchestration layer on top of the ERP: people ask in plain language, and the model picks and calls the tools that read or change the data, without anyone needing to know the tables behind it.</p>
+              <p>The tools are not hard-coded but discovered at request time, and they cover the everyday operations on tables and business objects: viewing, adding, editing, counting and deleting records. Every deletion asks for a confirmation first.</p>
               <ul class="tags"><li>FastAPI</li><li>Function calling</li><li>JSON Schema</li></ul>
             </section>
             <section class="system">
@@ -120,7 +120,7 @@
             <section class="system">
               <figure class="fig"><svg viewBox="0 0 160 110" aria-hidden="true"><path class="s" d="M50 50C76 50 80 22 106 22M51 54C78 54 82 44 106 44M50 60C76 60 80 88 106 88"/><path class="box" d="M51 57C78 57 82 66 106 66"/><circle class="f" cx="36" cy="55" r="15"/><circle class="a" cx="36" cy="55" r="5"/><rect class="f" x="106" y="15" width="42" height="14" rx="4"/><rect class="f" x="106" y="37" width="42" height="14" rx="4"/><rect class="p" x="106" y="59" width="42" height="14" rx="4"/><rect class="f" x="106" y="81" width="42" height="14" rx="4"/><path class="d" d="M114 22h26M114 44h18M114 66h24M114 88h14"/></svg></figure>
               <h4 data-n="06">Second-level support agent <span class="status">in development</span></h4>
-              <p>An AI agent for second-level support that works out dynamically how to use the information it is given. For each request it picks the sources and tools it needs, among tickets, knowledge bases, logs, the ERP and the internal code platform, and combines what it finds into one answer with its sources.</p>
+              <p>An AI agent for second-level support that works out dynamically how to use the information it is given. For each request it picks the sources and tools it needs, among tickets, knowledge bases, logs, the ERP and the code knowledge agent, and combines what it finds into one answer with its sources.</p>
               <ul class="tags"><li>FastAPI</li><li>Agent loop</li><li>Dynamic tools</li><li>PostgreSQL</li></ul>
             </section>
           </div>

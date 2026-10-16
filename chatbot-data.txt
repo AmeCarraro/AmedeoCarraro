@@ -28,28 +28,28 @@ Q: Current job? | Where does Amedeo work? | Where does he work? | Current role |
 A: Amedeo is an AI Engineer at Terya (TeamSystem Group), a company that makes management software for retail, food service and the food industry. He has worked there since November 2025, on the AI side of the company's LLM systems.
 
 Q: What does he build at work? | What did he build at Terya? | What has he built at work? | What does he do at Terya? | What is he working on | Systems at work | Work projects | What does he work on? | Cosa fa in Terya | Su cosa lavora
-A: A service-desk RAG assistant, a voice agent for support calls, an internal RAG platform with an MCP server, a tool-calling agent for the ERP, self-hosted inference, and a second-level support agent that is still in development. The Experience page describes each one.
+A: A chatbot on several hundred technical manuals for the service desk, a speech-to-speech voice agent for support calls, a code knowledge agent built on the company's codebase, a tool-calling orchestration layer for the ERP, self-hosted inference, and a second-level support agent that is still in development. The Experience page describes each one.
 
 Q: Work history? | Work experience | Previous experience | Past jobs | Career | What did he do before | Years of experience | Senior | Junior | Seniority | Internships | Esperienze lavorative | Esperienza lavorativa | Anni di esperienza | Cosa ha fatto prima | Cosa ha fatto
 A: Amedeo has been an AI Engineer at Terya since November 2025. Before that he was a research intern at the University of Padua for his Master's thesis (2024 to 2025), a full-stack developer intern at ITReview (2023) and a deep learning and DevOps intern at AppLibra (2021). He also worked in hospitality while studying. The Experience page has the details.
 
-Q: Service desk assistant? | RAG | RAG system | RAG experience | Retrieval-augmented generation | How does his RAG work? | Chunking | Citations | Document chatbot
-A: The service-desk assistant answers support questions from several hundred technical manuals. The manuals are split following an internal procedure that makes retrieval more accurate; every question is searched by meaning and by keywords, and the passages found go through a final ranking. Answers are detailed and built only from what the manuals say.
+Q: Service desk assistant? | RAG | RAG system | RAG experience | Retrieval-augmented generation | How does his RAG work? | Chunking | Citations | Document chatbot | Chatbot on technical manuals | Technical manuals | Service desk chatbot
+A: The service-desk chatbot answers support questions from several hundred technical manuals and documents. The manuals are split into clearly delimited paragraphs following an internal procedure that makes retrieval more accurate; every question is searched by meaning and by keywords, and the passages found go through a final ranking. Answers are detailed and built only from what the manuals say.
 
-Q: Voice agent? | Voice | Voice AI | Voice assistant | Voicebot | Phone support | Real-time voice | Speech
+Q: Voice agent? | Voice | Voice AI | Voice assistant | Voicebot | Phone support | Real-time voice | Speech | Speech-to-speech
 A: A speech-to-speech agent that answers support calls in real time. The caller speaks naturally and can interrupt it at any moment, while the agent collects the information it needs and saves it in the ticketing system.
 
-Q: MCP? | Model Context Protocol | Internal RAG platform | Code search | Codebase
-A: The internal RAG platform is built on the company's indexed codebase: the code is converted into documents, and every question runs a double search, on the documents and on the code. The same procedure can be called through a Model Context Protocol (MCP) server and its tools. Answers adapt to the person asking (a consultant gets a different answer from a developer, and not everyone is shown the code) and to the type of request, such as an impact analysis or documentation.
+Q: MCP? | Model Context Protocol | Internal RAG platform | Code knowledge agent | Code agent | Code search | Codebase
+A: The code knowledge agent is built on the company's codebase: the code is indexed and turned into documentation, so that questions about it can be asked in plain language. The documentation and the processed code then serve as context, as in a RAG system, to make development work faster, with more context for each task and fewer tokens spent on paid models. It can also be reached through a Model Context Protocol (MCP) server and its tools, and its answers adapt to who is asking and to the type of request, such as an impact analysis or documentation.
 
-Q: ERP orchestrator? | Orchestrator | Tool calling | Function calling | Agents | Guardrails
-A: A tool-calling agent for the ERP: its data can be queried and edited in natural language. The available functions are discovered dynamically at request time, and the actions are the usual database operations on tables and business objects: view, add, edit, delete and count records. Deleting always asks for a confirmation first.
+Q: ERP orchestrator? | Orchestrator | Orchestration | Tool-calling orchestration | Tool calling | Function calling | Agents | Guardrails
+A: An orchestration layer on top of the ERP: people ask in plain language, and the model picks and calls the tools that read or change the data. The tools are discovered at request time and cover the everyday operations on tables and business objects: viewing, adding, editing, counting and deleting records. Every deletion asks for a confirmation first.
 
 Q: Self-hosted inference? | Local models | vLLM | Ollama | Which models does he use? | Open source models | On-premises | DGX Spark | Qwen | NVIDIA | Modelli locali | Modelli in locale | Che modelli usa
 A: An NVIDIA DGX Spark on the premises runs all the models, language, embedding and reranking, instead of a cloud API, so internal data stays inside the company network. The language models are from the Qwen family and are served with vLLM and Ollama. All the systems use it, with cloud models as a fallback.
 
 Q: Second-level support agent? | Agentic assistant | What is in development? | In development | New project | Latest project
-A: An AI agent for second-level support, still in development. It works out dynamically how to use the information it is given: for each request it picks the sources and tools it needs, among tickets, knowledge bases, logs, the ERP and the internal code platform, and combines what it finds into one answer with its sources.
+A: An AI agent for second-level support, still in development. It works out dynamically how to use the information it is given: for each request it picks the sources and tools it needs, among tickets, knowledge bases, logs, the ERP and the code knowledge agent, and combines what it finds into one answer with its sources.
 
 Q: Research internship? | University research | Research experience
 A: From September 2024 to March 2025 Amedeo was a research intern at the University of Padua, working on his Master's thesis: deep learning models that classify variable stars from telescope data.
