@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Amedeo Carraro — AI Engineer</title>
-  <meta name="description" content="Amedeo Carraro, AI Engineer. LLM agents, retrieval-augmented generation, real-time voice agents and self-hosted inference. Work experience, projects and background.">
+  <title>Amedeo Carraro — AI Engineer &amp; Software Architect</title>
+  <meta name="description" content="Amedeo Carraro, AI Engineer and Software Architect. LLM agents, retrieval-augmented generation, real-time voice agents and self-hosted inference. Work experience, projects and background.">
   <link rel="canonical" href="https://www.amedeocarraro.com/">
-  <meta property="og:title" content="Amedeo Carraro — AI Engineer">
+  <meta property="og:title" content="Amedeo Carraro — AI Engineer &amp; Software Architect">
   <meta property="og:description" content="LLM agents, RAG, real-time voice agents and self-hosted inference. Work experience, projects and background.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.amedeocarraro.com/">
@@ -21,7 +21,7 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Amedeo Carraro",
-    "jobTitle": "AI Engineer",
+    "jobTitle": "AI Engineer and Software Architect",
     "url": "https://www.amedeocarraro.com/",
     "image": "https://www.amedeocarraro.com/images/portrait.jpg",
     "email": "mailto:amedeo.carraro01@gmail.com",
@@ -52,10 +52,12 @@
   <main id="main" class="wrap">
 
     <section class="hero">
+      <div class="band-bg" aria-hidden="true"><i></i><i></i><i></i></div>
       <div class="hero-text">
-        <p class="eyebrow">AI Engineer · Vicenza, Italy</p>
+        <p class="eyebrow">AI Engineer &amp; Software Architect · Vicenza, Italy</p>
         <h1>Amedeo Carraro</h1>
-        <p class="lead">I build LLM systems that run on real company data and real phone lines: retrieval-augmented generation, agents that call tools and real-time voice. I work as an AI Engineer at Terya (TeamSystem Group) and hold an MSc in Computer Engineering, Artificial Intelligence and Robotics, from the University of Padua.</p>
+        <p class="statement">I build LLM systems that run on <em>real company data</em> and <em>real phone lines</em>.</p>
+        <p class="lead">Retrieval-augmented generation, agents that call tools and real-time voice. I work as an AI Engineer at Terya (TeamSystem Group) and hold an MSc in Computer Engineering, Artificial Intelligence and Robotics, from the University of Padua.</p>
         <ul class="links">
           <li><a class="primary" href="mailto:amedeo.carraro01@gmail.com">Email</a></li>
           <li><a href="https://github.com/AmeCarraro" target="_blank" rel="noopener noreferrer">GitHub</a></li>
@@ -63,7 +65,12 @@
           <li><a href="Amedeo_Carraro_resume.pdf" target="_blank" rel="noopener noreferrer">CV (PDF)</a></li>
         </ul>
       </div>
-      <img class="portrait" src="images/portrait.jpg" alt="Portrait of Amedeo Carraro" width="104" height="104">
+      <div class="portrait-ring"><img class="portrait" src="images/portrait.jpg" alt="Portrait of Amedeo Carraro" width="176" height="176"></div>
+      <ul class="stats">
+        <li><b data-count="6">6</b><span>LLM-based systems at work, one still in development</span></li>
+        <li><b>End to end</b><span>from the model and the retrieval to the back end and the deployment</span></li>
+        <li><b data-count="6">6</b><span>certifications, from Oracle and IBM</span></li>
+      </ul>
     </section>
 
     <section class="block" aria-labelledby="work">
@@ -78,36 +85,42 @@
 
           <div class="systems">
             <section class="system">
-              <h4 data-n="01">Service-desk RAG assistant</h4>
-              <p>An assistant for the service desk that answers support questions from several hundred technical manuals, so an operator gets the right procedure without searching for it.</p>
-              <p>The manuals are split into paragraphs following an internal procedure, which makes retrieval more accurate. Every question is searched twice, by meaning and by keywords, and the passages found go through a final ranking. The answer is detailed and precise, and it is built only from what the manuals say, to avoid hallucinations.</p>
-              <ul class="tags"><li>FastAPI</li><li>PostgreSQL / pgvector</li><li>Hybrid search</li><li>Reranking</li><li>Docker</li></ul>
+              <figure class="fig"><svg viewBox="0 0 160 110" aria-hidden="true"><rect class="p" x="20" y="28" width="46" height="60" rx="4"/><rect class="p" x="27" y="21" width="46" height="60" rx="4"/><rect class="f" x="34" y="14" width="46" height="60" rx="4"/><path class="d" d="M42 27h30M42 35h30M42 43h20M42 51h14"/><circle class="p" cx="76" cy="60" r="13"/><circle class="s" cx="76" cy="60" r="13"/><path class="s k" d="M86.5 70.500l8 8" style="stroke-width:3.4"/><path class="f" d="M106 30h34a5 5 0 0 1 5 5v22a5 5 0 0 1-5 5h-20l-9 8v-8h-5a5 5 0 0 1-5-5V35a5 5 0 0 1 5-5z"/><path class="s" d="M110 41h26M110 50h16"/></svg></figure>
+              <h4 data-n="01">Chatbot on hundreds of technical manuals</h4>
+              <p>A chatbot for the service desk that answers support questions from several hundred technical manuals and documents, so an operator gets the right procedure without searching for it.</p>
+              <p>The manuals are split into clearly delimited paragraphs following an internal procedure, which makes retrieval more accurate. Every question is searched twice, by meaning and by keywords, and the passages found go through a final ranking. The answer is detailed and precise, and it is built only from what the manuals say, to avoid hallucinations.</p>
+              <ul class="tags"><li>RAG</li><li>FastAPI</li><li>PostgreSQL / pgvector</li><li>Hybrid search</li><li>Reranking</li><li>Docker</li></ul>
             </section>
             <section class="system">
-              <h4 data-n="02">Voice agent for support calls</h4>
+              <figure class="fig"><svg viewBox="0 0 160 110" aria-hidden="true"><path class="s" d="M24 62V52a24 24 0 0 1 48 0v10"/><rect class="f" x="18" y="58" width="12" height="22" rx="5"/><rect class="f" x="66" y="58" width="12" height="22" rx="5"/><path class="s" d="M72 80v3a8 8 0 0 1-8 8h-9"/><circle class="a" cx="52" cy="91" r="3.2"/><g class="wave a"><rect x="94" y="46" width="4.5" height="18" rx="2.25"/><rect x="103" y="37" width="4.5" height="36" rx="2.25"/><rect x="112" y="27" width="4.5" height="56" rx="2.25"/><rect x="121" y="40" width="4.5" height="30" rx="2.25"/><rect x="130" y="33" width="4.5" height="44" rx="2.25"/><rect x="139" y="45" width="4.5" height="20" rx="2.25"/></g></svg></figure>
+              <h4 data-n="02">Speech-to-speech voice agent for support calls</h4>
               <p>A speech-to-speech agent that answers support calls in real time. The caller speaks naturally and can interrupt it at any moment, while the agent collects the information it needs and saves it in the ticketing system.</p>
               <ul class="tags"><li>Python asyncio</li><li>OpenAI Realtime API</li><li>Function calling</li></ul>
             </section>
             <section class="system">
-              <h4 data-n="03">Internal RAG platform and MCP</h4>
-              <p>An indexed codebase: the code is converted into documents, so that questions about it can be asked in plain language.</p>
-              <p>Every question runs a double search, on the documents and on the code. The same procedure can be called through a Model Context Protocol (MCP) server and its tools. Answers adapt to the person asking: a consultant gets a different answer from a developer, and not everyone is shown the code. They also adapt to the type of request, such as an impact analysis or documentation.</p>
-              <ul class="tags"><li>.NET</li><li>PostgreSQL / pgvector</li><li>MCP</li></ul>
+              <figure class="fig"><svg viewBox="0 0 160 110" aria-hidden="true"><rect class="p" x="14" y="16" width="64" height="46" rx="5"/><path class="d" d="M14 28h64"/><g class="a"><circle cx="21" cy="22" r="1.7"/><circle cx="27" cy="22" r="1.7"/><circle cx="33" cy="22" r="1.7"/></g><path class="s" d="M36 38l-7 7 7 7M56 38l7 7-7 7M50 35l-8 20"/><rect class="f" x="98" y="12" width="46" height="56" rx="4"/><path class="d" d="M106 24h30M106 32h30M106 40h22M106 48h30M106 56h16"/><path class="s" d="M46 62v14a6 6 0 0 0 6 6h12M121 68v8a6 6 0 0 1-6 6H98"/><rect class="f" x="64" y="71" width="34" height="22" rx="11"/><circle class="s" cx="79" cy="81" r="4.5"/><path class="s" d="M82.5 84.500l3.5 3.5"/></svg></figure>
+              <h4 data-n="03">Code knowledge agent</h4>
+              <p>A knowledge base built on the company's codebase: the code is indexed and turned into documentation, so that questions about it can be asked in plain language.</p>
+              <p>The documentation and the processed code then serve as context, as in a RAG system, to make development work faster: more context for each task, and fewer tokens spent on paid models. Answers also adapt to who is asking and to the type of request, such as an impact analysis or documentation.</p>
+              <ul class="tags"><li>RAG</li><li>MCP</li><li>.NET</li><li>PostgreSQL / pgvector</li></ul>
             </section>
             <section class="system">
+              <figure class="fig"><svg viewBox="0 0 160 110" aria-hidden="true"><path class="f" d="M14 16h40a5 5 0 0 1 5 5v16a5 5 0 0 1-5 5H32l-8 7v-7H14a5 5 0 0 1-5-5V21a5 5 0 0 1 5-5z"/><path class="s" d="M17 26h34M17 33h20"/><path class="s" d="M63 29h13M72 25l4 4-4 4"/><circle class="f" cx="91" cy="29" r="11"/><path class="s" d="M93 22l-6 8h8l-6 8"/><path class="s" d="M91 40v20M102 29h10"/><rect class="p" x="114" y="12" width="34" height="9" rx="4.5"/><rect class="p" x="114" y="25" width="34" height="9" rx="4.5"/><rect class="p" x="114" y="38" width="34" height="9" rx="4.5"/><rect class="p" x="30" y="60" width="118" height="36" rx="5"/><rect class="a" x="31" y="72.5" width="116" height="11" opacity=".22"/><path class="d" d="M30 72h118M30 84h118M66 60v36M108 60v36"/></svg></figure>
               <h4 data-n="04">Tool-calling orchestration for the ERP</h4>
-              <p>A tool-calling agent for the ERP: its data can be queried and edited in natural language, without knowing the tables behind it.</p>
-              <p>The available functions are not hard-coded: they are discovered dynamically at request time. The actions are the usual database operations on tables and business objects: view, add, edit, delete and count records. Deleting always asks for a confirmation first.</p>
+              <p>An orchestration layer on top of the ERP: people ask in plain language, and the model picks and calls the tools that read or change the data, without anyone needing to know the tables behind it.</p>
+              <p>The tools are not hard-coded but discovered at request time, and they cover the everyday operations on tables and business objects: viewing, adding, editing, counting and deleting records. Every deletion asks for a confirmation first.</p>
               <ul class="tags"><li>FastAPI</li><li>Function calling</li><li>JSON Schema</li></ul>
             </section>
             <section class="system">
+              <figure class="fig"><svg viewBox="0 0 160 110" aria-hidden="true"><rect class="f" x="18" y="16" width="74" height="21" rx="4"/><rect class="f" x="18" y="44" width="74" height="21" rx="4"/><rect class="f" x="18" y="72" width="74" height="21" rx="4"/><g class="leds a"><circle cx="28" cy="26.5" r="2.4"/><circle cx="28" cy="54.5" r="2.4"/><circle cx="28" cy="82.5" r="2.4"/></g><path class="d" d="M40 26.500h42M40 54.500h42M40 82.500h42"/><path class="s" d="M92 54.500h12"/><rect class="p" x="110" y="39" width="32" height="32" rx="4"/><rect class="s" x="118" y="47" width="16" height="16" rx="2"/><path class="s" d="M117 39v-7M126 39v-7M135 39v-7M117 78v-7M126 78v-7M135 78v-7M110 46h-6M110 63h-6M148 46h-6M148 55h-6M148 63h-6"/></svg></figure>
               <h4 data-n="05">Self-hosted inference</h4>
               <p>An NVIDIA DGX Spark on the premises runs all the models, language, embedding and reranking, instead of a cloud API, so internal data stays inside the company network. The language models are from the Qwen family and are served with vLLM and Ollama. All the systems here use it, with cloud models as a fallback.</p>
               <ul class="tags"><li>NVIDIA DGX Spark</li><li>vLLM</li><li>Ollama</li><li>Qwen</li></ul>
             </section>
             <section class="system">
+              <figure class="fig"><svg viewBox="0 0 160 110" aria-hidden="true"><path class="s" d="M50 50C76 50 80 22 106 22M51 54C78 54 82 44 106 44M50 60C76 60 80 88 106 88"/><path class="box" d="M51 57C78 57 82 66 106 66"/><circle class="f" cx="36" cy="55" r="15"/><circle class="a" cx="36" cy="55" r="5"/><rect class="f" x="106" y="15" width="42" height="14" rx="4"/><rect class="f" x="106" y="37" width="42" height="14" rx="4"/><rect class="p" x="106" y="59" width="42" height="14" rx="4"/><rect class="f" x="106" y="81" width="42" height="14" rx="4"/><path class="d" d="M114 22h26M114 44h18M114 66h24M114 88h14"/></svg></figure>
               <h4 data-n="06">Second-level support agent <span class="status">in development</span></h4>
-              <p>An AI agent for second-level support that works out dynamically how to use the information it is given. For each request it picks the sources and tools it needs, among tickets, knowledge bases, logs, the ERP and the internal code platform, and combines what it finds into one answer with its sources.</p>
+              <p>An AI agent for second-level support that works out dynamically how to use the information it is given. For each request it picks the sources and tools it needs, among tickets, knowledge bases, logs, the ERP and the code knowledge agent, and combines what it finds into one answer with its sources.</p>
               <ul class="tags"><li>FastAPI</li><li>Agent loop</li><li>Dynamic tools</li><li>PostgreSQL</li></ul>
             </section>
           </div>

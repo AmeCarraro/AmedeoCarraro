@@ -40,6 +40,12 @@ class Handler(chat.handler, SimpleHTTPRequestHandler):
             return chat.handler.do_POST(self)
         self.send_error(404)
 
+    def end_headers(self):
+        # A preview must show the files as they are now, never a copy the browser kept.
+        if not self.path.startswith('/api/'):
+            self.send_header('Cache-Control', 'no-store')
+        super().end_headers()
+
 
 if __name__ == '__main__':
     load_env(os.path.join(SITE, '.env'))
