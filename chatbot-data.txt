@@ -8,8 +8,8 @@
 Q: Who are you? | What are you? | What is this? | Are you a bot? | Chi sei | Cosa sei
 A: I'm the assistant on Amedeo's website. I answer questions about his work, projects, skills and education from a set of facts he wrote himself.
 
-Q: Who is Amedeo? | Who is Amedeo Carraro? | Amedeo | Tell me about Amedeo | Tell me about him | About Amedeo | What does Amedeo do? | What does he do? | Introduce Amedeo | Chi è Amedeo | Cosa fa Amedeo | Cosa fa | Parlami di Amedeo
-A: Amedeo Carraro is an AI Engineer at Terya (TeamSystem Group) in Bassano del Grappa, Italy. He builds LLM systems: agents that call tools, retrieval-augmented generation and real-time voice agents. He has an MSc in Computer Engineering (Artificial Intelligence and Robotics) from the University of Padua.
+Q: Who is Amedeo? | Who is Amedeo Carraro? | Amedeo | Tell me about Amedeo | Tell me about him | About Amedeo | What does Amedeo do? | What does he do? | Introduce Amedeo | Software architect | Is he a software architect? | Chi è Amedeo | Cosa fa Amedeo | Cosa fa | Parlami di Amedeo
+A: Amedeo Carraro is an AI Engineer and software architect at Terya (TeamSystem Group) in Bassano del Grappa, Italy. He designs and builds LLM systems: agents that call tools, retrieval-augmented generation and real-time voice agents. He has an MSc in Computer Engineering (Artificial Intelligence and Robotics) from the University of Padua.
 
 Q: What makes Amedeo different? | Why Amedeo? | What is special about him? | Strengths | Punti di forza
 A: He works on the stretch between research and production: he takes a technique that works in a notebook and makes it work for the people who use it, on real data and real hardware.
